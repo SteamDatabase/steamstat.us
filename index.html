@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title>Steam Status · Is Steam Down?</title>
+	
+	<meta property="twitter:card" content="summary">
+	<meta property="twitter:site" content="@SteamDB">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Steam Status">
+	<meta property="og:title" content="Steam Status">
+	<meta property="description" content="Displays status of Steam client, Steam store, Steam community, Dota 2, TF2 and CSGO">
+	<meta property="og:description" content="Displays status of Steam client, Steam store, Steam community, Dota 2, TF2 and CSGO">
+	<meta property="og:image" content="http://steamstat.us/static/tile.png">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&amp;subset=latin">
+	<link rel="canonical" href="http://steamstat.us/">
+	<link rel="image_src" href="http://steamstat.us/static/tile.png">
+	<link rel="author" href="https://plus.google.com/112834339046661065024">
+	
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="apple-touch-icon" href="/static/tile.png">
+	
+	<link rel="stylesheet" href="/static/freeman.css?1">
+</head>
+<body>
+	<div class="container">
+		<h1 class="title">Steam Services Status</h1>
+		
+		<noscript>This website requires JavaScript</noscript>
+		
+		<div class="info">
+			This website displays status of various Steam related services.
+			<hr>
+			<a href="https://steamdb.info/donate/">Click here if you wish to donate.</a> Your support is appreciated!
+		</div>
+		
+		<div id="psa"></div>
+		
+		<div class="services">
+			<div id="loader">
+				<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
+				
+				<div class="spinner" id="loader-content">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+			</div>
+			
+			<div class="service" itemscope>
+				<span class="name"><a href="https://steamdb.info/app/753/graphs/" target="_blank">Online<span class="hide-small"> on Steam</span></a> </span>
+				<span class="status" id="online">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name">SteamDB Steam Client </span>
+				<span class="status" id="steam">…</span>
+			</div>
+			
+			<div class="service" itemscope>
+				<span class="name"><i class="flag flag-us"></i> United States </span>
+				<span class="status" id="cm-US">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name"><i class="flag"></i> Europe </span>
+				<span class="status" id="cm-EU">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name"><i class="flag flag-cn"></i> China </span>
+				<span class="status" id="cm-CN">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name"><i class="flag flag-nl"></i> Netherlands </span>
+				<span class="status" id="cm-NL">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name"><i class="flag flag-au"></i> Australia </span>
+				<span class="status" id="cm-AU">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name"><i class="flag flag-sg"></i> Singapore </span>
+				<span class="status" id="cm-SG">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<link itemprop="url" href="https://store.steampowered.com/">
+				<span class="name" itemprop="name">Steam Store </span>
+				<span class="status" id="store">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<link itemprop="url" href="https://steamcommunity.com/">
+				<span class="name" itemprop="name">Steam Community </span>
+				<span class="status" id="community">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Web API </span>
+				<span class="status" id="webapi">…</span>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name"><a href="https://steamdb.info/app/440/graphs/" target="_blank" title="Team Fortress 2">TF2</a> <span class="show-small">GC</span><span class="hide-small">Game Coordinator</span> </span>
+				<span class="status" id="tf2">…</span>s
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name"><a href="https://steamdb.info/app/570/graphs/" target="_blank">Dota 2</a> <span class="show-small">GC</span><span class="hide-small">Game Coordinator</span> <a href="#dota_stats" class="caret" id="dota-button" title="Matchmaking stats"></a></span>
+				<span class="status" id="dota2">…</span>
+			</div>
+			
+			<div class="mmstats services closed" id="dota-container">
+				<div class="service" itemscope>
+					<span class="name">Players Searching </span>
+					<span class="status" id="dota_mm_searching">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Average Wait Time </span>
+					<span class="status" id="dota_mm_average">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Online Regions </span>
+					<span class="status" id="dota_mm_regions">…</span>
+				</div>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name"><a href="https://steamdb.info/app/730/graphs/" target="_blank" title="Counter-Strike: Global Offensive">CS:GO</a> <span class="show-small">GC</span><span class="hide-small">Game Coordinator</span> <a href="#csgo_stats" class="caret" id="csgo-button" title="Matchmaking stats"></a></span>
+				<span class="status" id="csgo">…</span>
+			</div>
+			
+			<div class="mmstats services closed" id="csgo-container">
+				<div class="service" itemscope>
+					<span class="name">Sessions Logon </span>
+					<span class="status" id="csgo_sessions">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Player Inventories </span>
+					<span class="status" id="csgo_community">…</span>
+				</div>
+				
+				<div class="service" itemscope>
+					<span class="name">Matchmaking Scheduler </span>
+					<span class="status" id="csgo_mm_scheduler">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Players Searching </span>
+					<span class="status" id="csgo_mm_searching">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Average Wait Time </span>
+					<span class="status" id="csgo_mm_average">…</span>
+				</div>
+				
+				<div class="service" itemscope>
+					<span class="name">EU West </span>
+					<span class="status" id="csgo_dc_eu_west">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">EU East </span>
+					<span class="status" id="csgo_dc_eu_east">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">EU North </span>
+					<span class="status" id="csgo_dc_eu_north">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">US West </span>
+					<span class="status" id="csgo_dc_us_west">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">US East </span>
+					<span class="status" id="csgo_dc_us_east">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Brazil </span>
+					<span class="status" id="csgo_dc_br">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Dubai </span>
+					<span class="status" id="csgo_dc_dubai">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Singapore </span>
+					<span class="status" id="csgo_dc_singapore">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">Australia </span>
+					<span class="status" id="csgo_dc_au">…</span>
+				</div>
+				<div class="service" itemscope>
+					<span class="name">South Africa </span>
+					<span class="status" id="csgo_dc_sa">…</span>
+				</div>
+			</div>
+			
+			<div class="service" itemscope itemtype="http://schema.org/Thing">
+				<link itemprop="url" href="https://steamdb.info/">
+				<span class="name" itemprop="name"><a href="https://steamdb.info/" target="_blank">SteamDB</a> Database </span>
+				<span class="status" id="database">…</span>
+			</div>
+		</div>
+		
+		<div class="share">
+			<a class="twitter-button" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fsteamstat.us&amp;text=Is%20%23Steam%20down%3F&amp;via=SteamDB">
+				<i class="twitter-icon"></i>
+				<span class="twitter-label">Tweet</span>
+			</a>
+			
+			<!--iframe src="https://platform.twitter.com/widgets/follow_button.html?dnt=true&amp;screen_name=SteamDB&amp;lang=en&amp;show_count=false&amp;show_screen_name=false&amp;size=l" height="28" width="81" title="Follow"></iframe>
+			<iframe class="tweet-button hide-small" src="https://platform.twitter.com/widgets/tweet_button.html?count=none&amp;dnt=true&amp;lang=en&amp;size=l&amp;text=Check%20out%20%23Steam%20status%20on&amp;url=http%3A%2F%2Fsteamstat.us&amp;related=SteamDB" height="28" width="77" title="Tweet"></iframe-->
+			<iframe class="flattr-button" src="https://api.flattr.com/button/view/?uid=SteamDB&amp;button=compact&amp;url=http%3A%2F%2Fsteamstat.us%2F" height="28" width="110" title="Flattr"></iframe>
+		</div>
+		
+		<div class="footer">
+			Created by <a target="_blank" href="//xpaw.me">xPaw</a>.<br class="show-small"> This page refreshes every minute.
+			
+			<div class="footer-attribution">
+				CM monitoring initially created by <a target="_blank" href="https://github.com/VoiDeD">VoiDeD</a>.<br>
+				Dota 2 stats provided by <a target="_blank" href="https://rjackson.me/tools/mmstats">RJackson</a>.
+			</div>
+		</div>
+	</div>
+	
+	<script src="/static/app.min.js?1"></script>
+	<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-37177069-4','steamstat.us');ga('set','forceSSL',true);ga('send','pageview');</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+==================================================================
+https://keybase.io/xpaw
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://steamstat.us
+  * I am xpaw (https://keybase.io/xpaw) on keybase.
+  * I have a public key with fingerprint 1FC4 BF8B 87AC E27C 59A4  4176 13C2 9770 07F9 8120
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "1fc4bf8b87ace27c59a4417613c2977007f98120",
+            "host": "keybase.io",
+            "key_id": "13c2977007f98120",
+            "uid": "7529fdd436238515fba2e796949ec100",
+            "username": "xpaw"
+        },
+        "revoke": {
+            "sig_ids": [
+                "3a1ff371b7d52c137235d0dc8144e52972c7de55e832b9b7ed831f3b094873d70f"
+            ]
+        },
+        "service": {
+            "hostname": "steamstat.us",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1412429247,
+    "expire_in": 157680000,
+    "prev": "3881ef0f1a475b3297b7e76ae17e83163e488913eb0d8187d4f423291750091e",
+    "seqno": 17,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v1.1.2
+Comment: https://keybase.io/crypto
+
+yMIpAnicZZJtbAxBGMe3RRulXg5BSsIgIqmzszt7s3skJE3auAoiVfF69mX2umlv
+d91u79qKRCSChLTeSiqhgh4hqCCSxms1XpoQaUoQrftCaaMoQoKavfDJfJnMPP/5
+/Z//5LmbO4TJyVjVdWKw635HMqP9dnElUzLv683NQLG0ahDcDMpJetMNM0Jidsww
+XRAEUFeRoouKiGWVcFgVJBkhiAOQVzkJY5bFuiRCjgX5oMxyvBcUo8gO8RsWvaOH
+sKF5nP/1lekCFjhJ1zTEBzheFKCgKzJHsBSQkERUyKaFDomZcpRQdZUtJ8CWfBAj
+cauceO06RoQ6OCC4FvAy1HUeQwVrAqdCHnO8oLGaKkKECLXBnIo1IghE5DlFUjDR
+RB7qvMJKSMS8hlkdrKds6hY31DTci/TX2XGJHHVc2fVXOrQnO2a5lmpV0EqZ69pO
+0OvKrbY9aYIo4b+QsGKYGv1Q+iJOYo5hmSAIqVJ1DY8KEeQQJ3EI5wNSZRsxEjY8
+hYADIkuX50PiFMmLIiQ6q0MZYUHhaRbaPg7IBGKaBgZ4gkRRgjxRWE2EItaQjjgq
+g1hgWQkS4MXaZFqUTa1cOeIlMiKm7FbGCNhy59a6oUxGDpM1LNObCSZn+Jh/k9KT
+yB4M98041Nu44kXqfOaFt8VlxmVf0e4nn0vPnOodcZw7+1St2Wt3jwqUpipm+LLn
+fqu5/qjtwne5pbSjdvBN3ZJkHvDv3NWsfOwPrWlimmdP3LD1yNLTLT9Ce/Clwvq+
+8d0LSvYsrzk7b6CzOdmDFiYbfMemXxYQP/ZZ/FBXwf6fN1e+v6Ff+XVtWe6Z0JMF
+W6fkMSF9ybi2l+bq7fbJT7/OD020KQ+q1fZpj1Oph3OK5m6rC+ck57dmfRjoJwv9
+cPHR2gnRzCuLdkw2Cr9kP/S1bpw6YlJT1r2rkYJ9B4vPNfYzHaNHPm85/OBiw/VZ
+Sn17a8mrMdFQ55vud7/tmY2A2XSg8PUfOegxWg==
+=WzqL
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/xpaw
+
+==================================================================
