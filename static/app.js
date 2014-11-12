@@ -11,7 +11,11 @@ try
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
 		
-		ShowError = function( text )
+		/**
+		 * @param {string} text
+		 * @param {string=} data
+		 */
+		ShowError = function( text, data )
 		{
 			loader.style.display = 'block';
 			doc.getElementById( 'loader-content' ).style.display = 'none';
@@ -20,6 +24,17 @@ try
 			if( text )
 			{
 				element.innerHTML = text;
+				
+				text = text.replace( '<br>', ' ' );
+			}
+			else
+			{
+				text = 'AJAX Error: ' + data;
+			}
+			
+			if( ga )
+			{
+				ga( 'send', 'event', 'Error', 'ShowError', text );
 			}
 		},
 		
@@ -28,7 +43,7 @@ try
 			loader.style.display = 'block';
 			
 			xhr = new XMLHttpRequest( );
-			xhr.open( 'GET', 'https://steamdb.info/api/SteamRailgun/?' + Math.round( Date.now() / 1000 / 60 ) * 60, true );
+			xhr.open( 'GET', 'https://steamdb.info/api/SteamRailgun/', true );
 			xhr.onreadystatechange = LoadData;
 			xhr.ontimeout = function() { ShowError( 'Request timed out.<br>Reload the page manually.' ); };
 			xhr.timeout = 20000;
@@ -49,7 +64,7 @@ try
 					
 					if( xhr.status !== 200 )
 					{
-						return ShowError( 0 );
+						return ShowError( '', 'Status: ' + xhr.status );
 					}
 					
 					if( response === null || response[ 0 ] !== '{' )
@@ -61,7 +76,7 @@ try
 					
 					if( !response[ 'success' ] )
 					{
-						return ShowError( 0 );
+						return ShowError( '', 'Success = false' );
 					}
 					
 					psa = response[ 'psa' ] || '';
@@ -143,7 +158,7 @@ try
 				}
 				catch( x )
 				{
-					ShowError( 0 );
+					ShowError( '' );
 					
 					console.debug( 'Status:', xhr.status, xhr.statusText );
 					console.debug( 'Data:', response );
@@ -151,7 +166,10 @@ try
 			}
 		},
 		
-		/** @return {string} */
+		/**
+		 * @param {number} previous
+		 * @return {string}
+		 */
 		TimeDifference = function( previous )
 		{
 			var msPerMinute = 60 * 1000;
@@ -188,6 +206,9 @@ try
 			}
 		},
 		
+		/**
+		 * @param {string} item
+		 */
 		InitializeMatchmakingStats = function( item )
 		{
 			var yeOlDumbeClassName = 'mmstats services',
