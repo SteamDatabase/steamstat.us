@@ -256,7 +256,6 @@ try
 	if( storage && Element.prototype.addEventListener )
 	{
 		InitializeMatchmakingStats( 'csgo' );
-		InitializeMatchmakingStats( 'dota' );
 	}
 }
 catch( e )
