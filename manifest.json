@@ -2,7 +2,7 @@
 	"name": "Steam Status",
 	"start_url": "http://steamstat.us/",
 	"display": "standalone",
-	"orientation": "landscape",
+	"orientation": "any",
 	"icons":
 	[
 		{
