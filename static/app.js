@@ -182,7 +182,7 @@ try
 			
 			if( elapsed < msPerMinute )
 			{
-				return 'just now';
+				return '<1m';
 			}
 			else if( elapsed < msPerHour )
 			{
