@@ -223,7 +223,7 @@ try
 			{
 				e.preventDefault( );
 				
-				if( statsContainer.classList.contains( 'closed' ) )
+				if( !statsContainer.classList.contains( 'closed' ) )
 				{
 					statsContainer.classList.add( 'closed' );
 					
