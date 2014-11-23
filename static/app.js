@@ -211,41 +211,34 @@ try
 		 */
 		InitializeMatchmakingStats = function( item )
 		{
-			var yeOlDumbeClassName = 'mmstats services',
-				storageItem = 'show_' + item,
+			var storageItem    = 'show_' + item,
 				statsContainer = doc.getElementById( item + '-container' );
 			
 			if( storage.getItem( storageItem ) )
 			{
-				statsContainer.className = yeOlDumbeClassName;
+				statsContainer.classList.remove( 'closed' );
 			}
 			
 			doc.getElementById( item + '-button' ).addEventListener( 'click', function( e )
 			{
-				try
+				e.preventDefault( );
+				
+				if( statsContainer.classList.contains( 'closed' ) )
 				{
-					e.preventDefault( );
+					statsContainer.classList.add( 'closed' );
 					
-					if( statsContainer.className === yeOlDumbeClassName )
-					{
-						statsContainer.className = yeOlDumbeClassName + ' closed';
-						
-						storage.removeItem( storageItem );
-					}
-					else
-					{
-						statsContainer.className = yeOlDumbeClassName;
-						
-						storage.setItem( storageItem, 1 );
-					}
+					storage.removeItem( storageItem );
 				}
-				catch( x )
+				else
 				{
-					//
+					statsContainer.classList.remove( 'closed' );
+					
+					storage.setItem( storageItem, 1 );
 				}
 			} );
 		};
 	
+	// Delete noscript element because some browsers think it's cool to render it if javascript is enabled
 	if( element )
 	{
 		element.parentNode.removeChild( element );
@@ -253,7 +246,8 @@ try
 	
 	RefreshData( );
 	
-	if( storage && Element.prototype.addEventListener )
+	// Woo sanity checks so we don't fail spectacularly in old browsers
+	if( storage && Element.prototype.addEventListener && loader.classList )
 	{
 		InitializeMatchmakingStats( 'csgo' );
 	}
@@ -261,6 +255,12 @@ try
 catch( e )
 {
 	ShowError( 'Something broke.<br>Are you using an outdated browser?' );
+	
+	if( ga )
+	{
+		ga( 'send', 'event', 'Error', 'ShowError', e.message || 'try-catch' );
+	}
+	
 	console.error( e );
 }
 }( document, localStorage ) );
