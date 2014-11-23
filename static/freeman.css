@@ -377,6 +377,12 @@ a:hover {
 	}
 }
 
+@media screen and (max-width: 360px) {
+	.title {
+		font-size: 1.7em;
+	}
+}
+
 @media screen and (max-height: 720px) {
 	.container {
 		margin-top: 10px;
