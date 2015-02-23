@@ -63,7 +63,11 @@ a:hover {
 	text-decoration: underline;
 }
 
-.services, .info, #psa, noscript {
+.services,
+.info,
+#psa,
+#old-browser,
+noscript {
 	text-align: left;
 	position: relative;
 	background-color: #282936;
@@ -77,13 +81,16 @@ a:hover {
 	border: 1px solid #191921;
 }
 
-#psa, noscript {
+#psa,
+#old-browser,
+noscript {
 	display: block;
 	color: #FFF;
 	background-color: #DA4453;
 }
 
-#psa {
+#psa,
+#old-browser {
 	display: none;
 }
 
@@ -97,7 +104,10 @@ a:hover {
 	text-decoration: none;
 }
 
-.info, #psa, noscript {
+.info,
+#psa,
+#old-browser,
+noscript {
 	padding: 1em;
 	margin-bottom: 1em;
 }

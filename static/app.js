@@ -2,11 +2,17 @@
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // ==/ClosureCompiler==
 
-( function( doc, storage )
+( function( doc, storage, notif )
 {
 try
 {
-	var key, value, response, xhr, psa, timeDiff,
+	var key,
+		value,
+		response,
+		xhr,
+		psa,
+		timeDiff,
+		previousOnline = 0,
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
@@ -87,10 +93,10 @@ try
 					{
 						if( psa )
 						{
-							psa = '<hr>';
+							psa += '<hr>';
 						}
 						
-						psa += 'Data appears to be ' + 0 | ( timeDiff / 60 ) + ' minutes old.';
+						psa += 'Data appears to be ' + ( 0 | ( timeDiff / 60 ) ) + ' minutes old.';
 						
 						if( timeDiff > 3000 )
 						{
@@ -115,6 +121,25 @@ try
 						psa_element.innerHTML = '';
 						psa_element.style.display = 'none';
 					}
+					
+					if( previousOnline < 75 && response[ 'online' ] >= 75 && notif )
+					{
+						if( notif.permission === 'granted' )
+						{
+							var notification = new notif( 'Steam is back online',
+							{
+								'lang': 'en',
+								'icon': '/static/logos/192px.png',
+								'body': response[ 'online' ] + '% of Steam servers are online, you could try logging in now.'
+							} );
+							
+							setTimeout( function() {
+								notification.close();
+							}, 5000 );
+						}
+					}
+					
+					previousOnline = response[ 'online' ];
 					
 					response = response[ 'services' ];
 					
@@ -246,10 +271,19 @@ try
 	
 	RefreshData( );
 	
-	// Woo sanity checks so we don't fail spectacularly in old browsers
-	if( storage && Element.prototype.addEventListener && loader.classList )
+	// Insanity checks
+	if( !storage || !notif || !notif.permission || !Element.prototype.addEventListener )
+	{
+		doc.getElementById( 'old-browser' ).style.display = 'block';
+	}
+	else
 	{
 		InitializeMatchmakingStats( 'csgo' );
+		
+		if( notif.permission !== 'denied' )
+		{
+			Notification.requestPermission();
+		}
 	}
 }
 catch( e )
@@ -263,4 +297,4 @@ catch( e )
 	
 	console.error( e );
 }
-}( document, localStorage ) );
+}( document, localStorage, window.Notification ) );
