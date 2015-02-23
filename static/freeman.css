@@ -26,6 +26,11 @@ iframe {
 	overflow: hidden;
 }
 
+hr {
+	border: none;
+	border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
 .container {
 	margin: 20px auto 10px;
 	width: 500px;
@@ -75,10 +80,6 @@ noscript {
 	border-radius: 6px;
 	font-size: 1em;
 	line-height: 1.5;
-}
-
-.info hr {
-	border: 1px solid #191921;
 }
 
 #psa,
