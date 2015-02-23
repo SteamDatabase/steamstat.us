@@ -12,7 +12,7 @@ try
 		xhr,
 		psa,
 		timeDiff,
-		previousOnline = 0,
+		previousOnline = 100,
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
