@@ -12,10 +12,12 @@ try
 		xhr,
 		psa,
 		timeDiff,
+		secondsToUpdate = 0,
 		previousOnline = 100,
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
+		time_element   = doc.getElementById( 'time-to-update' ),
 		
 		/**
 		 * @param {string} text
@@ -41,6 +43,22 @@ try
 			if( ga )
 			{
 				ga( 'send', 'event', 'Error', 'ShowError', text );
+			}
+		},
+		
+		Tick = function( )
+		{
+			if( secondsToUpdate <= 0 )
+			{
+				secondsToUpdate = 45;
+				
+				RefreshData( );
+			}
+			else
+			{
+				setTimeout( Tick, 1000 );
+				
+				time_element.textContent = --secondsToUpdate < 10 ? '0' + secondsToUpdate : secondsToUpdate;
 			}
 		},
 		
@@ -179,7 +197,7 @@ try
 						}
 					}
 					
-					setTimeout( RefreshData, 60000 );
+					Tick( );
 				}
 				catch( x )
 				{
@@ -269,7 +287,7 @@ try
 		element.parentNode.removeChild( element );
 	}
 	
-	RefreshData( );
+	Tick( );
 	
 	// Insanity checks
 	if( !storage || !notif || !notif.permission || !Element.prototype.addEventListener )

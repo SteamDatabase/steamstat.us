@@ -257,6 +257,10 @@ noscript {
 	border-top: 1px solid #282936;
 }
 
+#time-to-update {
+	color: #00AFED;
+}
+
 /* flattr and twitter buttons */
 .donate-button,
 .twitter-button {
