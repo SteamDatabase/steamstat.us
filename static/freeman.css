@@ -225,6 +225,10 @@ noscript {
 	display: none;
 }
 
+#js-csgo-services {
+	cursor: pointer;
+}
+
 .caret {
 	display: inline-block;
 	width: 0;
