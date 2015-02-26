@@ -271,12 +271,16 @@ try
 					statsContainer.classList.add( 'closed' );
 					
 					storage.removeItem( storageItem );
+					
+					this.classList.remove( 'up' );
 				}
 				else
 				{
 					statsContainer.classList.remove( 'closed' );
 					
 					storage.setItem( storageItem, 1 );
+					
+					this.classList.add( 'up' );
 				}
 			} );
 		};

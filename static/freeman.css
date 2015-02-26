@@ -138,8 +138,7 @@ noscript {
 	font-size: 90%;
 }
 
-.services .service + .service,
-.services .services + .service {
+.services .sep {
 	border-top: 1px solid #191921;
 }
 
@@ -251,10 +250,6 @@ noscript {
 
 .mmstats.closed {
 	display: none;
-}
-
-.mmstats .service + .service {
-	border-top: 1px solid #282936;
 }
 
 #time-to-update {
