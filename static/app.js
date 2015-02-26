@@ -17,7 +17,7 @@ try
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
-		time_element   = doc.getElementById( 'time-to-update' ),
+		time_element   = doc.getElementById( 'js-refresh' ),
 		
 		/**
 		 * @param {string} text
@@ -255,14 +255,17 @@ try
 		InitializeMatchmakingStats = function( item )
 		{
 			var storageItem    = 'show_' + item,
-				statsContainer = doc.getElementById( item + '-container' );
+				statsContainer = doc.getElementById( 'js-' + item + '-container' ),
+				caret          = doc.getElementById( 'js-' + item + '-caret' );
 			
 			if( storage.getItem( storageItem ) )
 			{
 				statsContainer.classList.remove( 'closed' );
+				
+				caret.classList.add( 'up' );
 			}
 			
-			doc.getElementById( item + '-button' ).addEventListener( 'click', function( e )
+			doc.getElementById( 'js-' + item + '-services' ).addEventListener( 'click', function( e )
 			{
 				e.preventDefault( );
 				
@@ -272,7 +275,7 @@ try
 					
 					storage.removeItem( storageItem );
 					
-					this.classList.remove( 'up' );
+					caret.classList.remove( 'up' );
 				}
 				else
 				{
@@ -280,7 +283,7 @@ try
 					
 					storage.setItem( storageItem, 1 );
 					
-					this.classList.add( 'up' );
+					caret.classList.add( 'up' );
 				}
 			} );
 		};
