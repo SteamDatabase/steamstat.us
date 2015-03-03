@@ -297,7 +297,7 @@ try
 	Tick( );
 	
 	// Insanity checks
-	if( !storage || !notif || !notif.permission || !Element.prototype.addEventListener )
+	if( !storage || ( notif && !notif.permission ) || !Element.prototype.addEventListener )
 	{
 		doc.getElementById( 'old-browser' ).style.display = 'block';
 	}
@@ -305,9 +305,9 @@ try
 	{
 		InitializeMatchmakingStats( 'csgo' );
 		
-		if( notif.permission !== 'denied' )
+		if( notif && notif.permission !== 'denied' )
 		{
-			Notification.requestPermission();
+			notif.requestPermission();
 		}
 	}
 }
