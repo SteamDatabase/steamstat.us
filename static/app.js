@@ -314,7 +314,7 @@ try
 	http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
 	{
-		navigator.serviceWorker.register( '/static/service-worker.js', { scope: '/' } );
+		navigator.serviceWorker.register( '/static/service-worker.js' );
 	}
 }
 catch( e )
