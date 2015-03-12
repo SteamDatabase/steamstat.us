@@ -1,6 +1,7 @@
 {
 	"name": "Steam Status",
-	"start_url": "http://steamstat.us/",
+	"short_name": "Steam Status",
+	"start_url": "https://steamstat.us/",
 	"display": "standalone",
 	"orientation": "any",
 	"icons":
@@ -13,6 +14,11 @@
 		{
 			"src": "static/logos/192px.png",
 			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "static/logos/144px.png",
+			"sizes": "144x144",
 			"type": "image/png"
 		},
 		{
