@@ -10,7 +10,7 @@
 
 body {
 	margin: 0;
-	color: #8487AF;
+	color: #8A8DB7;
 	background: #1B1B24;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 16px;
@@ -60,7 +60,7 @@ p {
 }
 
 a {
-	color: #4183c4;
+	color: #4384D8;
 	text-decoration: none;
 }
 
@@ -87,7 +87,7 @@ noscript {
 noscript {
 	display: block;
 	color: #FFF;
-	background-color: #DA4453;
+	background-color: #D83D42;
 }
 
 #psa,
@@ -96,7 +96,7 @@ noscript {
 }
 
 #psa a {
-	color: #CCD1D9;
+	color: #FFF;
 	text-decoration: underline;
 }
 
@@ -147,11 +147,11 @@ noscript {
 }
 
 .minor {
-	color: #FFA500;
+	color: #26C6DA;
 }
 
 .major {
-	color: #e63900;
+	color: #FFC107;
 }
 
 #loader {
