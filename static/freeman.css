@@ -43,8 +43,18 @@ hr {
 	padding-top: 10px;
 }
 
-.footer-attribution {
-	margin-top: 14px;
+.footer-oreos {
+	background-color: #282936;
+	border: 1px solid #191921;
+	border-radius: 6px;
+	padding: 10px 0;
+}
+
+.footer-oreos p {
+	margin: 0;
+}
+
+.footer-oreos .attribution {
 	font-size: .8em;
 }
 
@@ -53,10 +63,6 @@ hr {
 	margin: 10px 0;
 	font-size: 2.6em;
 	font-weight: 300;
-}
-
-p {
-	margin: 0 0 40px 0;
 }
 
 a {
