@@ -141,6 +141,10 @@ noscript {
 	float: right;
 }
 
+.help {
+	cursor: help;
+}
+
 .service .time {
 	cursor: help;
 	color: #888;
@@ -245,17 +249,15 @@ noscript {
 /* flattr and twitter buttons */
 .donate-button,
 .twitter-button {
-	font: normal normal normal 11px/18px 'Helvetica Neue',Arial,sans-serif;
 	height: 28px;
 	border-radius: 3px;
 	font-size: 13px;
 	line-height: 26px;
 	outline: none;
-	text-decoration: none;
-	position: relative;
 	font-weight: bold;
 	display: inline-block;
 	vertical-align: top;
+	padding: 0 7px;
 	
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -263,11 +265,16 @@ noscript {
 }
 
 .donate-button {
-	padding: 0 7px;
 	color: #FFF;
+	text-shadow: 1px 1px 0 #333;
 	border: #7ea352 solid 1px;
 	background: #8cb55b;
 	background: linear-gradient(#92bd5e, #88b058);
+}
+
+.twitter-button > img,
+.donate-button > img {
+	vertical-align: text-bottom;
 }
 
 .donate-button:focus,
@@ -281,6 +288,7 @@ noscript {
 
 .twitter-button {
 	color: #333;
+	text-shadow: 1px 1px 0 #FFF;
 	border: #CCC solid 1px;
 	background-color: #EEE;
 	background-image: linear-gradient(#FFF,#DEDEDE);
@@ -301,21 +309,6 @@ noscript {
 .twitter-button:active {
 	box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.1);
 }
-
-.twitter-icon {
-	width: 21px;
-	height: 16px;
-	left: 4px;
-	margin-top: -8px;
-	position: absolute;
-	top: 50%;
-	background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAQCAMAAADOBMQXAAAA21BMVEUAAAAAgK8nvesBjLYCibH///////8Ag67///9fyutLwOFu0O4CkLs7ttv////////l9Pn///////8AgKcNue0Nt+oLsuULqdoauusasuAXp9IDlsE0u+QPqddCxe4stt8DjbaN2vKe4PMBi7VhyOcnrNPW8flcw+LA6fQBi7Qiocf///+M0ecBirWg3e9BsdT///8Cjbee2esPlLoypMmMz+I/pcX///8AjboAhq9Is9Gt2+v///8Bt+4BtuwBs+gBsOYBtesBqNsBpdYBodEBrOABnMsBmMUBk78lFZULAAAAPXRSTlMAEPPwn3e/MAzj4N/RuadrTTwkIPv7+fn39/Tx7+zr5uHX08/NzcfHwb+2s7Kvq6qDgH53dmppYGBQQzIwUAz9uQAAAMJJREFUGNN9zNXSwjAQhuEtVVx+wd3dnW6SGtz/FbEQCmc8B5n53kkC5AckRVNVTQHFBGKqpoyJwHWDhNbYKbQ2QfkIZO1xIbjjlUYWra3jXKf0y9xH20bBYzqQXJT53q297HKbYIQiOVT/kPmu57BHFXV4yuQZ0ktGJ2F9Wa1BhHaIr0A6dz4ZKzmQrCR/VzaDULoXf93G+AXeTsl/fMboPkzaUL26HKkVWmkI6ZNYkQv8rTVTWfjI6inDMMaLDHx3Byv+I/LSI+6qAAAAAElFTkSuQmCC') 0 0 no-repeat;
-}
-
-.twitter-label {
-	padding: 0 7px 0 29px;
-}
-
 
 .spinner {
 	width: 50px;
