@@ -14,6 +14,8 @@ try
 		timeDiff,
 		secondsToUpdate = 0,
 		previousOnline = 100,
+		graphData,
+		graph          = doc.getElementById( 'cms-graph' ),
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
@@ -60,6 +62,43 @@ try
 				
 				time_element.textContent = --secondsToUpdate < 10 ? '0' + secondsToUpdate : secondsToUpdate;
 			}
+		},
+		
+		LoadGraph = function( )
+		{
+			var xhrGraph = new XMLHttpRequest( );
+			xhrGraph.open( 'GET', 'https://steamdb.info/api/SteamGraphCM/', true );
+			xhrGraph.onreadystatechange = function()
+			{
+				try
+				{
+					if( xhrGraph.readyState === 4 )
+					{
+						response = JSON.parse( xhrGraph.responseText );
+						
+						if( !response[ 'success' ] )
+						{
+							graph.textContent = 'Failed to load graph data.';
+							
+							return;
+						}
+						
+						graphData = response.data;
+						
+						if( window.Highcharts )
+						{
+							RenderChart();
+						}
+					}
+				}
+				catch( x )
+				{
+					graph.textContent = 'Failed to load graph data.';
+				}
+			};
+			xhrGraph.ontimeout = function() { graph.textContent = 'Request timed out, unable to render graph.'; };
+			xhrGraph.timeout = 10000;
+			xhrGraph.send( );
 		},
 		
 		RefreshData = function( )
@@ -295,6 +334,7 @@ try
 	}
 	
 	Tick( );
+	LoadGraph( );
 	
 	// Insanity checks
 	if( !storage || ( notif && !notif.permission ) || !Element.prototype.addEventListener )
@@ -311,7 +351,140 @@ try
 		}
 	}
 	
-	http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
+	// Not using dot notation so that closure compiler doesn't optimize it away
+	window[ 'RenderChart' ] = function()
+	{
+		if( !graphData )
+		{
+			return;
+		}
+		
+		if( !window[ 'Highcharts' ] )
+		{
+			graph.innerHTML = 'Failed to load Highcharts.<br>Please unblock <b>cdnjs.cloudflare.com</b> for this to work.';
+			
+			return;
+		}
+		
+		var d = new Date();
+		d.setDate( d.getDate( ) - 1 );
+		
+		new window[ 'Highcharts' ][ 'Chart' ](
+		{
+			plotOptions:
+			{
+				series:
+				{
+					animation: false,
+					color: '#4384D8'
+				}
+			},
+			chart:
+			{
+				renderTo: graph,
+				backgroundColor: '#282936',
+				spacing: [5, 0, 0, 0],
+				style: {
+					fontFamily: "'Open Sans', sans-serif"
+				}
+			},
+			title:
+			{
+				text: null
+			},
+			credits:
+			{
+				enabled: false
+			},
+			exporting:
+			{
+				enabled: false
+			},
+			rangeSelector:
+			{
+				enabled: false
+			},
+			scrollbar:
+			{
+				enabled: false
+			},
+			navigator:
+			{
+				enabled: false
+			},
+			tooltip:
+			{
+				enabled: false
+			},
+			legend:
+			{
+				enabled: false
+			},
+			xAxis:
+			{
+				type: 'datetime',
+				labels:
+				{
+					style:
+					{
+						color: '#9E9E9E'
+					}
+				},
+				lineWidth: 0,
+				tickWidth: 0
+			},
+			yAxis:
+			{
+				gridLineColor: '#3A3B47',
+				title:
+				{
+					text: 'Online CMs Today',
+					style:
+					{
+						color: '#8A8DB7'
+					}
+				},
+				labels:
+				{
+					format: '{value}%',
+					style:
+					{
+						color: '#9E9E9E'
+					}
+				},
+				showLastLabel: true,
+				tickPositions: [0, 25, 50, 75, 100],
+				min: 0,
+				max: 100,
+				allowDecimals: false,
+				startOnTick: false,
+				endOnTick: false
+			},
+			series:
+			[
+				{
+					pointStart: d.getTime(),
+					pointInterval: 30000,
+					data: graphData,
+					marker:
+					{
+						enabled: false
+					},
+					states:
+					{
+						hover:
+						{
+							enabled: false
+						}
+					}
+				}
+			]
+		});
+		
+		graphData = null;
+	};
+	
+	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
 	{
 		navigator.serviceWorker.register( '/static/service-worker.js' );

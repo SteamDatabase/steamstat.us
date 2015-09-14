@@ -238,6 +238,11 @@ noscript {
 	color: #00AFED;
 }
 
+#cms-graph {
+	height: 150px;
+	margin-top: 34px;
+}
+
 /* flattr and twitter buttons */
 .donate-button,
 .twitter-button {
