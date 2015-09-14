@@ -20,19 +20,13 @@ img {
 	border: 0;
 }
 
-iframe {
-	border: 0;
-	background-color: transparent;
-	overflow: hidden;
-}
-
 hr {
 	border: none;
 	border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .container {
-	margin: 20px auto 10px;
+	margin: 1em auto;
 	width: 500px;
 	text-align: center;
 }
@@ -180,7 +174,8 @@ noscript {
 	z-index: 999;
 }
 
-.spinner, .error {
+.spinner,
+.error {
 	margin: auto;
 	position: absolute;
 	top: 0;
@@ -198,7 +193,7 @@ noscript {
 	color: #F6BB42;
 }
 
-.tweet-button, .flattr-button {
+.tweet-button {
 	margin-left: 6px;
 }
 
@@ -352,22 +347,22 @@ noscript {
 	}
 	
 	.container {
-		margin-top: 10px;
 		width: 100%;
 	}
 	
-	.services {
-		margin: 0 16px;
+	/* TODO: Use border-box on all elements so this crap can go away */
+	.services,
+	.footer,
+	.footer-oreos,
+	.info,
+	#psa,
+	noscript {
+		margin-left: 1em;
+		margin-right: 1em;
 	}
 	
 	.mmstats {
 		margin: 0;
-	}
-	
-	.footer,
-	.footer-oreos,
-	.info, #psa, noscript {
-		margin: 0 16px 1em;
 	}
 }
 
@@ -388,12 +383,6 @@ noscript {
 @media screen and (max-width: 360px) {
 	.title {
 		font-size: 1.7em;
-	}
-}
-
-@media screen and (max-height: 720px) {
-	.container {
-		margin-top: 10px;
 	}
 }
 
