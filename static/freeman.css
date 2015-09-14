@@ -193,10 +193,6 @@ noscript {
 	color: #F6BB42;
 }
 
-.tweet-button {
-	margin-left: 6px;
-}
-
 .show-small {
 	display: none;
 }
@@ -254,8 +250,6 @@ noscript {
 	vertical-align: top;
 	padding: 0 7px;
 	
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
