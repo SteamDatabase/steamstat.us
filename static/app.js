@@ -2,7 +2,7 @@
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // ==/ClosureCompiler==
 
-( function( doc, storage, notif )
+( function( doc )
 {
 try
 {
@@ -19,335 +19,310 @@ try
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
 		psa_element    = doc.getElementById( 'psa' ),
-		time_element   = doc.getElementById( 'js-refresh' ),
+		time_element   = doc.getElementById( 'js-refresh' );
+	
+	/**
+	 * @param {string} text
+	 * @param {string=} data
+	 */
+	var ShowError = function( text, data )
+	{
+		loader.style.display = 'block';
+		doc.getElementById( 'loader-content' ).style.display = 'none';
+		( element = doc.getElementById( 'loader-error' ) ).style.display = 'block';
 		
-		/**
-		 * @param {string} text
-		 * @param {string=} data
-		 */
-		ShowError = function( text, data )
+		if( text )
 		{
-			loader.style.display = 'block';
-			doc.getElementById( 'loader-content' ).style.display = 'none';
-			( element = doc.getElementById( 'loader-error' ) ).style.display = 'block';
+			element.innerHTML = text;
 			
-			if( text )
-			{
-				element.innerHTML = text;
-				
-				text = text.replace( '<br>', ' ' );
-			}
-			else
-			{
-				text = 'AJAX Error: ' + data;
-			}
-		},
-		
-		Tick = function( )
+			text = text.replace( '<br>', ' ' );
+		}
+		else
 		{
-			if( secondsToUpdate <= 0 )
-			{
-				secondsToUpdate = 45;
-				
-				RefreshData( );
-			}
-			else
-			{
-				setTimeout( Tick, 1000 );
-				
-				time_element.textContent = --secondsToUpdate < 10 ? '0' + secondsToUpdate : secondsToUpdate;
-			}
-		},
-		
-		LoadGraph = function( )
+			text = 'AJAX Error: ' + data;
+		}
+	};
+	
+	var Tick = function( )
+	{
+		if( secondsToUpdate <= 0 )
 		{
-			var xhrGraph = new XMLHttpRequest( );
-			xhrGraph.open( 'GET', 'https://crowbar.steamdb.info/Gina', true );
-			xhrGraph.onreadystatechange = function()
-			{
-				try
-				{
-					if( xhrGraph.readyState === 4 )
-					{
-						response = JSON.parse( xhrGraph.responseText );
-						
-						if( !response[ 'success' ] )
-						{
-							graph.textContent = 'Failed to load graph data.';
-							
-							return;
-						}
-						
-						graphData = response.data;
-						
-						if( 'Highcharts' in window )
-						{
-							RenderChart();
-						}
-					}
-				}
-				catch( x )
-				{
-					graph.textContent = 'Failed to load graph data.';
-				}
-			};
-			xhrGraph.ontimeout = function() { graph.textContent = 'Request timed out, unable to render graph.'; };
-			xhrGraph.timeout = 10000;
-			xhrGraph.send( );
-		},
-		
-		RefreshData = function( )
-		{
-			loader.style.display = 'block';
+			secondsToUpdate = 45;
 			
-			xhr = new XMLHttpRequest( );
-			xhr.open( 'GET', 'https://crowbar.steamdb.info/Barney', true );
-			xhr.onreadystatechange = LoadData;
-			xhr.ontimeout = function() { ShowError( 'Request timed out.<br>Reload the page manually.' ); };
-			xhr.timeout = 20000;
-			xhr.send( );
-		},
-		
-		LoadData = function( )
+			RefreshData( );
+		}
+		else
 		{
-			xhr = this;
+			setTimeout( Tick, 1000 );
 			
-			if( xhr.readyState === 4 )
+			time_element.textContent = --secondsToUpdate < 10 ? '0' + secondsToUpdate : secondsToUpdate;
+		}
+	};
+	
+	var LoadGraph = function( )
+	{
+		var xhrGraph = new XMLHttpRequest( );
+		xhrGraph.open( 'GET', 'https://crowbar.steamdb.info/Gina', true );
+		xhrGraph.onreadystatechange = function()
+		{
+			try
 			{
-				response = xhr.responseText;
-				
-				try
+				if( xhrGraph.readyState === 4 )
 				{
-					loader.style.display = 'none';
-					
-					if( xhr.status !== 200 )
-					{
-						return ShowError( '', 'Status: ' + xhr.status );
-					}
-					
-					if( response === null || response[ 0 ] !== '{' )
-					{
-						return ShowError( 'Received invalid data.<br>Is something wrong with your network?' );
-					}
-					
-					response = JSON.parse( response );
+					response = JSON.parse( xhrGraph.responseText );
 					
 					if( !response[ 'success' ] )
 					{
-						return ShowError( '', 'Success = false' );
+						graph.textContent = 'Failed to load graph data.';
+						
+						return;
 					}
 					
-					psa = response[ 'psa' ] || '';
+					graphData = response.data;
 					
-					timeDiff = Math.abs( Date.now() / 1000 - response[ 'time' ] );
-					
-					if( timeDiff > 300 )
+					if( 'Highcharts' in window )
 					{
-						if( psa )
-						{
-							psa += '<hr>';
-						}
-						
-						psa += 'Data appears to be ' + ( 0 | ( timeDiff / 60 ) ) + ' minutes old.';
-						
-						if( timeDiff > 3000 )
-						{
-							psa += ' <a href="http://time.is" target="_blank">Is your clock out of sync?</a>';
-						}
+						RenderChart();
 					}
-					
+				}
+			}
+			catch( x )
+			{
+				graph.textContent = 'Failed to load graph data.';
+			}
+		};
+		xhrGraph.ontimeout = function() { graph.textContent = 'Request timed out, unable to render graph.'; };
+		xhrGraph.timeout = 10000;
+		xhrGraph.send( );
+	};
+	
+	var RefreshData = function( )
+	{
+		loader.style.display = 'block';
+		
+		xhr = new XMLHttpRequest( );
+		xhr.open( 'GET', 'https://crowbar.steamdb.info/Barney', true );
+		xhr.onreadystatechange = LoadData;
+		xhr.ontimeout = function() { ShowError( 'Request timed out.<br>Reload the page manually.' ); };
+		xhr.timeout = 20000;
+		xhr.send( );
+	};
+	
+	var LoadData = function( )
+	{
+		xhr = this;
+		
+		if( xhr.readyState === 4 )
+		{
+			response = xhr.responseText;
+			
+			try
+			{
+				loader.style.display = 'none';
+				
+				if( xhr.status !== 200 )
+				{
+					return ShowError( '', 'Status: ' + xhr.status );
+				}
+				
+				if( response === null || response[ 0 ] !== '{' )
+				{
+					return ShowError( 'Received invalid data.<br>Is something wrong with your network?' );
+				}
+				
+				response = JSON.parse( response );
+				
+				if( !response[ 'success' ] )
+				{
+					return ShowError( '', 'Success = false' );
+				}
+				
+				psa = response[ 'psa' ] || '';
+				
+				timeDiff = Math.abs( Date.now() / 1000 - response[ 'time' ] );
+				
+				if( timeDiff > 300 )
+				{
 					if( psa )
 					{
-						if( psa_element.style.display !== 'block' )
+						psa += '<hr>';
+					}
+					
+					psa += 'Data appears to be ' + ( 0 | ( timeDiff / 60 ) ) + ' minutes old.';
+					
+					if( timeDiff > 3000 )
+					{
+						psa += ' <a href="http://time.is" target="_blank">Is your clock out of sync?</a>';
+					}
+				}
+				
+				if( psa )
+				{
+					if( psa_element.style.display !== 'block' )
+					{
+						psa_element.style.display = 'block';
+					}
+					
+					if( psa_element.innerHTML !== psa )
+					{
+						psa_element.innerHTML = psa;
+					}
+				}
+				else if( psa_element.style.display !== 'none' )
+				{
+					psa_element.innerHTML = '';
+					psa_element.style.display = 'none';
+				}
+				
+				if( previousOnline < 75 && response[ 'online' ] >= 75 && 'Notification' in window )
+				{
+					if( window.Notification.permission === 'granted' )
+					{
+						var notification = new window.Notification( 'Steam is back online',
 						{
-							psa_element.style.display = 'block';
-						}
+							'lang': 'en',
+							'icon': '/static/logos/192px.png',
+							'body': response[ 'online' ] + '% of Steam servers are online, you could try logging in now.'
+						} );
 						
-						if( psa_element.innerHTML !== psa )
-						{
-							psa_element.innerHTML = psa;
-						}
+						setTimeout( function() {
+							notification.close();
+						}, 5000 );
 					}
-					else if( psa_element.style.display !== 'none' )
+				}
+				
+				previousOnline = response[ 'online' ];
+				
+				response = response[ 'services' ];
+				
+				for( key in response )
+				{
+					element = doc.getElementById( key );
+					
+					if( element )
 					{
-						psa_element.innerHTML = '';
-						psa_element.style.display = 'none';
-					}
-					
-					if( previousOnline < 75 && response[ 'online' ] >= 75 && notif )
-					{
-						if( notif.permission === 'granted' )
-						{
-							var notification = new notif( 'Steam is back online',
-							{
-								'lang': 'en',
-								'icon': '/static/logos/192px.png',
-								'body': response[ 'online' ] + '% of Steam servers are online, you could try logging in now.'
-							} );
-							
-							setTimeout( function() {
-								notification.close();
-							}, 5000 );
-						}
-					}
-					
-					previousOnline = response[ 'online' ];
-					
-					response = response[ 'services' ];
-					
-					for( key in response )
-					{
-						element = doc.getElementById( key );
+						value = response[ key ];
 						
-						if( element )
+						if( value.status )
 						{
-							value = response[ key ];
+							key = 'status ' + value.status;
 							
-							if( value.status )
+							if( element.className !== key )
 							{
-								key = 'status ' + value.status;
-								
-								if( element.className !== key )
-								{
-									element.className = key;
-								}
+								element.className = key;
 							}
-							
-							if( value.time )
+						}
+						
+						if( value.time )
+						{
+							element.innerHTML = value.title + ' <span class="time" title="Time since last status change">(' + TimeDifference( value.time ) + ')</span>';
+						}
+						else
+						{
+							if( element.textContent )
 							{
-								element.innerHTML = value.title + ' <span class="time" title="Time since last status change">(' + TimeDifference( value.time ) + ')</span>';
+								element.textContent = value.title;
 							}
 							else
 							{
-								if( element.textContent )
-								{
-									element.textContent = value.title;
-								}
-								else
-								{
-									element.innerText = value.title;
-								}
+								element.innerText = value.title;
 							}
 						}
 					}
-					
-					Tick( );
 				}
-				catch( x )
-				{
-					ShowError( '' );
-					
-					console.debug( 'Status:', xhr.status, xhr.statusText );
-					console.debug( 'Data:', response );
-				}
+				
+				Tick( );
 			}
-		},
+			catch( x )
+			{
+				ShowError( '' );
+				
+				console.debug( 'Status:', xhr.status, xhr.statusText );
+				console.debug( 'Data:', response );
+			}
+		}
+	};
+	
+	/**
+	 * @param {number} previous
+	 * @return {string}
+	 */
+	var TimeDifference = function( previous )
+	{
+		var msPerMinute = 60 * 1000;
+		var msPerHour = msPerMinute * 60;
+		var msPerDay = msPerHour * 24;
+		var msPerMonth = msPerDay * 30;
+		var msPerYear = msPerDay * 365;
 		
-		/**
-		 * @param {number} previous
-		 * @return {string}
-		 */
-		TimeDifference = function( previous )
+		var elapsed = Date.now() - ( previous * 1000 );
+		
+		if( elapsed < msPerMinute )
 		{
-			var msPerMinute = 60 * 1000;
-			var msPerHour = msPerMinute * 60;
-			var msPerDay = msPerHour * 24;
-			var msPerMonth = msPerDay * 30;
-			var msPerYear = msPerDay * 365;
+			return '<1m';
+		}
+		else if( elapsed < msPerHour )
+		{
+			return Math.round( elapsed / msPerMinute ) + 'm';
+		}
+		else if( elapsed < msPerDay )
+		{
+			return Math.round( elapsed / msPerHour ) + 'h';
+		}
+		else if( elapsed < msPerMonth )
+		{
+			return '≈' + Math.round( elapsed / msPerDay ) + 'd';
+		}
+		else if( elapsed < msPerYear )
+		{
+			return '≈' + Math.round( elapsed / msPerMonth ) + 'm';
+		}
+		else
+		{
+			return '≈' + Math.round( elapsed / msPerYear ) + 'y';
+		}
+	};
+	
+	/**
+	 * @param {string} item
+	 */
+	var InitializeMatchmakingStats = function( item )
+	{
+		var storageItem    = 'show_' + item,
+			statsContainer = doc.getElementById( 'js-' + item + '-container' ),
+			caret          = doc.getElementById( 'js-' + item + '-caret' );
+		
+		if( window.localStorage.getItem( storageItem ) )
+		{
+			statsContainer.classList.remove( 'closed' );
 			
-			var elapsed = Date.now() - ( previous * 1000 );
+			caret.classList.add( 'up' );
+		}
+		
+		doc.getElementById( 'js-' + item + '-services' ).addEventListener( 'click', function( e )
+		{
+			e.preventDefault( );
 			
-			if( elapsed < msPerMinute )
+			if( !statsContainer.classList.contains( 'closed' ) )
 			{
-				return '<1m';
-			}
-			else if( elapsed < msPerHour )
-			{
-				return Math.round( elapsed / msPerMinute ) + 'm';
-			}
-			else if( elapsed < msPerDay )
-			{
-				return Math.round( elapsed / msPerHour ) + 'h';
-			}
-			else if( elapsed < msPerMonth )
-			{
-				return '≈' + Math.round( elapsed / msPerDay ) + 'd';
-			}
-			else if( elapsed < msPerYear )
-			{
-				return '≈' + Math.round( elapsed / msPerMonth ) + 'm';
+				statsContainer.classList.add( 'closed' );
+				
+				window.localStorage.removeItem( storageItem );
+				
+				caret.classList.remove( 'up' );
 			}
 			else
 			{
-				return '≈' + Math.round( elapsed / msPerYear ) + 'y';
-			}
-		},
-		
-		/**
-		 * @param {string} item
-		 */
-		InitializeMatchmakingStats = function( item )
-		{
-			var storageItem    = 'show_' + item,
-				statsContainer = doc.getElementById( 'js-' + item + '-container' ),
-				caret          = doc.getElementById( 'js-' + item + '-caret' );
-			
-			if( storage.getItem( storageItem ) )
-			{
 				statsContainer.classList.remove( 'closed' );
+				
+				window.localStorage.setItem( storageItem, '1' );
 				
 				caret.classList.add( 'up' );
 			}
-			
-			doc.getElementById( 'js-' + item + '-services' ).addEventListener( 'click', function( e )
-			{
-				e.preventDefault( );
-				
-				if( !statsContainer.classList.contains( 'closed' ) )
-				{
-					statsContainer.classList.add( 'closed' );
-					
-					storage.removeItem( storageItem );
-					
-					caret.classList.remove( 'up' );
-				}
-				else
-				{
-					statsContainer.classList.remove( 'closed' );
-					
-					storage.setItem( storageItem, 1 );
-					
-					caret.classList.add( 'up' );
-				}
-			} );
-		};
+		} );
+	};
 	
-	// Delete noscript element because some browsers think it's cool to render it if javascript is enabled
-	if( element )
-	{
-		element.parentNode.removeChild( element );
-	}
-	
-	Tick( );
-	LoadGraph( );
-	
-	// Insanity checks
-	if( !storage || ( notif && !notif.permission ) || !Element.prototype.addEventListener )
-	{
-		doc.getElementById( 'old-browser' ).style.display = 'block';
-	}
-	else
-	{
-		InitializeMatchmakingStats( 'csgo' );
-		
-		if( notif && notif.permission !== 'denied' )
-		{
-			notif.requestPermission();
-		}
-	}
-	
-	// Not using dot notation so that closure compiler doesn't optimize it away
-	window[ 'RenderChart' ] = function()
+	var RenderChart = function()
 	{
 		if( !graphData )
 		{
@@ -479,19 +454,45 @@ try
 		graphData = null;
 	};
 	
+	// Delete noscript element because some browsers think it's cool to render it if javascript is enabled
+	if( element )
+	{
+		element.parentNode.removeChild( element );
+	}
+	
+	Tick( );
+	LoadGraph( );
+	
+	// Insanity checks
+	if( !( 'localStorage' in window ) || ( 'Notification' in window && !window.Notification.permission ) || !Element.prototype.addEventListener )
+	{
+		doc.getElementById( 'old-browser' ).style.display = 'block';
+	}
+	else
+	{
+		InitializeMatchmakingStats( 'csgo' );
+		
+		if( window.Notification && window.Notification.permission !== 'denied' )
+		{
+			window.Notification.requestPermission();
+		}
+	}
+	
+	window[ 'RenderChart' ] = RenderChart;
+	
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
 	{
 		navigator.serviceWorker.register( '/service-worker.js', { scope: './' } );
 	}
 	
-	window.addEventListener('beforeinstallprompt', function( e )
+	window.addEventListener( 'beforeinstallprompt', function( e )
 	{
-		e.userChoice.then( function( choiceResult )
+		e[ 'userChoice' ].then( function( choiceResult )
 		{
-			if( ga )
+			if( 'ga' in window )
 			{
-				ga( 'send', 'event', 'Install Prompt', 'Outcome', choiceResult[ 'outcome' ] );
+				window[ 'ga' ]( 'send', 'event', 'Install Prompt', 'Outcome', choiceResult[ 'outcome' ] );
 			}
 		} );
 	} );
@@ -502,4 +503,4 @@ catch( e )
 	
 	console.error( e );
 }
-}( document, localStorage, Notification ) );
+}( document ) );
