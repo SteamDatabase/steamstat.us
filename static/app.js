@@ -65,46 +65,6 @@ try
 	/**
 	 * @return {undefined}
 	 */
-	var LoadGraph = function( )
-	{
-		var xhrGraph = new XMLHttpRequest( );
-		xhrGraph.open( 'GET', 'https://crowbar.steamdb.info/Gina', true );
-		xhrGraph.onreadystatechange = function()
-		{
-			try
-			{
-				if( xhrGraph.readyState === 4 )
-				{
-					response = JSON.parse( xhrGraph.responseText );
-					
-					if( !response[ 'success' ] )
-					{
-						graph.textContent = 'Failed to load graph data.';
-						
-						return;
-					}
-					
-					graphData = response.data;
-					
-					if( 'Highcharts' in window )
-					{
-						RenderChart();
-					}
-				}
-			}
-			catch( x )
-			{
-				graph.textContent = 'Failed to load graph data.';
-			}
-		};
-		xhrGraph.ontimeout = function() { graph.textContent = 'Request timed out, unable to render graph.'; };
-		xhrGraph.timeout = 10000;
-		xhrGraph.send( );
-	};
-	
-	/**
-	 * @return {undefined}
-	 */
 	var RefreshData = function( )
 	{
 		loader.style.display = 'block';
@@ -467,6 +427,46 @@ try
 		});
 		
 		graphData = null;
+	};
+	
+	/**
+	 * @return {undefined}
+	 */
+	var LoadGraph = function( )
+	{
+		var xhrGraph = new XMLHttpRequest( );
+		xhrGraph.open( 'GET', 'https://crowbar.steamdb.info/Gina', true );
+		xhrGraph.onreadystatechange = function()
+		{
+			try
+			{
+				if( xhrGraph.readyState === 4 )
+				{
+					response = JSON.parse( xhrGraph.responseText );
+					
+					if( !response[ 'success' ] )
+					{
+						graph.textContent = 'Failed to load graph data: Failed to parse JSON.';
+						
+						return;
+					}
+					
+					graphData = response.data;
+					
+					if( 'Highcharts' in window )
+					{
+						RenderChart();
+					}
+				}
+			}
+			catch( x )
+			{
+				graph.textContent = 'Failed to load graph data: ' + ( x.message || 'Unknown error.' );
+			}
+		};
+		xhrGraph.ontimeout = function() { graph.textContent = 'Request timed out, unable to render graph.'; };
+		xhrGraph.timeout = 10000;
+		xhrGraph.send( );
 	};
 	
 	// Delete noscript element because some browsers think it's cool to render it if javascript is enabled
