@@ -22,7 +22,7 @@ try
 		time_element   = doc.getElementById( 'js-refresh' );
 	
 	/**
-	 * @param {string} text
+	 * @param {!string} text
 	 * @param {string=} data
 	 */
 	var ShowError = function( text, data )
@@ -43,6 +43,9 @@ try
 		}
 	};
 	
+	/**
+	 * @return {undefined}
+	 */
 	var Tick = function( )
 	{
 		if( secondsToUpdate <= 0 )
@@ -59,6 +62,9 @@ try
 		}
 	};
 	
+	/**
+	 * @return {undefined}
+	 */
 	var LoadGraph = function( )
 	{
 		var xhrGraph = new XMLHttpRequest( );
@@ -96,6 +102,9 @@ try
 		xhrGraph.send( );
 	};
 	
+	/**
+	 * @return {undefined}
+	 */
 	var RefreshData = function( )
 	{
 		loader.style.display = 'block';
@@ -108,6 +117,9 @@ try
 		xhr.send( );
 	};
 	
+	/**
+	 * @return {undefined}
+	 */
 	var LoadData = function( )
 	{
 		xhr = this;
@@ -244,8 +256,8 @@ try
 	};
 	
 	/**
-	 * @param {number} previous
-	 * @return {string}
+	 * @param {!number} previous
+	 * @return {!string}
 	 */
 	var TimeDifference = function( previous )
 	{
@@ -322,6 +334,9 @@ try
 		} );
 	};
 	
+	/**
+	 * @return {undefined}
+	 */
 	var RenderChart = function()
 	{
 		if( !graphData )
@@ -463,6 +478,9 @@ try
 	Tick( );
 	LoadGraph( );
 	
+	// Refresh graph every 10 minutes
+	setInterval( LoadGraph, 600000 );
+	
 	// Insanity checks
 	if( !( 'localStorage' in window ) || ( 'Notification' in window && !window.Notification.permission ) || !Element.prototype.addEventListener )
 	{
@@ -478,7 +496,9 @@ try
 		}
 	}
 	
+	// Expose render chart so it can get rendered after highcharts loads (and graph data already loaded)
 	window[ 'RenderChart' ] = RenderChart;
+	window[ 'UpdateGraph' ] = LoadGraph;
 	
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
