@@ -41,11 +41,6 @@ try
 			{
 				text = 'AJAX Error: ' + data;
 			}
-			
-			if( ga )
-			{
-				ga( 'send', 'event', 'Error', 'ShowError', text );
-			}
 		},
 		
 		Tick = function( )
@@ -85,7 +80,7 @@ try
 						
 						graphData = response.data;
 						
-						if( window.Highcharts )
+						if( 'Highcharts' in window )
 						{
 							RenderChart();
 						}
@@ -359,7 +354,7 @@ try
 			return;
 		}
 		
-		if( !window[ 'Highcharts' ] )
+		if( !( 'Highcharts' in window ) )
 		{
 			graph.innerHTML = 'Failed to load Highcharts.<br>Please unblock <b>cdnjs.cloudflare.com</b> for this to work.';
 			
@@ -487,18 +482,24 @@ try
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
 	{
-		navigator.serviceWorker.register( '/static/service-worker.js' );
+		navigator.serviceWorker.register( '/service-worker.js', { scope: './' } );
 	}
+	
+	window.addEventListener('beforeinstallprompt', function( e )
+	{
+		e.userChoice.then( function( choiceResult )
+		{
+			if( ga )
+			{
+				ga( 'send', 'event', 'Install Prompt', 'Outcome', choiceResult[ 'outcome' ] );
+			}
+		} );
+	} );
 }
 catch( e )
 {
-	ShowError( 'Something broke.<br>Are you using an outdated browser?' );
-	
-	if( ga )
-	{
-		ga( 'send', 'event', 'Error', 'ShowError', e.message || 'try-catch' );
-	}
+	ShowError( 'Something broke.<br>' + ( e.message || 'Are you using an outdated browser?' ) );
 	
 	console.error( e );
 }
-}( document, localStorage, window.Notification ) );
+}( document, localStorage, Notification ) );

@@ -4,6 +4,8 @@
 	"start_url": "https://steamstat.us/",
 	"display": "standalone",
 	"orientation": "any",
+	"theme_color": "#282936",
+	"background_color": "#1B1B24",
 	"icons":
 	[
 		{
