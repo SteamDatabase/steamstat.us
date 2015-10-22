@@ -103,14 +103,7 @@ try
 				}
 				
 				response = JSON.parse( response );
-				
-				if( !response[ 'success' ] )
-				{
-					return ShowError( '', 'Success = false' );
-				}
-				
 				psa = response[ 'psa' ] || '';
-				
 				timeDiff = Math.abs( Date.now() / 1000 - response[ 'time' ] );
 				
 				if( timeDiff > 300 )
@@ -444,7 +437,7 @@ try
 				{
 					response = JSON.parse( xhrGraph.responseText );
 					
-					if( !response[ 'success' ] )
+					if( !response[ 'data' ] )
 					{
 						graph.textContent = 'Failed to load graph data: Failed to parse JSON.';
 						
