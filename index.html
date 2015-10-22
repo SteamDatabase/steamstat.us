@@ -67,20 +67,22 @@
 		</a>
 		
 		<div id="psa"></div>
-		
-		<div class="services">
-			<div id="loader">
-				<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
-				
-				<div class="spinner" id="loader-content">
-					<div class="rect1"></div>
-					<div class="rect2"></div>
-					<div class="rect3"></div>
-					<div class="rect4"></div>
-					<div class="rect5"></div>
-				</div>
-			</div>
+	</div>
+	
+	<div class="container container-double">
+		<div id="loader">
+			<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
 			
+			<div class="spinner" id="loader-content">
+				<div class="rect1"></div>
+				<div class="rect2"></div>
+				<div class="rect3"></div>
+				<div class="rect4"></div>
+				<div class="rect5"></div>
+			</div>
+		</div>
+		
+		<div class="services service-left">
 			<div class="service" itemscope>
 				<span class="name"><a href="https://steamdb.info/app/753/graphs/" target="_blank">Online<span class="hide-small"> on Steam</span></a> </span>
 				<span class="status" id="online">…</span>
@@ -228,7 +230,69 @@
 			</div>
 		</div>
 		
-		<div class="footer-oreos">
+		<div class="services service-right">
+			<!-- WA, USA -->
+			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">US, Washington</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Community </span>
+				<span class="status" id="community_1">…</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Web API </span>
+				<span class="status" id="webapi_1">…</span>
+			</div>
+			
+			<!-- NC, USA -->
+			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">US, North Carolina</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Community </span>
+				<span class="status" id="community_2">…</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Web API </span>
+				<span class="status" id="webapi_2">…</span>
+			</div>
+			
+			<!-- TX, USA -->
+			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">US, Texas</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Community </span>
+				<span class="status" id="community_1">…</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Web API </span>
+				<span class="status" id="webapi_1">…</span>
+			</div>
+			
+			<!-- NJ, USA -->
+			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">US, New Jersey</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Community </span>
+				<span class="status" id="community_1">…</span>
+			</div>
+			
+			<div class="service reg" itemscope itemtype="http://schema.org/Thing">
+				<span class="name" itemprop="name">Steam Web API </span>
+				<span class="status" id="webapi_1">…</span>
+			</div>
+		</div>
+		
+		<div class="footer-oreos service-right">
 			<a href="https://steamdb.info/" target="_blank"><img src="https://steamdb.info/static/logos/header.svg" width="40" height="40" alt="SteamDB" title="a double stacked oreo project"></a>
 			
 			<p>
@@ -237,6 +301,10 @@
 			
 			<p class="attribution">
 				CM monitoring initially created by <a target="_blank" href="https://github.com/VoiDeD">VoiDeD</a>.
+			</p>
+			
+			<p class="attribution">
+				Regional status provided by <a href="http://is.steam.rip/" target="_blank">is.steam.rip</a>
 			</p>
 		</div>
 	</div>
