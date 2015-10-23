@@ -47,10 +47,11 @@ hr {
 }
 
 .footer-oreos p {
-	margin: 0;
+	margin-top: 0;
 }
 
-.footer-oreos .attribution {
+.attribution {
+	margin-bottom: 0;
 	font-size: .8em;
 }
 
