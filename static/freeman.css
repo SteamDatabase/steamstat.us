@@ -8,6 +8,14 @@
 	color: #FFF;
 }
 
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
 body {
 	margin: 0;
 	color: #8A8DB7;
@@ -27,18 +35,18 @@ hr {
 
 .container {
 	margin: 1em auto;
-	width: 500px;
-	text-align: center;
+	padding: 0 1em;
+	width: 34em;
 }
 
 .footer {
 	padding: 0 1em;
 	margin-bottom: 1em;
 	line-height: 28px;
-	text-align: left;
 }
 
 .footer-oreos {
+	text-align: center;
 	background-color: #282936;
 	border: 1px solid #191921;
 	border-radius: 6px;
@@ -56,6 +64,7 @@ hr {
 }
 
 .title {
+	text-align: center;
 	color: #FFF;
 	margin: 10px 0;
 	font-size: 2.6em;
@@ -74,9 +83,7 @@ a:hover {
 .services,
 .info,
 #psa,
-#old-browser,
 noscript {
-	text-align: left;
 	position: relative;
 	background-color: #282936;
 	border: 1px solid #191921;
@@ -86,15 +93,13 @@ noscript {
 }
 
 #psa,
-#old-browser,
 noscript {
 	display: block;
 	color: #FFF;
 	background-color: #D83D42;
 }
 
-#psa,
-#old-browser {
+#psa {
 	display: none;
 }
 
@@ -110,7 +115,6 @@ noscript {
 
 .info,
 #psa,
-#old-browser,
 noscript {
 	padding: 1em;
 	margin-bottom: 1em;
@@ -253,8 +257,6 @@ noscript {
 	display: inline-block;
 	vertical-align: top;
 	padding: 0 7px;
-	
-	box-sizing: border-box;
 }
 
 .donate-button {
@@ -318,7 +320,7 @@ noscript {
 	animation-delay: -0.8s;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 35em) {
 	.title {
 		font-size: 2em;
 	}
@@ -327,23 +329,12 @@ noscript {
 		width: 100%;
 	}
 	
-	/* TODO: Use border-box on all elements so this crap can go away */
-	.services,
-	.footer,
-	.footer-oreos,
-	.info,
-	#psa,
-	noscript {
-		margin-left: 1em;
-		margin-right: 1em;
-	}
-	
 	.mmstats {
 		margin: 0;
 	}
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 25em) {
 	.hide-small {
 		display: none;
 	}
@@ -357,7 +348,7 @@ noscript {
 	}
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 22em) {
 	.title {
 		font-size: 1.7em;
 	}
