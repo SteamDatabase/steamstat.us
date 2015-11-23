@@ -2,28 +2,14 @@
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // ==/ClosureCompiler==
 
-( function( doc )
+( function( doc, win )
 {
-try
-{
-	var key,
-		value,
-		response,
-		xhr,
-		psa,
-		timeDiff,
-		secondsToUpdate = 0,
-		previousOnline = 100,
-		graphData,
-		graph          = doc.getElementById( 'cms-graph' ),
-		loader         = doc.getElementById( 'loader' ),
-		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
-		psa_element    = doc.getElementById( 'psa' ),
-		time_element   = doc.getElementById( 'js-refresh' );
+	'use strict';
 	
 	/**
 	 * @param {!string} text
 	 * @param {string=} data
+	 * @return {undefined}
 	 */
 	var ShowError = function( text, data )
 	{
@@ -42,6 +28,74 @@ try
 			text = 'AJAX Error: ' + data;
 		}
 	};
+	
+	/**
+	 * Taken from https://github.com/schalkneethling/dnt-helper
+	 *
+	 * Returns true or false based on whether doNotTack is enabled. It also takes into account the
+	 * anomalies, such as !bugzilla 887703, which effect versions of Fx 31 and lower. It also handles
+	 * IE versions on Windows 7, 8 and 8.1, where the DNT implementation does not honor the spec.
+	 * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1217896 for more details
+	 * @returns {boolean} true if enabled else false
+	 */
+	function _dntEnabled()
+	{
+		// for old version of IE we need to use the msDoNotTrack property of navigator
+		// on newer versions, and newer platforms, this is doNotTrack but, on the window object
+		// Safari also exposes the property on the window object.
+		var dntStatus = navigator.doNotTrack || win.doNotTrack || navigator.msDoNotTrack;
+		var ua = navigator.userAgent;
+		
+		// List of Windows versions known to not implement DNT according to the standard.
+		var anomalousWinVersions = ['Windows NT 6.1', 'Windows NT 6.2', 'Windows NT 6.3'];
+		
+		var fxMatch = ua.match(/Firefox\/(\d+)/);
+		var ieRegEx = /MSIE|Trident/i;
+		var isIE = ieRegEx.test(ua);
+		// Matches from Windows up to the first occurance of ; un-greedily
+		// http://www.regexr.com/3c2el
+		var platform = ua.match(/Windows.+?(?=;)/g);
+		
+		// With old versions of IE, DNT did not exist so we simply return false;
+		if (isIE && typeof Array.prototype.indexOf !== 'function') {
+			return false;
+		} else if (fxMatch && parseInt(fxMatch[1], 10) < 32) {
+			// Can't say for sure if it is 1 or 0, due to Fx bug 887703
+			dntStatus = 'Unspecified';
+		} else if (isIE && platform && anomalousWinVersions.indexOf(platform.toString()) !== -1) {
+			// default is on, which does not honor the specification
+			dntStatus = 'Unspecified';
+		} else {
+			// sets dntStatus to Disabled or Enabled based on the value returned by the browser.
+			// If dntStatus is undefined, it will be set to Unspecified
+			dntStatus = { '0': 'Disabled', '1': 'Enabled' }[dntStatus] || 'Unspecified';
+		}
+		
+		return dntStatus === 'Enabled' ? true : false;
+	}
+
+try
+{
+	var key,
+		value,
+		response,
+		xhr,
+		psa,
+		timeDiff,
+		secondsToUpdate = 0,
+		previousOnline = 100,
+		graphData,
+		graph          = doc.getElementById( 'cms-graph' ),
+		loader         = doc.getElementById( 'loader' ),
+		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
+		psa_element    = doc.getElementById( 'psa' ),
+		time_element   = doc.getElementById( 'js-refresh' );
+	
+	// Delete noscript element because some browsers think it's cool to render it if javascript is enabled
+	if( element )
+	{
+		element.parentNode.removeChild( element );
+	}
 	
 	/**
 	 * @return {undefined}
@@ -139,11 +193,11 @@ try
 					psa_element.style.display = 'none';
 				}
 				
-				if( previousOnline < 75 && response[ 'online' ] >= 75 && 'Notification' in window )
+				if( previousOnline < 75 && response[ 'online' ] >= 75 && 'Notification' in win )
 				{
-					if( window.Notification.permission === 'granted' )
+					if( win.Notification.permission === 'granted' )
 					{
-						var notification = new window.Notification( 'Steam is back online',
+						var notification = new win.Notification( 'Steam is back online',
 						{
 							'lang': 'en',
 							'icon': '/static/logos/192px.png',
@@ -257,7 +311,7 @@ try
 			statsContainer = doc.getElementById( 'js-' + item + '-container' ),
 			caret          = doc.getElementById( 'js-' + item + '-caret' );
 		
-		if( window.localStorage.getItem( storageItem ) )
+		if( win.localStorage.getItem( storageItem ) )
 		{
 			statsContainer.classList.remove( 'closed' );
 			
@@ -272,7 +326,7 @@ try
 			{
 				statsContainer.classList.add( 'closed' );
 				
-				window.localStorage.removeItem( storageItem );
+				win.localStorage.removeItem( storageItem );
 				
 				caret.classList.remove( 'up' );
 			}
@@ -280,7 +334,7 @@ try
 			{
 				statsContainer.classList.remove( 'closed' );
 				
-				window.localStorage.setItem( storageItem, '1' );
+				win.localStorage.setItem( storageItem, '1' );
 				
 				caret.classList.add( 'up' );
 			}
@@ -297,7 +351,7 @@ try
 			return;
 		}
 		
-		if( !( 'Highcharts' in window ) )
+		if( !( 'Highcharts' in win ) )
 		{
 			graph.innerHTML = 'Failed to load Highcharts.<br>Please unblock <b>cdnjs.cloudflare.com</b> for this to work.';
 			
@@ -307,7 +361,7 @@ try
 		var d = new Date();
 		d.setDate( d.getDate( ) - 1 );
 		
-		new window[ 'Highcharts' ][ 'Chart' ](
+		new win[ 'Highcharts' ][ 'Chart' ](
 		{
 			plotOptions:
 			{
@@ -446,7 +500,7 @@ try
 					
 					graphData = response.data;
 					
-					if( 'Highcharts' in window )
+					if( 'Highcharts' in win )
 					{
 						RenderChart();
 					}
@@ -462,11 +516,9 @@ try
 		xhrGraph.send( );
 	};
 	
-	// Delete noscript element because some browsers think it's cool to render it if javascript is enabled
-	if( element )
-	{
-		element.parentNode.removeChild( element );
-	}
+	// Expose render chart so it can get rendered after highcharts loads (and graph data already loaded)
+	win[ 'RenderChart' ] = RenderChart;
+	win[ 'UpdateGraph' ] = LoadGraph;
 	
 	Tick( );
 	LoadGraph( );
@@ -474,24 +526,15 @@ try
 	// Refresh graph every 10 minutes
 	setInterval( LoadGraph, 600000 );
 	
-	// Insanity checks
-	if( !( 'localStorage' in window ) || ( 'Notification' in window && !window.Notification.permission ) || !Element.prototype.addEventListener )
+	if( win.Notification && win.Notification.permission !== 'denied' )
 	{
-		doc.getElementById( 'old-browser' ).style.display = 'block';
-	}
-	else
-	{
-		InitializeMatchmakingStats( 'csgo' );
-		
-		if( window.Notification && window.Notification.permission !== 'denied' )
-		{
-			window.Notification.requestPermission();
-		}
+		win.Notification.requestPermission();
 	}
 	
-	// Expose render chart so it can get rendered after highcharts loads (and graph data already loaded)
-	window[ 'RenderChart' ] = RenderChart;
-	window[ 'UpdateGraph' ] = LoadGraph;
+	if( win.localStorage )
+	{
+		InitializeMatchmakingStats( 'csgo' );
+	}
 	
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
@@ -499,13 +542,13 @@ try
 		navigator.serviceWorker.register( '/service-worker.js', { scope: './' } );
 	}
 	
-	window.addEventListener( 'beforeinstallprompt', function( e )
+	win.addEventListener( 'beforeinstallprompt', function( e )
 	{
 		e[ 'userChoice' ].then( function( choiceResult )
 		{
-			if( 'ga' in window )
+			if( 'ga' in win )
 			{
-				window[ 'ga' ]( 'send', 'event', 'Install Prompt', 'Outcome', choiceResult[ 'outcome' ] );
+				win[ 'ga' ]( 'send', 'event', 'Install Prompt', 'Outcome', choiceResult[ 'outcome' ] );
 			}
 		} );
 	} );
@@ -516,7 +559,11 @@ catch( e )
 	
 	console.error( e );
 }
-}( document ) );
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-37177069-4','steamstat.us');ga('set','forceSSL',true);ga('send','pageview');
-(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}})(document, 'script', 'twitter-wjs');
+// Only load Google Analytics and Twitter helper widget if DNT is not enabled
+if( !_dntEnabled() )
+{
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);})(win,doc,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-37177069-4','steamstat.us');ga('set','forceSSL',true);ga('send','pageview');
+	(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}})(doc, 'script', 'twitter-wjs');
+}
+}( document, window ) );
