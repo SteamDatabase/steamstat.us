@@ -203,10 +203,6 @@ noscript {
 	color: #F6BB42;
 }
 
-.show-small {
-	display: none;
-}
-
 #js-csgo-services {
 	cursor: pointer;
 }
@@ -245,43 +241,6 @@ noscript {
 #cms-graph {
 	height: 150px;
 	margin-top: 34px;
-}
-
-.donate-button {
-	height: 28px;
-	border-radius: 3px;
-	font-size: 13px;
-	line-height: 26px;
-	outline: none;
-	font-weight: bold;
-	display: inline-block;
-	vertical-align: top;
-	padding: 0 7px;
-}
-
-.donate-button {
-	color: #FFF;
-	text-shadow: 1px 1px 0 #333;
-	border: #7ea352 solid 1px;
-	background: #8cb55b;
-	background: linear-gradient(#92bd5e, #88b058);
-}
-
-.donate-button > img {
-	vertical-align: text-bottom;
-}
-
-.donate-button:focus,
-.donate-button:hover,
-.donate-button:active {
-	text-decoration: none;
-	border-color: #db8421;
-	background: #ed8f24;
-	background: linear-gradient(#f59425, #e88c23);
-}
-
-.donate-button:active {
-	box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.1);
 }
 
 .spinner {
@@ -337,10 +296,6 @@ noscript {
 @media screen and (max-width: 25em) {
 	.hide-small {
 		display: none;
-	}
-	
-	.show-small {
-		display: inline;
 	}
 	
 	.service .status {
