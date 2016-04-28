@@ -7,7 +7,7 @@
 	<title>Steam Status · Is Steam Down?</title>
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&amp;subset=latin" crossorigin="anonymous">
-	<link rel="stylesheet" href="static/freeman.css?30">
+	<link rel="stylesheet" href="static/freeman.css?31">
 	
 	<meta property="twitter:card" content="summary">
 	<meta property="twitter:site" content="@SteamStatus">
@@ -39,6 +39,18 @@
 	<link rel="apple-touch-icon" sizes="152x152" href="/static/logos/apple-152px.png">
 </head>
 <body>
+	<div id="loader">
+		<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
+		
+		<div class="spinner" id="loader-content">
+			<div class="rect1"></div>
+			<div class="rect2"></div>
+			<div class="rect3"></div>
+			<div class="rect4"></div>
+			<div class="rect5"></div>
+		</div>
+	</div>
+	
 	<div class="container">
 		<h1 class="title">Steam Services Status</h1>
 		
@@ -60,18 +72,6 @@
 		
 		<div class="services-container">
 			<div class="services">
-				<div id="loader" hidden>
-					<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
-					
-					<div class="spinner" id="loader-content">
-						<div class="rect1"></div>
-						<div class="rect2"></div>
-						<div class="rect3"></div>
-						<div class="rect4"></div>
-						<div class="rect5"></div>
-					</div>
-				</div>
-				
 				<div class="service" itemscope>
 					<span class="name"><a href="https://steamdb.info/app/753/graphs/" target="_blank">Online<span class="hide-small"> on Steam</span></a> </span>
 					<span class="status" id="online">…</span>
