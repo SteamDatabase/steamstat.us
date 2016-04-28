@@ -170,12 +170,6 @@ noscript {
 	cursor: help;
 }
 
-.service .time {
-	cursor: help;
-	color: #888;
-	font-size: 90%;
-}
-
 .services .sep {
 	border-top: 1px solid #191921;
 }

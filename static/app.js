@@ -232,20 +232,18 @@ try
 							}
 						}
 						
-						if( value.time )
+						if( element.textContent )
 						{
-							element.innerHTML = value.title + ' <span class="time" title="Time since last status change">(' + TimeDifference( value.time ) + ')</span>';
+							element.textContent = value.title;
 						}
 						else
 						{
-							if( element.textContent )
-							{
-								element.textContent = value.title;
-							}
-							else
-							{
-								element.innerText = value.title;
-							}
+							element.innerText = value.title;
+						}
+						
+						if( value.time )
+						{
+							element.title = 'Time since last status change: ' + TimeDifference( value.time );
 						}
 					}
 				}
@@ -272,34 +270,23 @@ try
 		var msPerHour = msPerMinute * 60;
 		var msPerDay = msPerHour * 24;
 		var msPerMonth = msPerDay * 30;
-		var msPerYear = msPerDay * 365;
 		
 		var elapsed = Date.now() - ( previous * 1000 );
 		
 		if( elapsed < msPerMinute )
 		{
-			return '<1m';
+			return 'less than a minute ago';
 		}
 		else if( elapsed < msPerHour )
 		{
-			return Math.round( elapsed / msPerMinute ) + 'm';
+			return Math.round( elapsed / msPerMinute ) + ' minutes';
 		}
 		else if( elapsed < msPerDay )
 		{
-			return Math.round( elapsed / msPerHour ) + 'h';
+			return Math.round( elapsed / msPerHour ) + ' hours';
 		}
-		else if( elapsed < msPerMonth )
-		{
-			return '≈' + Math.round( elapsed / msPerDay ) + 'd';
-		}
-		else if( elapsed < msPerYear )
-		{
-			return '≈' + Math.round( elapsed / msPerMonth ) + 'm';
-		}
-		else
-		{
-			return '≈' + Math.round( elapsed / msPerYear ) + 'y';
-		}
+		
+		return '≈' + Math.round( elapsed / msPerDay ) + ' days';
 	};
 	
 	/**
