@@ -36,7 +36,7 @@ hr {
 .container {
 	margin: 1em auto;
 	padding: 0 1em;
-	width: 34em;
+	max-width: 69em; /* ayy lmao */
 }
 
 .footer {
@@ -71,6 +71,11 @@ hr {
 	font-weight: 300;
 }
 
+.services-title {
+	font-weight: 300;
+	margin: 8px 12px;
+}
+
 a {
 	color: #4384D8;
 	text-decoration: none;
@@ -81,6 +86,7 @@ a:hover {
 }
 
 .services,
+.mmstats,
 .info,
 #psa,
 noscript {
@@ -90,6 +96,21 @@ noscript {
 	border-radius: 6px;
 	font-size: 1em;
 	line-height: 1.5;
+}
+
+.services-container:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.services {
+	width: 49%;
+	float: left;
+}
+
+.services:last-child {
+	float: right;
 }
 
 #psa,
@@ -203,35 +224,10 @@ noscript {
 	color: #F6BB42;
 }
 
-#js-csgo-services {
-	cursor: pointer;
-}
-
-.caret {
-	display: inline-block;
-	width: 0;
-	height: 0;
-	margin-left: 2px;
-	vertical-align: 1px;
-	border-top: 6px solid #FFF;
-	border-right: 6px solid transparent;
-	border-left: 6px solid transparent;
-}
-
-.caret.up {
-	border-top: 0;
-	border-bottom: 6px solid #FFF;
-}
-
 .mmstats {
-	display: block;
-	border-top: 0;
+	border: 0;
 	border-radius: 0;
 	background-color: #191921;
-}
-
-.mmstats.closed {
-	display: none;
 }
 
 #js-refresh {
@@ -290,6 +286,11 @@ noscript {
 	
 	.mmstats {
 		margin: 0;
+	}
+	
+	.services {
+		float: none;
+		width: 100%;
 	}
 }
 

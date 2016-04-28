@@ -7,7 +7,7 @@
 	<title>Steam Status · Is Steam Down?</title>
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&amp;subset=latin" crossorigin="anonymous">
-	<link rel="stylesheet" href="static/freeman.css?21">
+	<link rel="stylesheet" href="static/freeman.css?30">
 	
 	<meta property="twitter:card" content="summary">
 	<meta property="twitter:site" content="@SteamStatus">
@@ -58,104 +58,110 @@
 		
 		<div id="psa"></div>
 		
-		<div class="services">
-			<div id="loader">
-				<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
-				
-				<div class="spinner" id="loader-content">
-					<div class="rect1"></div>
-					<div class="rect2"></div>
-					<div class="rect3"></div>
-					<div class="rect4"></div>
-					<div class="rect5"></div>
-				</div>
-			</div>
-			
-			<div class="service" itemscope>
-				<span class="name"><a href="https://steamdb.info/app/753/graphs/" target="_blank">Online<span class="hide-small"> on Steam</span></a> </span>
-				<span class="status" id="online">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing">
-				<link itemprop="url" href="https://steamdb.info/">
-				<span class="name" itemprop="name"><a href="https://steamdb.info/" target="_blank">SteamDB</a> Database </span>
-				<span class="status" id="database">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing">
-				<span class="name"><a href="https://steamdb.info/" target="_blank">SteamDB</a> Updater </span>
-				<span class="status" id="steam">…</span>
-			</div>
-			
-			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
-				<span class="name help" title="Connection Manager: A server that your Steam Client connects to">Steam CMs </span>
-				<span class="status" id="cms">…</span>
-				
-				<div id="cms-graph">Loading graph…</div>
-			</div>
-			
-			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
-				<link itemprop="url" href="https://store.steampowered.com/">
-				<span class="name" itemprop="name">Steam Store </span>
-				<span class="status" id="store">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing">
-				<link itemprop="url" href="https://steamcommunity.com/">
-				<span class="name" itemprop="name">Steam Community </span>
-				<span class="status" id="community">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing">
-				<span class="name" itemprop="name">Steam Web API </span>
-				<span class="status" id="webapi">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing">
-				<link itemprop="url" href="http://repo.steampowered.com/">
-				<span class="name" itemprop="name">SteamOS Repositories </span>
-				<span class="status" id="repo">…</span>
-			</div>
-			
-			<div class="service sep" itemscope itemtype="http://schema.org/Thing">
-				<span class="name help" itemprop="name" title="Item server"><a href="https://steamdb.info/app/440/graphs/" target="_blank" title="Team Fortress 2">TF2</a> Services </span>
-				<span class="status" id="tf2">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing">
-				<span class="name help" itemprop="name" title="Item server"><a href="https://steamdb.info/app/570/graphs/" target="_blank">Dota 2</a> Services </span>
-				<span class="status" id="dota2">…</span>
-			</div>
-			
-			<div class="service" itemscope itemtype="http://schema.org/Thing" id="js-csgo-services">
-				<span class="name" itemprop="name"><a href="https://steamdb.info/app/730/graphs/" target="_blank" title="Counter-Strike: Global Offensive">CS:GO</a> Services <i class="caret" id="js-csgo-caret"></i></span>
-				<span class="status" id="csgo">…</span>
-			</div>
-			
-			<div class="mmstats services closed" id="js-csgo-container">
-				<div class="service" itemscope>
-					<span class="name">Sessions Logon </span>
-					<span class="status" id="csgo_sessions">…</span>
-				</div>
-				<div class="service" itemscope>
-					<span class="name">Player Inventories </span>
-					<span class="status" id="csgo_community">…</span>
+		<div class="services-container">
+			<div class="services">
+				<div id="loader" hidden>
+					<span class="error" id="loader-error">Failed to load data.<br>Reload the page manually.</span>
+					
+					<div class="spinner" id="loader-content">
+						<div class="rect1"></div>
+						<div class="rect2"></div>
+						<div class="rect3"></div>
+						<div class="rect4"></div>
+						<div class="rect5"></div>
+					</div>
 				</div>
 				
 				<div class="service" itemscope>
-					<span class="name">Matchmaking Scheduler </span>
-					<span class="status" id="csgo_mm_scheduler">…</span>
-				</div>
-				<div class="service" itemscope>
-					<span class="name">Players Searching </span>
-					<span class="status" id="csgo_mm_searching">…</span>
-				</div>
-				<div class="service" itemscope>
-					<span class="name">Average Wait Time </span>
-					<span class="status" id="csgo_mm_average">…</span>
+					<span class="name"><a href="https://steamdb.info/app/753/graphs/" target="_blank">Online<span class="hide-small"> on Steam</span></a> </span>
+					<span class="status" id="online">…</span>
 				</div>
 				
-				<div class="service" itemscope>
+				<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+					<span class="name help" title="Connection Manager: A server that your Steam Client connects to">Steam CMs </span>
+					<span class="status" id="cms">…</span>
+					
+					<div id="cms-graph">Loading graph…</div>
+				</div>
+				
+				<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+					<link itemprop="url" href="https://store.steampowered.com/">
+					<span class="name" itemprop="name">Steam Store </span>
+					<span class="status" id="store">…</span>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing">
+					<link itemprop="url" href="https://steamcommunity.com/">
+					<span class="name" itemprop="name">Steam Community </span>
+					<span class="status" id="community">…</span>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing">
+					<span class="name" itemprop="name">Steam Web API </span>
+					<span class="status" id="webapi">…</span>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing">
+					<link itemprop="url" href="http://repo.steampowered.com/">
+					<span class="name" itemprop="name">SteamOS Repositories </span>
+					<span class="status" id="repo">…</span>
+				</div>
+				
+				<div class="service sep" itemscope itemtype="http://schema.org/Thing">
+					<span class="name help" itemprop="name" title="Item server"><a href="https://steamdb.info/app/440/graphs/" target="_blank" title="Team Fortress 2">TF2</a> Services </span>
+					<span class="status" id="tf2">…</span>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing">
+					<span class="name help" itemprop="name" title="Item server"><a href="https://steamdb.info/app/570/graphs/" target="_blank">Dota 2</a> Services </span>
+					<span class="status" id="dota2">…</span>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing" id="js-csgo-services">
+					<span class="name" itemprop="name"><a href="https://steamdb.info/app/730/graphs/" target="_blank" title="Counter-Strike: Global Offensive">CS:GO</a> Services </span>
+					<span class="status" id="csgo">…</span>
+				</div>
+				
+				<div class="mmstats">
+					<div class="service" itemscope>
+						<span class="name">Sessions Logon </span>
+						<span class="status" id="csgo_sessions">…</span>
+					</div>
+					<div class="service" itemscope>
+						<span class="name">Player Inventories </span>
+						<span class="status" id="csgo_community">…</span>
+					</div>
+					
+					<div class="service" itemscope>
+						<span class="name">Matchmaking Scheduler </span>
+						<span class="status" id="csgo_mm_scheduler">…</span>
+					</div>
+					<div class="service" itemscope>
+						<span class="name">Players Searching </span>
+						<span class="status" id="csgo_mm_searching">…</span>
+					</div>
+					<div class="service" itemscope>
+						<span class="name">Average Wait Time </span>
+						<span class="status" id="csgo_mm_average">…</span>
+					</div>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing">
+					<link itemprop="url" href="https://steamdb.info/">
+					<span class="name" itemprop="name"><a href="https://steamdb.info/" target="_blank">SteamDB</a> Database </span>
+					<span class="status" id="database">…</span>
+				</div>
+				
+				<div class="service" itemscope itemtype="http://schema.org/Thing">
+					<span class="name"><a href="https://steamdb.info/" target="_blank">SteamDB</a> Updater </span>
+					<span class="status" id="steam">…</span>
+				</div>
+			</div>
+			
+			<div class="services">
+				<h3 class="services-title">CS:GO Regions</h3>
+				
+				<div class="service sep" itemscope>
 					<span class="name">EU West </span>
 					<span class="status" id="csgo_eu_west">…</span>
 				</div>
@@ -167,7 +173,7 @@
 					<span class="name">EU North </span>
 					<span class="status" id="csgo_eu_north">…</span>
 				</div>
-				<div class="service" itemscope>
+				<div class="service sep" itemscope>
 					<span class="name">US Northwest </span>
 					<span class="status" id="csgo_us_northwest">…</span>
 				</div>
@@ -183,7 +189,7 @@
 					<span class="name">US Southeast </span>
 					<span class="status" id="csgo_us_southeast">…</span>
 				</div>
-				<div class="service" itemscope>
+				<div class="service sep" itemscope>
 					<span class="name">Australia </span>
 					<span class="status" id="csgo_australia">…</span>
 				</div>

@@ -303,45 +303,6 @@ try
 	};
 	
 	/**
-	 * @param {string} item
-	 */
-	var InitializeMatchmakingStats = function( item )
-	{
-		var storageItem    = 'show_' + item,
-			statsContainer = doc.getElementById( 'js-' + item + '-container' ),
-			caret          = doc.getElementById( 'js-' + item + '-caret' );
-		
-		if( win.localStorage.getItem( storageItem ) )
-		{
-			statsContainer.classList.remove( 'closed' );
-			
-			caret.classList.add( 'up' );
-		}
-		
-		doc.getElementById( 'js-' + item + '-services' ).addEventListener( 'click', function( e )
-		{
-			e.preventDefault( );
-			
-			if( !statsContainer.classList.contains( 'closed' ) )
-			{
-				statsContainer.classList.add( 'closed' );
-				
-				win.localStorage.removeItem( storageItem );
-				
-				caret.classList.remove( 'up' );
-			}
-			else
-			{
-				statsContainer.classList.remove( 'closed' );
-				
-				win.localStorage.setItem( storageItem, '1' );
-				
-				caret.classList.add( 'up' );
-			}
-		} );
-	};
-	
-	/**
 	 * @return {undefined}
 	 */
 	var RenderChart = function()
@@ -529,11 +490,6 @@ try
 	if( win.Notification && win.Notification.permission !== 'denied' )
 	{
 		win.Notification.requestPermission();
-	}
-	
-	if( win.localStorage )
-	{
-		InitializeMatchmakingStats( 'csgo' );
 	}
 	
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
