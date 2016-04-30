@@ -77,7 +77,7 @@ hr {
 }
 
 a {
-	color: #4384D8;
+	color: #5d91df;
 	text-decoration: none;
 }
 
@@ -175,7 +175,7 @@ noscript {
 }
 
 .good {
-	color: #339966;
+	color: #4aa172;
 }
 
 .minor {
@@ -290,10 +290,6 @@ noscript {
 }
 
 @media screen and (max-width: 25em) {
-	.hide-small {
-		display: none;
-	}
-	
 	.service .status {
 		font-size: .9em;
 	}
