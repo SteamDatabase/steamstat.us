@@ -34,33 +34,30 @@ hr {
 }
 
 .container {
-	margin: 1em auto;
+	margin: 0 auto;
 	padding: 0 1em;
 	max-width: 69em; /* ayy lmao */
 }
 
 .footer {
-	padding: 0 1em;
-	margin-bottom: 1em;
-	line-height: 28px;
+	background-color: #282936;
+	padding: 2em 0;
+	margin-top: 2em;
 }
 
 .footer-oreos {
-	text-align: center;
-	background-color: #282936;
-	border: 1px solid #191921;
-	border-radius: 6px;
-	padding: 10px 0;
-	margin-top: 1em;
+	background-color: #111;
+	padding: 2em 0;
+	opacity: .6;
+	transition: .2s opacity;
+}
+
+.footer-oreos:hover {
+	opacity: 1;
 }
 
 .footer-oreos p {
-	margin-top: 0;
-}
-
-.attribution {
-	margin-bottom: 0;
-	font-size: .8em;
+	margin: 0;
 }
 
 .title {
@@ -86,8 +83,6 @@ a:hover {
 }
 
 .services,
-.mmstats,
-.info,
 #psa,
 noscript {
 	position: relative;
@@ -134,7 +129,6 @@ noscript {
 	text-decoration: none;
 }
 
-.info,
 #psa,
 noscript {
 	padding: 1em;
@@ -156,9 +150,14 @@ noscript {
 	float: left;
 }
 
-.share,
+.pull-right,
 .service .status {
+	text-align: right;
 	float: right;
+}
+
+.twitter-follow-button {
+	margin-top: -3px;
 }
 
 /* Hide link when it is being replaced by the iframe and both are visible */
@@ -220,8 +219,6 @@ noscript {
 }
 
 .mmstats {
-	border: 0;
-	border-radius: 0;
 	background-color: #191921;
 }
 
@@ -279,13 +276,21 @@ noscript {
 		width: 100%;
 	}
 	
-	.mmstats {
-		margin: 0;
-	}
-	
+	.pull-right,
 	.services {
 		float: none;
 		width: 100%;
+	}
+	
+	.pull-right,
+	.footer-oreos,
+	.footer {
+		text-align: center;
+	}
+	
+	.attribution {
+		font-size: .8em;
+		margin-bottom: 1em;
 	}
 }
 
@@ -319,7 +324,7 @@ noscript {
 	height: 10px;
 }
 
-::-webkit-scrollbar-track-piece  {
+::-webkit-scrollbar-track-piece {
 	background-color: #3b3b3b;
 }
 
