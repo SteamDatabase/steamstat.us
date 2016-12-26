@@ -124,7 +124,7 @@ try
 		loader.style.display = 'block';
 		
 		xhr = new XMLHttpRequest( );
-		xhr.open( 'GET', 'https://crowbar.steamdb.info/Barney', true );
+		xhr.open( 'GET', 'https://crowbar.steamstat.us/Barney', true );
 		xhr.onreadystatechange = LoadData;
 		xhr.ontimeout = function() { ShowError( 'Request timed out.<br>Reload the page manually.' ); };
 		xhr.timeout = 20000;
@@ -430,7 +430,7 @@ try
 	var LoadGraph = function( )
 	{
 		var xhrGraph = new XMLHttpRequest( );
-		xhrGraph.open( 'GET', 'https://crowbar.steamdb.info/Gina', true );
+		xhrGraph.open( 'GET', 'https://crowbar.steamstat.us/Gina', true );
 		xhrGraph.onreadystatechange = function()
 		{
 			try
