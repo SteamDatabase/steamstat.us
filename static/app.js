@@ -245,7 +245,7 @@ try
 						
 						if( value.time )
 						{
-							element.title = 'Time since last status change: ' + TimeDifference( value.time ) + ( element.id === 'cms' ? ( '.\nBreakdown: ' + extra ) : '' );
+							element.dataset.tooltip = 'Time since last status change: ' + TimeDifference( value.time ) + ( element.id === 'cms' ? ( '\nBreakdown: ' + extra ) : '' );
 						}
 					}
 				}

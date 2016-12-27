@@ -136,7 +136,7 @@ noscript {
 }
 
 .service {
-	overflow: hidden;
+	position: relative;
 	padding: 8px 12px;
 }
 
@@ -163,10 +163,6 @@ noscript {
 /* Hide link when it is being replaced by the iframe and both are visible */
 .twitter-follow-button + .twitter-follow-button {
 	display: none;
-}
-
-.help {
-	cursor: help;
 }
 
 .services .sep {
@@ -331,4 +327,38 @@ noscript {
 ::-webkit-scrollbar-thumb:vertical {
 	height: 50px;
 	background-color: #666;
+}
+
+[data-tooltip]:before {
+	visibility: hidden;
+	opacity: 0;
+	font-size: .9em;
+	content: attr(data-tooltip);
+	overflow: hidden;
+	white-space: pre;
+	word-wrap: break-word;
+	position: absolute;
+	top: 0;
+	left: 2%;
+	width: 96%;
+	background: rgba(27, 27, 36, .8);
+	color: #FFF;
+	text-align: left;
+	padding: 8px;
+	border-radius: 6px;
+}
+
+[data-tooltip]:hover:before {
+	visibility: visible;
+	opacity: 1;
+	animation: .15s fade-in linear;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
