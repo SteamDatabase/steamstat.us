@@ -346,6 +346,7 @@ noscript {
 	text-align: left;
 	padding: 8px;
 	border-radius: 6px;
+	z-index: 1;
 }
 
 [data-tooltip]:hover:before {
