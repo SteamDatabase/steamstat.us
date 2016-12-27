@@ -437,6 +437,11 @@ try
 			{
 				if( xhrGraph.readyState === 4 )
 				{
+					if( xhrGraph.status !== 200 )
+					{
+						graph.textContent = 'Failed to load graph data: HTTP ' + xhrGraph.status;
+					}
+					
 					response = JSON.parse( xhrGraph.responseText );
 					
 					if( !response[ 'data' ] )
