@@ -212,6 +212,8 @@ try
 				
 				previousOnline = response[ 'online' ];
 				
+				var extra = response[ 'online_info' ];
+				
 				response = response[ 'services' ];
 				
 				for( key in response )
@@ -243,7 +245,7 @@ try
 						
 						if( value.time )
 						{
-							element.title = 'Time since last status change: ' + TimeDifference( value.time );
+							element.title = 'Time since last status change: ' + TimeDifference( value.time ) + ( key === 'cms' ? ( '. (' + extra + ')' ) : '' );
 						}
 					}
 				}
