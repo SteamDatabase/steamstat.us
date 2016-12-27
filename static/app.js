@@ -245,7 +245,7 @@ try
 						
 						if( value.time )
 						{
-							element.title = 'Time since last status change: ' + TimeDifference( value.time ) + ( key === 'cms' ? ( '. (' + extra + ')' ) : '' );
+							element.title = 'Time since last status change: ' + TimeDifference( value.time ) + ( element.id === 'cms' ? ( '.\nBreakdown: ' + extra ) : '' );
 						}
 					}
 				}
