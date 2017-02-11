@@ -405,9 +405,9 @@ try
 			series:
 			[
 				{
-					pointStart: d.getTime(),
-					pointInterval: 30000,
-					data: graphData,
+					pointStart: graphData.start,
+					pointInterval: graphData.step,
+					data: graphData.data,
 					marker:
 					{
 						enabled: false
@@ -448,12 +448,12 @@ try
 					
 					if( !response[ 'data' ] )
 					{
-						graph.textContent = 'Failed to load graph data: Failed to parse JSON.';
+						graph.textContent = 'Failed to load graph data.';
 						
 						return;
 					}
 					
-					graphData = response.data;
+					graphData = response;
 					
 					if( 'Highcharts' in win )
 					{
