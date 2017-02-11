@@ -317,8 +317,7 @@ try
 			{
 				series:
 				{
-					animation: false,
-					color: '#4384D8'
+					animation: false
 				}
 			},
 			chart:
@@ -360,7 +359,7 @@ try
 				shadow: false,
 				borderWidth: 0,
 				borderRadius: 0,
-				pointFormat: '<br><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
+				pointFormat: '<br><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>%',
 			},
 			legend:
 			{
@@ -382,6 +381,10 @@ try
 			yAxis:
 			{
 				gridLineColor: '#3A3B47',
+				title:
+				{
+					enabled: false
+				},
 				labels:
 				{
 					format: '{value}%',
@@ -401,25 +404,18 @@ try
 			series:
 			[
 				{
+					color: '#4384D8',
 					name: 'Online CMs',
 					pointStart: graphData.start,
 					pointInterval: graphData.step,
-					data: graphData.data,
-					marker:
-					{
-						enabled: false
-					}
+					data: graphData.data
 				},
 				{
-					color: '#4A89DC',
+					color: '#4aa172',
 					name: 'Successful Trades',
 					pointStart: graphData.start,
 					pointInterval: graphData.step,
-					data: graphData.trades,
-					marker:
-					{
-						enabled: false
-					}
+					data: graphData.trades
 				}
 			]
 		});
