@@ -419,6 +419,22 @@ try
 							enabled: false
 						}
 					}
+				},
+				{
+					pointStart: graphData.start,
+					pointInterval: graphData.step,
+					data: graphData.trades,
+					marker:
+					{
+						enabled: false
+					},
+					states:
+					{
+						hover:
+						{
+							enabled: false
+						}
+					}
 				}
 			]
 		});
