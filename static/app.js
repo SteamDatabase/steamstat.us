@@ -356,7 +356,11 @@ try
 			},
 			tooltip:
 			{
-				enabled: false
+				shared: true,
+				shadow: false,
+				borderWidth: 0,
+				borderRadius: 0,
+				pointFormat: '<br><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
 			},
 			legend:
 			{
@@ -378,14 +382,6 @@ try
 			yAxis:
 			{
 				gridLineColor: '#3A3B47',
-				title:
-				{
-					text: 'Online CMs Today',
-					style:
-					{
-						color: '#8A8DB7'
-					}
-				},
 				labels:
 				{
 					format: '{value}%',
@@ -405,35 +401,24 @@ try
 			series:
 			[
 				{
+					name: 'Online CMs',
 					pointStart: graphData.start,
 					pointInterval: graphData.step,
 					data: graphData.data,
 					marker:
 					{
 						enabled: false
-					},
-					states:
-					{
-						hover:
-						{
-							enabled: false
-						}
 					}
 				},
 				{
+					color: '#4A89DC',
+					name: 'Successful Trades',
 					pointStart: graphData.start,
 					pointInterval: graphData.step,
 					data: graphData.trades,
 					marker:
 					{
 						enabled: false
-					},
-					states:
-					{
-						hover:
-						{
-							enabled: false
-						}
 					}
 				}
 			]
