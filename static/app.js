@@ -411,6 +411,13 @@ try
 					data: graphData.data
 				},
 				{
+					color: '#FFF176',
+					name: 'Online WebSocket CMs',
+					pointStart: graphData.start,
+					pointInterval: graphData.step,
+					data: graphData.cms_ws
+				},
+				{
 					color: '#4aa172',
 					name: 'Successful Trades',
 					pointStart: graphData.start,
