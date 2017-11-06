@@ -356,10 +356,16 @@ try
 			tooltip:
 			{
 				shared: true,
+				split: false,
 				shadow: false,
 				borderWidth: 0,
 				borderRadius: 0,
-				pointFormat: '<br><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>%',
+				style:
+				{
+					color: '#FFF'
+				},
+				backgroundColor: 'rgba(27, 27, 36, .8)',
+				pointFormat: '<br><span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}%</b>',
 			},
 			legend:
 			{
