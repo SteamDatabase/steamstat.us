@@ -39,33 +39,34 @@ hr {
 	max-width: 69em; /* ayy lmao */
 }
 
-.footer {
-	background-color: #282936;
+header {
+	background-image: linear-gradient(to bottom, #313242, #1B1B24);
 	padding: 2em 0;
-	margin-top: 2em;
 }
 
-.footer-oreos {
+footer {
 	background-color: #111;
 	padding: 2em 0;
-	opacity: .6;
+	margin-top: 2em;
+	opacity: .7;
 	transition: .2s opacity;
 }
 
-.footer-oreos:hover {
+footer:hover {
 	opacity: 1;
 }
 
-.footer-oreos p {
+footer p {
 	margin: 0;
 }
 
 .title {
-	text-align: center;
+	display: inline;
 	color: #FFF;
-	margin: 10px 0;
-	font-size: 2.6em;
+	line-height: 1;
+	font-size: 1.5em;
 	font-weight: 300;
+	margin-right: .5em;
 }
 
 .services-title {
@@ -157,7 +158,7 @@ noscript {
 }
 
 .twitter-follow-button {
-	margin-top: -3px;
+	margin-top: -1px;
 }
 
 /* Hide link when it is being replaced by the iframe and both are visible */
@@ -264,10 +265,6 @@ noscript {
 }
 
 @media screen and (max-width: 35em) {
-	.title {
-		font-size: 2em;
-	}
-	
 	.container {
 		width: 100%;
 	}
@@ -278,10 +275,14 @@ noscript {
 		width: 100%;
 	}
 	
-	.pull-right,
-	.footer-oreos,
-	.footer {
+	header,
+	footer,
+	.pull-right {
 		text-align: center;
+	}
+	
+	.title {
+		display: block;
 	}
 	
 	.attribution {
@@ -293,12 +294,6 @@ noscript {
 @media screen and (max-width: 25em) {
 	.service .status {
 		font-size: .9em;
-	}
-}
-
-@media screen and (max-width: 22em) {
-	.title {
-		font-size: 1.7em;
 	}
 }
 
@@ -320,13 +315,14 @@ noscript {
 	height: 10px;
 }
 
-::-webkit-scrollbar-track-piece {
-	background-color: #3b3b3b;
-}
-
 ::-webkit-scrollbar-thumb:vertical {
 	height: 50px;
-	background-color: #666;
+	background-color: rgba(255, 255, 255, .2);
+	border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover:vertical {
+	background-color: rgba(255, 255, 255, .7);
 }
 
 [data-tooltip]:before {
