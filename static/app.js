@@ -313,6 +313,10 @@ try
 		
 		new win[ 'Highcharts' ][ 'Chart' ](
 		{
+			global:
+			{
+				useUTC: false
+			},
 			plotOptions:
 			{
 				series:
