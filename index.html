@@ -6,7 +6,7 @@
 	
 	<title>Steam Status · Is Steam Down?</title>
 	
-	<link rel="stylesheet" href="static/freeman.css?_=1519758840">
+	<link rel="stylesheet" href="static/freeman.css?_=1522344060">
 	<link rel="dns-prefetch" href="https://crowbar.steamstat.us">
 	
 	<meta property="twitter:card" content="summary">
@@ -25,6 +25,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="msapplication-config" content="/browserconfig.xml">
+	
+	<meta name="twitter:widgets:csp" content="on">
+	<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content; default-src 'none'; form-action 'none'; img-src 'self' https: data:; connect-src https://crowbar.steamstat.us/; style-src 'self' 'unsafe-inline'; script-src 'self' https://cdnjs.cloudflare.com https://www.google-analytics.com https://platform.twitter.com; frame-src https://platform.twitter.com/; manifest-src 'self'; child-src 'self'; worker-src 'self';">
 	
 	<link rel="manifest" href="/manifest.json">
 	<link rel="canonical" href="https://steamstat.us/">
@@ -271,9 +274,8 @@
 		</div>
 	</footer>
 	
-	<script src="static/app.js?_=1497962220"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.2/adapters/standalone-framework.js" integrity="sha256-AbpHGcgLb+kRsJGnwFEktk7uzpZOCcBY74+YBdrKVGs=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highstock/6.0.2/highstock.js" integrity="sha256-Hv2+oHKYxpo8YEfLZ4IeNF2PLHPSPehfoDslY8YyTDA=" crossorigin="anonymous"></script>
-	<script>window.RenderChart();</script>
+	<script src="static/app.js?_=1522344060"></script>
 </body>
 </html>

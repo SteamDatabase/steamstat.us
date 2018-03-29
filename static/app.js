@@ -84,7 +84,6 @@ try
 		timeDiff,
 		secondsToUpdate = 0,
 		previousOnline = 100,
-		graphData,
 		graph          = doc.getElementById( 'cms-graph' ),
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
@@ -292,25 +291,18 @@ try
 	};
 	
 	/**
+	 * @param {array} graphData
 	 * @return {undefined}
 	 */
-	var RenderChart = function()
+	var RenderChart = function( graphData )
 	{
-		if( !graphData )
-		{
-			return;
-		}
-		
 		if( !( 'Highcharts' in win ) )
 		{
 			graph.innerHTML = 'Failed to load Highcharts.<br>Please unblock <b>cdnjs.cloudflare.com</b> for this to work.';
 			
 			return;
 		}
-		
-		var d = new Date();
-		d.setDate( d.getDate( ) - 1 );
-		
+
 		new win[ 'Highcharts' ][ 'Chart' ](
 		{
 			global:
@@ -436,8 +428,6 @@ try
 				}
 			]
 		});
-		
-		graphData = null;
 	};
 	
 	/**
@@ -467,12 +457,7 @@ try
 						return;
 					}
 					
-					graphData = response;
-					
-					if( 'Highcharts' in win )
-					{
-						RenderChart();
-					}
+					RenderChart( response );
 				}
 			}
 			catch( x )
