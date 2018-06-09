@@ -49,6 +49,7 @@ footer {
 	padding: 2em 0;
 	margin-top: 2em;
 	transition: .2s opacity;
+	line-height: 1.5;
 }
 
 footer p {
@@ -271,7 +272,6 @@ noscript {
 	}
 	
 	header,
-	footer,
 	.pull-right {
 		text-align: center;
 	}
