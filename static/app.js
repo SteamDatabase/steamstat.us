@@ -244,7 +244,7 @@ try
 						
 						if( value.time )
 						{
-							element.dataset.tooltip = 'Time since last status change: ' + TimeDifference( value.time ) + ( element.id === 'cms' ? ( '\nBreakdown: ' + extra ) : '' );
+							element.dataset.tooltip = 'Time since last status change: ' + TimeDifference( value.time );
 						}
 					}
 				}
@@ -418,13 +418,6 @@ try
 					pointStart: graphData.start,
 					pointInterval: graphData.step,
 					data: graphData.cms_ws
-				},
-				{
-					color: '#4aa172',
-					name: 'Successful Trades',
-					pointStart: graphData.start,
-					pointInterval: graphData.step,
-					data: graphData.trades
 				}
 			]
 		});

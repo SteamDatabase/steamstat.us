@@ -48,12 +48,7 @@ footer {
 	background-color: #111;
 	padding: 2em 0;
 	margin-top: 2em;
-	opacity: .7;
 	transition: .2s opacity;
-}
-
-footer:hover {
-	opacity: 1;
 }
 
 footer p {
@@ -283,11 +278,6 @@ noscript {
 	
 	.title {
 		display: block;
-	}
-	
-	.attribution {
-		font-size: .8em;
-		margin-bottom: 1em;
 	}
 }
 
