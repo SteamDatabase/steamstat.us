@@ -126,6 +126,10 @@ noscript {
 	text-decoration: none;
 }
 
+#psa img {
+	max-width: 100%;
+}
+
 #psa,
 noscript {
 	padding: 1em;
