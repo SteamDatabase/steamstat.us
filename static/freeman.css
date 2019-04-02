@@ -16,6 +16,10 @@ html {
 	box-sizing: inherit;
 }
 
+[hidden] {
+	display: none;
+}
+
 body {
 	margin: 0;
 	color: #8A8DB7;
@@ -106,15 +110,14 @@ noscript {
 	float: right;
 }
 
-#psa,
 noscript {
 	display: block;
-	color: #FFF;
-	background-color: #D83D42;
 }
 
-#psa {
-	display: none;
+#psa,
+noscript {
+	color: #FFF;
+	background-color: #D83D42;
 }
 
 #psa a {
@@ -215,7 +218,6 @@ noscript {
 
 .error {
 	text-align: center;
-	display: none;
 	height: 70px;
 	font-size: 1.6em;
 	line-height: 1.6em;

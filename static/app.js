@@ -8,25 +8,16 @@
 	
 	/**
 	 * @param {!string} text
-	 * @param {string=} data
 	 * @return {undefined}
 	 */
-	var ShowError = function( text, data )
+	var ShowError = function( text )
 	{
-		loader.style.display = 'block';
-		doc.getElementById( 'loader-content' ).style.display = 'none';
-		( element = doc.getElementById( 'loader-error' ) ).style.display = 'block';
+		loader.removeAttribute( 'hidden' );
+		doc.getElementById( 'loader-content' ).setAttribute( 'hidden', '' );
 		
-		if( text )
-		{
-			element.innerHTML = text;
-			
-			text = text.replace( '<br>', ' ' );
-		}
-		else
-		{
-			text = 'AJAX Error: ' + data;
-		}
+		element = doc.getElementById( 'loader-error' );
+		element.removeAttribute( 'hidden' );
+		element.innerHTML = text;
 	};
 
 try
@@ -75,7 +66,7 @@ try
 	 */
 	var RefreshData = function( )
 	{
-		loader.style.display = 'block';
+		loader.removeAttribute( 'hidden' );
 		
 		xhr = new XMLHttpRequest( );
 		xhr.open( 'GET', 'https://crowbar.steamstat.us/Barney', true );
@@ -98,11 +89,11 @@ try
 			
 			try
 			{
-				loader.style.display = 'none';
+				loader.setAttribute( 'hidden', '' );
 				
 				if( xhr.status !== 200 )
 				{
-					return ShowError( '', 'Status: ' + xhr.status );
+					return ShowError( 'Status: ' + xhr.status );
 				}
 				
 				if( response === null || response[ 0 ] !== '{' )
@@ -131,9 +122,9 @@ try
 				
 				if( psa )
 				{
-					if( psa_element.style.display !== 'block' )
+					if( psa_element.hasAttribute( 'hidden' ) )
 					{
-						psa_element.style.display = 'block';
+						psa_element.removeAttribute( 'hidden' );
 					}
 					
 					if( psa_element.innerHTML !== psa )
@@ -141,10 +132,10 @@ try
 						psa_element.innerHTML = psa;
 					}
 				}
-				else if( psa_element.style.display !== 'none' )
+				else if( !psa_element.hasAttribute( 'hidden' ) )
 				{
 					psa_element.innerHTML = '';
-					psa_element.style.display = 'none';
+					psa_element.setAttribute( 'hidden', '' );
 				}
 				
 				if( previousOnline < 75 && response[ 'online' ] >= 75 && 'Notification' in win )
@@ -208,10 +199,7 @@ try
 			}
 			catch( x )
 			{
-				ShowError( '' );
-				
-				console.debug( 'Status:', xhr.status, xhr.statusText );
-				console.debug( 'Data:', response );
+				ShowError( x.message );
 			}
 		}
 	};
@@ -246,7 +234,7 @@ try
 	};
 	
 	/**
-	 * @param {array} graphData
+	 * @param {Object} graphData
 	 * @return {undefined}
 	 */
 	var RenderChart = function( graphData )
@@ -418,10 +406,6 @@ try
 		xhrGraph.send( );
 	};
 	
-	// Expose render chart so it can get rendered after highcharts loads (and graph data already loaded)
-	win[ 'RenderChart' ] = RenderChart;
-	win[ 'UpdateGraph' ] = LoadGraph;
-	
 	Tick( );
 	LoadGraph( );
 	
@@ -463,7 +447,7 @@ catch( e )
 		const left = Math.round( window.screen.width / 2 - 250 );
 		const top = Math.round( window.screen.height / 2 - 300 );
 
-		window.open( follow.href, null, 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=500,height=600,left=' + left + ',top=' + top );
+		window.open( follow.href, undefined, 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=500,height=600,left=' + left + ',top=' + top );
 
 		e.preventDefault();
 		e.stopPropagation();
