@@ -42,6 +42,7 @@ hr {
 header {
 	background-image: linear-gradient(to bottom, #313242, #1B1B24);
 	padding: 2em 0;
+	user-select: none;
 }
 
 footer {
@@ -50,6 +51,7 @@ footer {
 	margin-top: 2em;
 	transition: .2s opacity;
 	line-height: 1.5;
+	user-select: none;
 }
 
 footer p {
@@ -156,13 +158,18 @@ noscript {
 	float: right;
 }
 
-.twitter-follow-button {
-	margin-top: -1px;
+#js-twitter-follow:hover {
+	color: #fff;
+	text-decoration: none;
 }
 
-/* Hide link when it is being replaced by the iframe and both are visible */
-.twitter-follow-button + .twitter-follow-button {
-	display: none;
+#js-twitter-follow:hover span {
+	text-decoration: underline;
+}
+
+#js-twitter-follow svg {
+	fill: currentColor;
+	vertical-align: -4px;
 }
 
 .services .sep {
@@ -193,6 +200,7 @@ noscript {
 	border-radius: 5px;
 	z-index: 999;
 	pointer-events: none;
+	user-select: none;
 }
 
 .spinner,

@@ -28,51 +28,6 @@
 			text = 'AJAX Error: ' + data;
 		}
 	};
-	
-	/**
-	 * Taken from https://github.com/schalkneethling/dnt-helper
-	 *
-	 * Returns true or false based on whether doNotTack is enabled. It also takes into account the
-	 * anomalies, such as !bugzilla 887703, which effect versions of Fx 31 and lower. It also handles
-	 * IE versions on Windows 7, 8 and 8.1, where the DNT implementation does not honor the spec.
-	 * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1217896 for more details
-	 * @returns {boolean} true if enabled else false
-	 */
-	function _dntEnabled()
-	{
-		// for old version of IE we need to use the msDoNotTrack property of navigator
-		// on newer versions, and newer platforms, this is doNotTrack but, on the window object
-		// Safari also exposes the property on the window object.
-		var dntStatus = navigator.doNotTrack || win.doNotTrack || navigator.msDoNotTrack;
-		var ua = navigator.userAgent;
-		
-		// List of Windows versions known to not implement DNT according to the standard.
-		var anomalousWinVersions = ['Windows NT 6.1', 'Windows NT 6.2', 'Windows NT 6.3'];
-		
-		var fxMatch = ua.match(/Firefox\/(\d+)/);
-		var ieRegEx = /MSIE|Trident/i;
-		var isIE = ieRegEx.test(ua);
-		// Matches from Windows up to the first occurance of ; un-greedily
-		// http://www.regexr.com/3c2el
-		var platform = ua.match(/Windows.+?(?=;)/g);
-		
-		// With old versions of IE, DNT did not exist so we simply return false;
-		if (isIE && typeof Array.prototype.indexOf !== 'function') {
-			return false;
-		} else if (fxMatch && parseInt(fxMatch[1], 10) < 32) {
-			// Can't say for sure if it is 1 or 0, due to Fx bug 887703
-			dntStatus = 'Unspecified';
-		} else if (isIE && platform && anomalousWinVersions.indexOf(platform.toString()) !== -1) {
-			// default is on, which does not honor the specification
-			dntStatus = 'Unspecified';
-		} else {
-			// sets dntStatus to Disabled or Enabled based on the value returned by the browser.
-			// If dntStatus is undefined, it will be set to Unspecified
-			dntStatus = { '0': 'Disabled', '1': 'Enabled' }[dntStatus] || 'Unspecified';
-		}
-		
-		return dntStatus === 'Enabled' ? true : false;
-	}
 
 try
 {
@@ -502,10 +457,26 @@ catch( e )
 	console.error( e );
 }
 
-// Only load Google Analytics and Twitter helper widget if DNT is not enabled
-if( !_dntEnabled() )
-{
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);})(win,doc,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-37177069-4','auto');ga('set','anonymizeIp',true);ga('send','pageview');
-	(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}})(doc, 'script', 'twitter-wjs');
-}
+	const follow = document.getElementById( 'js-twitter-follow' );
+	follow.addEventListener( 'click', function( e )
+	{
+		const left = Math.round( window.screen.width / 2 - 250 );
+		const top = Math.round( window.screen.height / 2 - 300 );
+
+		window.open( follow.href, null, 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=500,height=600,left=' + left + ',top=' + top );
+
+		e.preventDefault();
+		e.stopPropagation();
+	} );
+
+	window.GoogleAnalyticsObject = 'ga';
+	window.ga = function()
+	{
+		window.ga.q.push( arguments );
+	};
+	window.ga.q = [];
+	window.ga.l = Date.now();
+	ga( 'create', 'UA-37177069-4', 'auto' );
+	ga( 'set', 'anonymizeIp', true );
+	ga( 'send', 'pageview' );
 }( document, window ) );
