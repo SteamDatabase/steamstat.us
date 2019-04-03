@@ -265,7 +265,7 @@ try
 				backgroundColor: '#282936',
 				spacing: [5, 0, 0, 0],
 				style: {
-					fontFamily: "'Open Sans', sans-serif"
+					fontFamily: 'inherit'
 				}
 			},
 			title:
