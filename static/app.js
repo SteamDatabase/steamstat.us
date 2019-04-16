@@ -441,6 +441,11 @@ catch( e )
 	console.error( e );
 }
 
+	if( window.location.search.length > 0 || window.location.hash.length > 0 )
+	{
+		window.history.replaceState( null, '', window.location.origin );
+	}
+
 	const follow = document.getElementById( 'js-twitter-follow' );
 	follow.addEventListener( 'click', function( e )
 	{
