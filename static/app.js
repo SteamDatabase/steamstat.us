@@ -34,6 +34,7 @@ try
 		graph          = doc.getElementById( 'cms-graph' ),
 		loader         = doc.getElementById( 'loader' ),
 		element        = doc.getElementsByTagName( 'noscript' )[ 0 ],
+		notif_button   = doc.getElementById( 'js-enable-notification' ),
 		psa_element    = doc.getElementById( 'psa' ),
 		time_element   = doc.getElementById( 'js-refresh' );
 	
@@ -427,13 +428,25 @@ try
 	// Refresh graph every 10 minutes
 	setInterval( LoadGraph, 600000 );
 	
-	setInterval( function()
+	if( win.Notification && win.Notification.permission !== 'denied' )
 	{
-		if( win.Notification && win.Notification.permission !== 'denied' )
+		notif_button.addEventListener( 'click', function( e )
 		{
-			win.Notification.requestPermission();
-		}
-	}, 60000 );
+			e.preventDefault();
+
+			win.Notification.requestPermission( function( notifResult )
+			{
+				if( notifResult === 'granted' )
+				{
+					notif_button.setAttribute( 'hidden', '' );
+				}
+			} );
+		}, false );
+	}
+	else
+	{
+		notif_button.setAttribute( 'hidden', '' );
+	}
 	
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )

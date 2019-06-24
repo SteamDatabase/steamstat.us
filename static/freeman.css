@@ -72,7 +72,7 @@ footer p {
 }
 
 .services-title {
-	font-weight: 300;
+	font-weight: 500;
 	margin: 8px 12px;
 }
 
@@ -161,18 +161,25 @@ noscript {
 	float: right;
 }
 
+#js-enable-notification:hover,
 #js-twitter-follow:hover {
 	color: #fff;
 	text-decoration: none;
 }
 
+#js-enable-notification:hover span,
 #js-twitter-follow:hover span {
 	text-decoration: underline;
 }
 
+#js-enable-notification svg,
 #js-twitter-follow svg {
 	fill: currentColor;
 	vertical-align: -4px;
+}
+
+#js-enable-notification {
+	margin-right: 15px;
 }
 
 .services .sep {
@@ -202,7 +209,6 @@ noscript {
 	background-color: rgba(0, 0, 0, .5);
 	border-radius: 5px;
 	z-index: 999;
-	pointer-events: none;
 	user-select: none;
 }
 
