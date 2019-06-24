@@ -428,7 +428,7 @@ try
 	// Refresh graph every 10 minutes
 	setInterval( LoadGraph, 600000 );
 	
-	if( win.Notification && win.Notification.permission !== 'denied' )
+	if( win.Notification && win.Notification.permission === 'default' )
 	{
 		notif_button.addEventListener( 'click', function( e )
 		{
