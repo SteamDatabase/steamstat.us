@@ -28,6 +28,7 @@ try
 		xhr,
 		psa,
 		timeDiff,
+		hasServiceWorker = false,
 		secondsToUpdate = 0,
 		previousOnline = 100,
 		graph          = doc.getElementById( 'cms-graph' ),
@@ -142,16 +143,30 @@ try
 				{
 					if( win.Notification.permission === 'granted' )
 					{
-						var notification = new win.Notification( 'Steam is back online',
+						var notifTitle = 'Steam is back online';
+						var notifData =
 						{
 							'lang': 'en',
 							'icon': '/static/logos/192px.png',
 							'body': response[ 'online' ] + '% of Steam servers are online, you could try logging in now.'
-						} );
-						
-						setTimeout( function() {
-							notification.close();
-						}, 5000 );
+						};
+
+						if( hasServiceWorker )
+						{
+							navigator.serviceWorker.ready.then( function( registration )
+							{
+								registration.showNotification( notifTitle, notifData );
+							} );
+						}
+						else
+						{
+							var notification = new win.Notification( notifTitle, notifData );
+
+							notification.onclick = function()
+							{
+								notification.close();
+							};
+						}
 					}
 				}
 				
@@ -412,15 +427,24 @@ try
 	// Refresh graph every 10 minutes
 	setInterval( LoadGraph, 600000 );
 	
-	if( win.Notification && win.Notification.permission !== 'denied' )
+	setInterval( function()
 	{
-		win.Notification.requestPermission();
-	}
+		if( win.Notification && win.Notification.permission !== 'denied' )
+		{
+			win.Notification.requestPermission();
+		}
+	}, 60000 );
 	
 	// http://updates.html5rocks.com/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android
 	if( 'serviceWorker' in navigator )
 	{
-		navigator.serviceWorker.register( '/service-worker.js', { scope: './' } );
+		navigator.serviceWorker.register( '/service-worker.js', { scope: './' } ).then( function() 
+		{
+			hasServiceWorker = true;
+		} ).catch( function( e )
+		{
+			console.error( e );
+		} );
 	}
 	
 	win.addEventListener( 'beforeinstallprompt', function( e )
