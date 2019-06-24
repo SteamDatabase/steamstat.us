@@ -141,7 +141,6 @@ noscript {
 }
 
 .service {
-	position: relative;
 	padding: 8px 12px;
 }
 
@@ -334,32 +333,6 @@ noscript {
 	background-color: rgba(255, 255, 255, .7);
 }
 
-[data-tooltip]:before {
-	visibility: hidden;
-	opacity: 0;
-	font-size: .9em;
-	content: attr(data-tooltip);
-	overflow: hidden;
-	white-space: pre;
-	word-wrap: break-word;
-	position: absolute;
-	top: 0;
-	left: 2%;
-	width: 96%;
-	background: rgba(27, 27, 36, .8);
-	color: #FFF;
-	text-align: left;
-	padding: 8px;
-	border-radius: 6px;
-	z-index: 1;
-}
-
-[data-tooltip]:hover:before {
-	visibility: visible;
-	opacity: 1;
-	animation: .15s fade-in linear;
-}
-
 @keyframes fade-in {
 	0% {
 		opacity: 0;
@@ -367,6 +340,11 @@ noscript {
 	100% {
 		opacity: 1;
 	}
+}
+
+.game-icon {
+	vertical-align: sub;
+	border-radius: 3px;
 }
 
 /* Flags */

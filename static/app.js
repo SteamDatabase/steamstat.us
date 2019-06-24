@@ -118,7 +118,7 @@ try
 					
 					if( timeDiff > 3000 )
 					{
-						psa += ' <a href="http://time.is" target="_blank">Is your clock out of sync?</a>';
+						psa += ' <a href="https://time.is" target="_blank" rel="noopener">Is your clock out of sync?</a>';
 					}
 				}
 				
@@ -203,11 +203,6 @@ try
 						{
 							element.innerText = value.title;
 						}
-						
-						if( value.time )
-						{
-							element.dataset.tooltip = 'Time since last status change: ' + TimeDifference( value.time );
-						}
 					}
 				}
 				
@@ -218,35 +213,6 @@ try
 				ShowError( x.message );
 			}
 		}
-	};
-	
-	/**
-	 * @param {!number} previous
-	 * @return {!string}
-	 */
-	var TimeDifference = function( previous )
-	{
-		var msPerMinute = 60 * 1000;
-		var msPerHour = msPerMinute * 60;
-		var msPerDay = msPerHour * 24;
-		var msPerMonth = msPerDay * 30;
-		
-		var elapsed = Date.now() - ( previous * 1000 );
-		
-		if( elapsed < msPerMinute )
-		{
-			return 'less than a minute ago';
-		}
-		else if( elapsed < msPerHour )
-		{
-			return Math.round( elapsed / msPerMinute ) + ' minutes';
-		}
-		else if( elapsed < msPerDay )
-		{
-			return Math.round( elapsed / msPerHour ) + ' hours';
-		}
-		
-		return '≈' + Math.round( elapsed / msPerDay ) + ' days';
 	};
 	
 	/**
