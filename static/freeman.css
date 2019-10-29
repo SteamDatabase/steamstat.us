@@ -279,7 +279,7 @@ noscript {
 	animation-delay: -0.8s;
 }
 
-@media screen and (max-width: 35em) {
+@media screen and (max-width: 720px) {
 	.container {
 		width: 100%;
 	}
@@ -305,8 +305,8 @@ noscript {
 	}
 }
 
-@media screen and (max-width: 25em) {
-	.service .status {
+@media screen and (max-width: 400px) {
+	.service {
 		font-size: .9em;
 	}
 }
