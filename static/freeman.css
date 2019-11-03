@@ -357,7 +357,7 @@ noscript {
 .flag {
 	width: 16px;
 	height: 11px;
-	background: #000 url('https://cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/images/flags.png') no-repeat;
+	background: #000 url('flags.png') no-repeat;
 }
 
 .flag-ad {background-position: -16px 0}
