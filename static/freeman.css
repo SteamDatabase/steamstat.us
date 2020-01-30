@@ -118,7 +118,9 @@ noscript {
 #psa,
 noscript {
 	color: #FFF;
-	background-color: #D83D42;
+	background-color: #1566b7;
+	padding: 1em;
+	margin-bottom: 1em;
 }
 
 #psa a {
@@ -133,12 +135,6 @@ noscript {
 
 #psa img {
 	max-width: 100%;
-}
-
-#psa,
-noscript {
-	padding: 1em;
-	margin-bottom: 1em;
 }
 
 .service {
