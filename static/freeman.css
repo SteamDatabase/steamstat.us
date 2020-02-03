@@ -127,6 +127,12 @@ noscript {
 	font-size: 14px;
 }
 
+.regions span {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 noscript {
 	display: block;
 }
@@ -187,10 +193,6 @@ noscript {
 
 .services .sep {
 	border-top: 1px solid #191921;
-}
-
-.status {
-	overflow: hidden;
 }
 
 .good {
