@@ -3,7 +3,7 @@
 		constructor() {
 			this.hasServiceWorker = false;
 			this.secondsToUpdate = 0;
-			this.previousOnline = 100;
+			this.previousOnline = 146;
 			this.loader = document.getElementById('loader');
 			this.psa_element = document.getElementById('psa');
 			this.time_element = document.getElementById('js-refresh');
@@ -112,26 +112,32 @@
 						}
 					}
 
-					this.previousOnline = response.online;
-
 					Object.entries(response.services).forEach(([key, value]) => {
 						const element = document.getElementById(key);
 
-						if (element) {
-							if (value.status) {
-								const className = `status ${value.status}`;
-
-								if (element.className !== className) {
-									element.className = className;
-								}
-							}
-
-							element.textContent = value.title;
-						} else {
+						if (!element) {
 							// eslint-disable-next-line no-console
 							console.error('Missing DOM element for', key);
+							return;
 						}
+
+						const className = `status ${value.status}`;
+
+						if (this.previousOnline === 146) {
+							// Initial page load
+							element.className = className;
+						} else if (element.className !== className) {
+							element.className = `${className} status-changed`;
+
+							setTimeout(() => {
+								element.className = className;
+							}, 1000);
+						}
+
+						element.textContent = value.title;
 					});
+
+					this.previousOnline = response.online;
 
 					if (response.graph) {
 						if (this.highcharts.series.length > 0) {

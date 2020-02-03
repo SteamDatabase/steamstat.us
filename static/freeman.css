@@ -207,6 +207,10 @@ noscript {
 	color: #FFC107;
 }
 
+.status-changed {
+	animation: status-changed 1s;
+}
+
 #loader {
 	height: 100%;
 	width: 100%;
@@ -293,12 +297,12 @@ noscript {
 	.container {
 		width: 100%;
 	}
-	
+
 	.pull-right {
 		float: none;
 		width: 100%;
 	}
-	
+
 	.services-container {
 		flex-direction: column;
 	}
@@ -315,7 +319,7 @@ noscript {
 	.pull-right {
 		text-align: center;
 	}
-	
+
 	.title {
 		display: block;
 	}
@@ -328,7 +332,7 @@ noscript {
 }
 
 @-webkit-keyframes stretch {
-	0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+	0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
 	20% { -webkit-transform: scaleY(1.0) }
 }
 
@@ -355,12 +359,9 @@ noscript {
 	background-color: rgba(255, 255, 255, .7);
 }
 
-@keyframes fade-in {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
+@keyframes status-changed {
+	from {
+		background: #1566b7;
 	}
 }
 
