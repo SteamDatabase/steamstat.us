@@ -127,6 +127,9 @@
 							}
 
 							element.textContent = value.title;
+						} else {
+							// eslint-disable-next-line no-console
+							console.error('Missing DOM element for', key);
 						}
 					});
 

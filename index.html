@@ -6,7 +6,7 @@
 	
 	<title>Steam Status · Is Steam Down?</title>
 	
-	<link rel="stylesheet" href="static/freeman.css?_=1580000000">
+	<link rel="stylesheet" href="static/freeman.css?_=1580729940">
 	<link rel="dns-prefetch" href="https://crowbar.steamstat.us">
 	
 	<meta property="twitter:card" content="summary">
@@ -161,105 +161,134 @@
 				</div>
 			</div>
 			
-			<div class="services">
-				<h3 class="services-title">CS:GO Regions</h3>
+			<div class="services regions">
+				<span class="regions-title">Region</span>
+				<span><img class="game-icon" alt="Steam" width="20" height="20" src="static/icons/steam.jpg"> CM</span>
+				<span><img class="game-icon" alt="CS:GO" width="20" height="20" src="static/icons/csgo.jpg"></span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-nl" alt="" width="16" height="11"> <span class="muted">ams</span> Amsterdam</span>
+				<span class="status" id="ams">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-lu" alt="" width="16" height="11"> <span class="muted">lux</span> Luxembourg</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_eu_west"></span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-at" alt="" width="16" height="11"> <span class="muted">vie</span> Vienna</span>
+				<span class="status" id="vie">…</span>
+				<span class="status" id="csgo_eu_east">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-se" alt="" width="16" height="11"> <span class="muted">sto</span> Stockholm</span>
+				<span class="status" id="sto">…</span>
+				<span class="status" id="csgo_eu_north">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-pl" alt="" width="16" height="11"> <span class="muted">waw</span> Warsaw</span>
+				<span class="status" id="waw">…</span>
+				<span class="status" id="csgo_poland">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-es" alt="" width="16" height="11"> <span class="muted">mad</span> Madrid</span>
+				<span class="status" id="mad">…</span>
+				<span class="status" id="csgo_spain">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-de" alt="" width="16" height="11"> <span class="muted">fra</span> Frankfurt</span>
+				<span class="status" id="fra">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-fr" alt="" width="16" height="11"> <span class="muted">par</span> Paris</span>
+				<span class="status" id="par">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-uk" alt="" width="16" height="11"> <span class="muted">lhr</span> London</span>
+				<span class="status" id="lhr">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">iad</span> Sterling</span>
+				<span class="status" id="iad">…</span>
+				<span class="status" id="csgo_us_northeast">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">lax</span> Los Angeles</span>
+				<span class="status" id="lax">…</span>
+				<span class="status" id="csgo_us_southwest">…</span>
 				
-				<div class="service sep">
-					<span class="name"><img src="static/p.gif" class="flag flag-lu" alt="" width="16" height="11"> EU West </span>
-					<span class="status" id="csgo_eu_west">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-at" alt="" width="16" height="11"> EU East </span>
-					<span class="status" id="csgo_eu_east">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-se" alt="" width="16" height="11"> EU North </span>
-					<span class="status" id="csgo_eu_north">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-pl" alt="" width="16" height="11"> Poland </span>
-					<span class="status" id="csgo_poland">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-es" alt="" width="16" height="11"> Spain </span>
-					<span class="status" id="csgo_spain">…</span>
-				</div>
-				<div class="service sep">
-					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> US Northwest </span>
-					<span class="status" id="csgo_us_northwest">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> US Northeast </span>
-					<span class="status" id="csgo_us_northeast">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> US Northcentral </span>
-					<span class="status" id="csgo_us_northcentral">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> US Southwest </span>
-					<span class="status" id="csgo_us_southwest">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> US Southeast </span>
-					<span class="status" id="csgo_us_southeast">…</span>
-				</div>
-				<div class="service sep">
-					<span class="name"><img src="static/p.gif" class="flag flag-au" alt="" width="16" height="11"> Australia </span>
-					<span class="status" id="csgo_australia">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-br" alt="" width="16" height="11"> Brazil </span>
-					<span class="status" id="csgo_brazil">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-cl" alt="" width="16" height="11"> Chile </span>
-					<span class="status" id="csgo_chile">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-ae" alt="" width="16" height="11"> Emirates </span>
-					<span class="status" id="csgo_emirates">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> India </span>
-					<span class="status" id="csgo_india">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> India East </span>
-					<span class="status" id="csgo_india_east">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> Peru </span>
-					<span class="status" id="csgo_peru">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-jp" alt="" width="16" height="11"> Japan </span>
-					<span class="status" id="csgo_japan">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-hk" alt="" width="16" height="11"> Hong Kong </span>
-					<span class="status" id="csgo_hong_kong">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-sg" alt="" width="16" height="11"> Singapore </span>
-					<span class="status" id="csgo_singapore">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-za" alt="" width="16" height="11"> South Africa </span>
-					<span class="status" id="csgo_south_africa">…</span>
-				</div>
-				<div class="service sep">
-					<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> China Shanghai </span>
-					<span class="status" id="csgo_china_shanghai">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> China Guangzhou </span>
-					<span class="status" id="csgo_china_guangzhou">…</span>
-				</div>
-				<div class="service">
-					<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> China Tianjin </span>
-					<span class="status" id="csgo_china_tianjin">…</span>
-				</div>
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">ord</span> Chicago</span>
+				<span class="status" id="ord">…</span>
+				<span class="status" id="csgo_us_northcentral">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">okc</span> Oklahoma City</span>
+				<span class="status" id="okc">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">sea</span> Seattle</span>
+				<span class="status" id="sea">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">eat</span> Moses Lake</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_us_northwest">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">atl</span> Atlanta</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_us_southeast">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-au" alt="" width="16" height="11"> <span class="muted">syd</span> Sydney</span>
+				<span class="status" id="syd">…</span>
+				<span class="status" id="csgo_australia">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-br" alt="" width="16" height="11"> <span class="muted">gru</span> Sao Paulo</span>
+				<span class="status" id="gru">…</span>
+				<span class="status" id="csgo_brazil">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-cl" alt="" width="16" height="11"> <span class="muted">scl</span> Santiago</span>
+				<span class="status" id="scl">…</span>
+				<span class="status" id="csgo_chile">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-ae" alt="" width="16" height="11"> <span class="muted">dxb</span> Dubai</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_emirates">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> <span class="muted">bom</span> Mumbai </span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_india">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> <span class="muted">maa</span> Chennai </span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_india_east">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> <span class="muted">lim</span> Lima</span>
+				<span class="status" id="lim">…</span>
+				<span class="status" id="csgo_peru">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> <span class="muted">man</span> Manilla</span>
+				<span class="status" id="man">…</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-jp" alt="" width="16" height="11"> <span class="muted">tyo1</span> Tokyo</span>
+				<span class="status" id="tyo1">…</span>
+				<span class="status" id="csgo_japan">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-hk" alt="" width="16" height="11"> <span class="muted">hkg</span> Hong Kong</span>
+				<span class="status" id="hkg">…</span>
+				<span class="status" id="csgo_hong_kong">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-sg" alt="" width="16" height="11"> <span class="muted">sgp</span> Singapore</span>
+				<span class="status" id="sgp">…</span>
+				<span class="status" id="csgo_singapore">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-za" alt="" width="16" height="11"> <span class="muted">jnb</span> Johannesburg</span>
+				<span class="status" id="jnb">…</span>
+				<span class="status" id="csgo_south_africa">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">sha</span> Shanghai</span>
+				<span class="status" id="sha">…</span>
+				<span class="status" id="csgo_china_shanghai">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> Guangzhou</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_china_guangzhou">…</span>
+
+				<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> Tianjin</span>
+				<span class="status muted" title="No servers in this location">N/A</span>
+				<span class="status" id="csgo_china_tianjin">…</span>
 			</div>
 		</div>
 	</div>
@@ -272,7 +301,7 @@
 	</footer>
 	
 	<script src="static/highstock.js?_=1580000000"></script>
-	<script src="static/app.js?_=1580725440"></script>
+	<script src="static/app.js?_=1580729940"></script>
 	<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 </html>

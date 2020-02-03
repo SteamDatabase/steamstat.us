@@ -73,6 +73,7 @@ footer p {
 
 .services-title {
 	font-weight: 500;
+	font-size: 1.2em;
 	margin: 0;
 	padding: 8px 12px;
 }
@@ -103,6 +104,27 @@ noscript {
 
 .services {
 	width: 49%;
+}
+
+.regions {
+	display: grid;
+	grid-template-columns: 50% 25% 25%;
+	grid-template-rows: 36px repeat(auto-fill, 24px);
+	padding: 8px 12px;
+}
+
+.regions-title {
+	font-weight: 500;
+	font-size: 1.2em;
+}
+
+.regions .muted {
+	opacity: 0.5;
+}
+
+.regions .flag + .muted {
+	font-family: monospace;
+	font-size: 14px;
 }
 
 noscript {
@@ -165,6 +187,10 @@ noscript {
 
 .services .sep {
 	border-top: 1px solid #191921;
+}
+
+.status {
+	overflow: hidden;
 }
 
 .good {
