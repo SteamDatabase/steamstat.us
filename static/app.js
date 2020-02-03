@@ -4,7 +4,6 @@
 			this.hasServiceWorker = false;
 			this.secondsToUpdate = 0;
 			this.previousOnline = 100;
-			this.graph = document.getElementById('cms-graph');
 			this.loader = document.getElementById('loader');
 			this.psa_element = document.getElementById('psa');
 			this.time_element = document.getElementById('js-refresh');
@@ -131,6 +130,20 @@
 						}
 					});
 
+					if (response.graph) {
+						if (this.highcharts.series.length > 0) {
+							this.highcharts.series[0].remove();
+						}
+
+						this.highcharts.addSeries({
+							color: '#4384D8',
+							name: 'Online CMs',
+							pointStart: response.graph.start,
+							pointInterval: response.graph.step,
+							data: response.graph.data,
+						});
+					}
+
 					this.Tick();
 				} catch (error) {
 					this.ShowError(error.message);
@@ -138,15 +151,16 @@
 			}
 		}
 
-		RenderChart(graphData) {
+		RenderChart() {
+			const graph = document.getElementById('cms-graph');
+
 			if (!('Highcharts' in window)) {
-				this.graph.innerHTML = 'Failed to load Highcharts.';
+				graph.textContent = 'Failed to load Highcharts.';
 
 				return;
 			}
 
-			// eslint-disable-next-line no-new
-			new window.Highcharts.Chart(
+			this.highcharts = new window.Highcharts.Chart(
 				{
 					global:
 					{
@@ -161,7 +175,8 @@
 					},
 					chart:
 					{
-						renderTo: this.graph,
+						renderTo: graph,
+						animation: false,
 						backgroundColor: '#282936',
 						spacing: [5, 0, 0, 0],
 						style: {
@@ -246,52 +261,8 @@
 						startOnTick: false,
 						endOnTick: false,
 					},
-					series:
-					[
-						{
-							color: '#4384D8',
-							name: 'Online CMs',
-							pointStart: graphData.start,
-							pointInterval: graphData.step,
-							data: graphData.data,
-						},
-					],
 				},
 			);
-		}
-
-		LoadGraph() {
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'https://crowbar.steamstat.us/Gina', true);
-			xhr.onreadystatechange = () => {
-				try {
-					if (xhr.readyState === 4) {
-						if (xhr.status !== 200) {
-							this.graph.textContent = `Failed to load graph data: HTTP ${xhr.status}`;
-						}
-
-						const response = JSON.parse(xhr.responseText);
-
-						if (!response.data) {
-							this.graph.textContent = 'Failed to load graph data.';
-
-							return;
-						}
-
-						this.RenderChart(response);
-					}
-				} catch (x) {
-					this.graph.textContent = `Failed to load graph data: ${x.message || 'Unknown error.'}`;
-				}
-			};
-			xhr.ontimeout = () => {
-				this.graph.textContent = 'Request timed out, unable to render graph.';
-			};
-			xhr.timeout = 10000;
-			xhr.send();
-
-			// Refresh graph every 10 minutes
-			setTimeout(this.LoadGraph.bind(this), 600000);
 		}
 
 		HandleNotifications() {
@@ -354,8 +325,8 @@
 	}
 
 	const status = new SteamStatus();
+	status.RenderChart();
 	status.Tick();
-	status.LoadGraph();
 	status.RemoveNoscript();
 	status.HandleNotifications();
 	status.HandleFollowButton();
