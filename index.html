@@ -26,7 +26,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-	<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' https:; connect-src https://crowbar.steamstat.us/ https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.google-analytics.com; font-src https://cdn.jsdelivr.net; manifest-src 'self'; worker-src 'self';">
+	<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' https:; connect-src https://crowbar.steamstat.us/ https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-0j/LVlvAXM/qCYwH+qp7CO53wm6h9JiMR0PY96sQ5vY=' https://www.google-analytics.com; font-src https://cdn.jsdelivr.net; manifest-src 'self'; worker-src 'self';">
 
 	<link rel="manifest" href="/manifest.json">
 	<link rel="canonical" href="https://steamstat.us/">
@@ -300,8 +300,8 @@
 		</div>
 	</footer>
 
-	<script src="static/highstock.js?_=1580000000"></script>
-	<script src="static/app.js?_=1581004020"></script>
+	<script src="https://cdn.jsdelivr.net/npm/highcharts@8.0.0/highstock.js" integrity="sha256-0j/LVlvAXM/qCYwH+qp7CO53wm6h9JiMR0PY96sQ5vY=" crossorigin="anonymous"></script>
+	<script src="static/app.js?_=1581012600"></script>
 	<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 </html>

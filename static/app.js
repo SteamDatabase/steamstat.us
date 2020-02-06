@@ -28,14 +28,14 @@
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', 'https://crowbar.steamstat.us/Barney', true);
 			xhr.onreadystatechange = () => this.LoadData(xhr);
-			xhr.ontimeout = () => this.ShowError('Request timed out.<br>Reload the page manually.');
+			xhr.ontimeout = () => this.ShowError('Request timed out.<br>Is your network working?');
 			xhr.timeout = 20000;
 			xhr.send();
 		}
 
 		Tick() {
 			if (this.secondsToUpdate <= 0) {
-				this.secondsToUpdate = 45;
+				this.secondsToUpdate = 5;
 
 				this.RefreshData();
 			} else {
@@ -47,116 +47,123 @@
 		}
 
 		LoadData(xhr) {
-			if (xhr.readyState === 4) {
-				let response = xhr.responseText;
+			if (xhr.readyState !== 4) {
+				return;
+			}
 
-				try {
-					this.loader.setAttribute('hidden', '');
+			let response = xhr.responseText;
 
-					if (xhr.status !== 200) {
-						this.ShowError(`Status: ${xhr.status}`);
-						return;
-					}
+			try {
+				this.loader.setAttribute('hidden', '');
 
-					if (response === null || response[0] !== '{') {
-						this.ShowError('Received invalid data.<br>Is something wrong with your network?');
-						return;
-					}
-
-					response = JSON.parse(response);
-					let psa = response.psa || '';
-					const timeDiff = Math.abs(Date.now() / 1000 - response.time);
-
-					if (timeDiff > 300) {
-						if (psa) {
-							psa += '<hr>';
-						}
-
-						psa += `Data appears to be ${Math.round(timeDiff / 60)} minutes old.`;
-
-						if (timeDiff > 3000) {
-							psa += ' <a href="https://time.is" target="_blank" rel="noopener">Is your clock out of sync?</a>';
-						}
-					}
-
-					if (psa) {
-						if (this.psa_element.hasAttribute('hidden')) {
-							this.psa_element.removeAttribute('hidden');
-						}
-
-						if (this.psa_element.innerHTML !== psa) {
-							this.psa_element.innerHTML = psa;
-						}
-					} else if (!this.psa_element.hasAttribute('hidden')) {
-						this.psa_element.innerHTML = '';
-						this.psa_element.setAttribute('hidden', '');
-					}
-
-					if (this.previousOnline < 75 && response.online >= 75 && 'Notification' in window) {
-						if (window.Notification.permission === 'granted') {
-							const notifTitle = 'Steam is back online';
-							const notifData =						{
-								lang: 'en',
-								icon: '/static/logos/192px.png',
-								body: `${response.online}% of Steam servers are online, you could try logging in now.`,
-							};
-
-							if (this.hasServiceWorker) {
-								navigator.serviceWorker.ready.then((registration) => {
-									registration.showNotification(notifTitle, notifData);
-								});
-							} else {
-								const notification = new window.Notification(notifTitle, notifData);
-								notification.onclick = () => notification.close();
-							}
-						}
-					}
-
-					Object.entries(response.services).forEach(([key, value]) => {
-						const element = document.getElementById(key);
-
-						if (!element) {
-							// eslint-disable-next-line no-console
-							console.error('Missing DOM element for', key);
-							return;
-						}
-
-						const className = `status ${value.status}`;
-
-						if (this.previousOnline === 146) {
-							// Initial page load
-							element.className = className;
-						} else if (element.className !== className) {
-							element.className = `${className} status-changed`;
-
-							setTimeout(() => {
-								element.className = className;
-							}, 1000);
-						}
-
-						element.textContent = value.title;
-					});
-
-					this.previousOnline = response.online;
-
-					if (response.graph) {
-						if (this.highcharts.series.length > 0) {
-							this.highcharts.series[0].remove();
-						}
-
-						this.highcharts.addSeries({
-							color: '#4384D8',
-							name: 'Online CMs',
-							pointStart: response.graph.start,
-							pointInterval: response.graph.step,
-							data: response.graph.data,
-						});
-					}
-
-					this.Tick();
-				} catch (error) {
-					this.ShowError(error.message);
+				if (xhr.status === 0) {
+					this.ShowError('Failed to update the status.<br>Is your network working?');
+					return;
 				}
+
+				if (xhr.status !== 200) {
+					this.ShowError(`Status: ${xhr.status}`);
+					return;
+				}
+
+				if (response === null || response[0] !== '{') {
+					this.ShowError('Received invalid data.<br>Is your network working?');
+					return;
+				}
+
+				response = JSON.parse(response);
+				let psa = response.psa || '';
+				const timeDiff = Math.abs(Date.now() / 1000 - response.time);
+
+				if (timeDiff > 300) {
+					if (psa) {
+						psa += '<hr>';
+					}
+
+					psa += `Data appears to be ${Math.round(timeDiff / 60)} minutes old.`;
+
+					if (timeDiff > 3000) {
+						psa += ' <a href="https://time.is" target="_blank" rel="noopener">Is your clock out of sync?</a>';
+					}
+				}
+
+				if (psa) {
+					if (this.psa_element.hasAttribute('hidden')) {
+						this.psa_element.removeAttribute('hidden');
+					}
+
+					if (this.psa_element.innerHTML !== psa) {
+						this.psa_element.innerHTML = psa;
+					}
+				} else if (!this.psa_element.hasAttribute('hidden')) {
+					this.psa_element.innerHTML = '';
+					this.psa_element.setAttribute('hidden', '');
+				}
+
+				if (this.previousOnline < 75 && response.online >= 75 && 'Notification' in window) {
+					if (window.Notification.permission === 'granted') {
+						const notifTitle = 'Steam is back online';
+						const notifData =						{
+							lang: 'en',
+							icon: '/static/logos/192px.png',
+							body: `${response.online}% of Steam servers are online, you could try logging in now.`,
+						};
+
+						if (this.hasServiceWorker) {
+							navigator.serviceWorker.ready.then((registration) => {
+								registration.showNotification(notifTitle, notifData);
+							});
+						} else {
+							const notification = new window.Notification(notifTitle, notifData);
+							notification.onclick = () => notification.close();
+						}
+					}
+				}
+
+				Object.entries(response.services).forEach(([key, value]) => {
+					const element = document.getElementById(key);
+
+					if (!element) {
+						// eslint-disable-next-line no-console
+						console.error('Missing DOM element for', key);
+						return;
+					}
+
+					const className = `status ${value.status}`;
+
+					if (this.previousOnline === 146) {
+						// Initial page load
+						element.className = className;
+					} else if (element.className !== className) {
+						element.className = `${className} status-changed`;
+
+						setTimeout(() => {
+							element.className = className;
+						}, 1000);
+					}
+
+					element.textContent = value.title;
+				});
+
+				this.previousOnline = response.online;
+
+				if (response.graph) {
+					if (this.highcharts.series.length > 0) {
+						this.highcharts.series[0].remove();
+					}
+
+					this.highcharts.addSeries({
+						color: '#4384D8',
+						name: 'Online CMs',
+						pointStart: response.graph.start,
+						pointInterval: response.graph.step,
+						data: response.graph.data,
+					});
+				}
+
+				this.Tick();
+			} catch (error) {
+				this.ShowError(error.message);
 			}
 		}
 
