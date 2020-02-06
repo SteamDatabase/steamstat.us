@@ -14,12 +14,9 @@
 		}
 
 		ShowError(text) {
-			this.loader.removeAttribute('hidden');
-			document.getElementById('loader-content').setAttribute('hidden', '');
-
-			const element = document.getElementById('loader-error');
-			element.removeAttribute('hidden');
-			element.innerHTML = text;
+			this.loader.setAttribute('hidden', '');
+			this.psa_element.removeAttribute('hidden');
+			this.psa_element.textContent = text;
 		}
 
 		RefreshData() {
@@ -28,7 +25,7 @@
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', 'https://crowbar.steamstat.us/Barney', true);
 			xhr.onreadystatechange = () => this.LoadData(xhr);
-			xhr.ontimeout = () => this.ShowError('Request timed out.<br>Is your network working?');
+			xhr.ontimeout = () => this.ShowError('Request timed out. Is your network working?');
 			xhr.timeout = 20000;
 			xhr.send();
 		}
@@ -58,7 +55,7 @@
 				this.loader.setAttribute('hidden', '');
 
 				if (xhr.status === 0) {
-					this.ShowError('Failed to update the status.<br>Is your network working?');
+					this.ShowError('Failed to update the status. Is your network working?');
 					return;
 				}
 
@@ -68,7 +65,7 @@
 				}
 
 				if (response === null || response[0] !== '{') {
-					this.ShowError('Received invalid data.<br>Is your network working?');
+					this.ShowError('Received invalid data. Is your network working?');
 					return;
 				}
 

@@ -52,10 +52,7 @@ hr {
 }
 
 header {
-	padding: 2em 0;
-}
-
-header .container {
+	margin: 2em 0;
 	display: flex;
 	justify-content: space-between;
 }
@@ -97,6 +94,15 @@ footer .community {
 	font-size: 1.2em;
 	margin: 0;
 	padding: 8px 12px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#loader {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 28px;
+	color: #FFC107;
 }
 
 a {
@@ -169,6 +175,10 @@ noscript {
 	margin-bottom: 1em;
 }
 
+#psa {
+	margin-top: -1em;
+}
+
 #psa a {
 	color: #FFF;
 	text-decoration: underline;
@@ -231,80 +241,12 @@ noscript {
 	animation: status-changed 1s;
 }
 
-#loader {
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, .5);
-	border-radius: 5px;
-	z-index: 999;
-	user-select: none;
-}
-
-.spinner,
-.error {
-	margin: auto;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-
-.error {
-	text-align: center;
-	height: 70px;
-	font-size: 1.6em;
-	line-height: 1.6em;
-	color: #F6BB42;
-}
-
 #js-refresh {
 	font-variant-numeric: tabular-nums;
 }
 
 #cms-graph {
 	height: 150px;
-}
-
-.spinner {
-	width: 50px;
-	height: 40px;
-	text-align: center;
-	font-size: 10px;
-}
-
-.spinner > div {
-	background-color: #FFF;
-	height: 100%;
-	width: 6px;
-	display: inline-block;
-	-webkit-animation: stretch 1.2s infinite ease-in-out;
-	animation: stretch 1.2s infinite ease-in-out;
-}
-
-.spinner .rect2 {
-	-webkit-animation-delay: -1.1s;
-	animation-delay: -1.1s;
-}
-
-.spinner .rect3 {
-	-webkit-animation-delay: -1.0s;
-	animation-delay: -1.0s;
-}
-
-.spinner .rect4 {
-	-webkit-animation-delay: -0.9s;
-	animation-delay: -0.9s;
-}
-
-.spinner .rect5 {
-	-webkit-animation-delay: -0.8s;
-	animation-delay: -0.8s;
 }
 
 @media screen and (max-width: 720px) {
@@ -325,10 +267,7 @@ noscript {
 	}
 
 	header {
-		padding-top: 0;
-	}
-
-	header .container {
+		margin-top: 0;
 		flex-direction: column;
 	}
 

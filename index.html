@@ -8,7 +8,7 @@
 
 	<link rel="preconnect" href="https://crowbar.steamstat.us" crossorigin>
 	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-	<link rel="stylesheet" href="static/freeman.css?_=1581004020">
+	<link rel="stylesheet" href="static/freeman.css?_=1581016980">
 
 	<meta property="twitter:card" content="summary">
 	<meta property="twitter:site" content="@SteamStatus">
@@ -36,20 +36,8 @@
 	<link rel="icon" type="image/png" href="static/logos/192px.png">
 </head>
 <body>
-	<div id="loader">
-		<span class="error" id="loader-error" hidden>Failed to load data.<br>Reload the page manually.</span>
-
-		<div class="spinner" id="loader-content">
-			<div class="rect1"></div>
-			<div class="rect2"></div>
-			<div class="rect3"></div>
-			<div class="rect4"></div>
-			<div class="rect5"></div>
-		</div>
-	</div>
-
-	<header>
-		<div class="container">
+	<div class="container">
+		<header>
 			<div class="title-contain">
 				<h1 class="title">Unofficial Steam Status</h1>
 				Refreshing in <span id="js-refresh">00</span> seconds
@@ -66,17 +54,18 @@
 					<span>Follow @SteamStatus</span>
 				</a>
 			</div>
-		</div>
-	</header>
+		</header>
 
-	<div class="container">
 		<noscript>This website requires JavaScript</noscript>
 
 		<div id="psa" hidden></div>
 
 		<div class="services-container">
 			<div class="services">
-				<h3 class="sep services-title">Steam Services</h3>
+				<h3 class="sep services-title">
+					Steam Services
+					<span id="loader">Loading…</span>
+				</h3>
 
 				<div class="service">
 					<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/app/753/graphs/">Online on Steam</a> </span>
@@ -301,7 +290,7 @@
 	</footer>
 
 	<script src="https://cdn.jsdelivr.net/npm/highcharts@8.0.0/highstock.js" integrity="sha256-0j/LVlvAXM/qCYwH+qp7CO53wm6h9JiMR0PY96sQ5vY=" crossorigin="anonymous"></script>
-	<script src="static/app.js?_=1581012600"></script>
+	<script src="static/app.js?_=1581016980"></script>
 	<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 </html>
