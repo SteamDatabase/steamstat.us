@@ -186,7 +186,7 @@
 					{
 						renderTo: graph,
 						animation: false,
-						backgroundColor: '#282936',
+						backgroundColor: 'transparent',
 						spacing: [5, 0, 0, 0],
 						style: {
 							fontFamily: 'inherit',
@@ -249,7 +249,7 @@
 					},
 					yAxis:
 					{
-						gridLineColor: '#3A3B47',
+						gridLineColor: '#282936',
 						title:
 						{
 							enabled: false,

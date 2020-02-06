@@ -7,7 +7,8 @@
 	<title>Steam Status · Is Steam Down?</title>
 
 	<link rel="preconnect" href="https://crowbar.steamstat.us" crossorigin>
-	<link rel="stylesheet" href="static/freeman.css?_=1580735040">
+	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+	<link rel="stylesheet" href="static/freeman.css?_=1581004020">
 
 	<meta property="twitter:card" content="summary">
 	<meta property="twitter:site" content="@SteamStatus">
@@ -49,7 +50,11 @@
 
 	<header>
 		<div class="container">
-			<div class="pull-right">
+			<div class="title-contain">
+				<h1 class="title">Unofficial Steam Status</h1>
+				Refreshing in <span id="js-refresh">00</span> seconds
+			</div>
+			<div class="links">
 				<a href="#" id="js-enable-notification">
 					<svg viewBox="0 0 16 16" width="20" height="20"><path d="M13 5A5 5 0 0 0 3 5v5l-3 2v1h16v-1l-3-2V5zM10 14H6a2 2 0 1 0 4 0z"/></svg>
 					<span>Enable notifications</span>
@@ -61,10 +66,6 @@
 					<span>Follow @SteamStatus</span>
 				</a>
 			</div>
-
-			<h1 class="title">Unofficial Steam Status</h1>
-
-			Refreshing in <span id="js-refresh">&infin;</span> seconds
 		</div>
 	</header>
 
@@ -75,19 +76,19 @@
 
 		<div class="services-container">
 			<div class="services">
-				<h3 class="services-title">Steam Services</h3>
+				<h3 class="sep services-title">Steam Services</h3>
 
-				<div class="service sep">
+				<div class="service">
 					<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/app/753/graphs/">Online on Steam</a> </span>
 					<span class="status" id="online">…</span>
 				</div>
 
-				<div class="service">
+				<div class="service sep">
 					<span class="name">In-Game on Steam </span>
 					<span class="status" id="ingame">…</span>
 				</div>
 
-				<div class="service sep">
+				<div class="service">
 					<span class="name">Steam Store </span>
 					<span class="status" id="store">…</span>
 				</div>
@@ -107,9 +108,9 @@
 					<span class="status" id="cms">…</span>
 				</div>
 
-				<div id="cms-graph">Loading graph…</div>
+				<div class="service sep" id="cms-graph">Loading graph…</div>
 
-				<div class="service sep">
+				<div class="service">
 					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/tf2.jpg"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/440/graphs/" title="Team Fortress 2">TF2</a> Game Coordinator </span>
 					<span class="status" id="tf2">…</span>
 				</div>
@@ -129,12 +130,12 @@
 					<span class="status" id="artifact">…</span>
 				</div>
 
-				<div class="service">
+				<div class="service sep">
 					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/csgo.jpg"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/graphs/">CS:GO</a> Game Coordinator </span>
 					<span class="status" id="csgo">…</span>
 				</div>
 
-				<div class="service sep">
+				<div class="service">
 					<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/app/730/graphs/">CS:GO</a> Sessions Logon </span>
 					<span class="status" id="csgo_sessions">…</span>
 				</div>
@@ -144,145 +145,149 @@
 					<span class="status" id="csgo_community">…</span>
 				</div>
 
-				<div class="service">
+				<div class="service sep">
 					<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/app/730/graphs/">CS:GO</a> Matchmaking Scheduler </span>
 					<span class="status" id="csgo_mm_scheduler">…</span>
 				</div>
 
-				<div class="service sep">
+				<div class="service">
 					<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/">SteamDB.info</a> Database </span>
 					<span class="status" id="database">…</span>
 				</div>
 			</div>
 
-			<div class="services regions">
-				<span class="regions-title">Region</span>
-				<span><img class="game-icon" alt="Steam" width="20" height="20" src="static/icons/steam.jpg"> CM</span>
-				<span><img class="game-icon" alt="CS:GO" width="20" height="20" src="static/icons/csgo.jpg"></span>
+			<div class="services">
+				<div class="sep regions-title">
+					<span>Region</span>
+					<span title="Steam Connection Managers"><img class="game-icon" alt="Steam" width="24" height="24" src="static/icons/steam.jpg"> CM</span>
+					<span title="CS:GO Official Servers"><img class="game-icon" alt="CS:GO" width="24" height="24" src="static/icons/csgo.jpg"></span>
+				</div>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-nl" alt="" width="16" height="11"> <span class="muted">ams</span> Amsterdam</span>
-				<span class="status" id="ams">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+				<div class="regions">
+					<span class="name"><img src="static/p.gif" class="flag flag-nl" alt="" width="16" height="11"> <span class="muted">ams</span> Amsterdam</span>
+					<span class="status" id="ams">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-lu" alt="" width="16" height="11"> <span class="muted">lux</span> Luxembourg</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_eu_west"></span>
+					<span class="name"><img src="static/p.gif" class="flag flag-lu" alt="" width="16" height="11"> <span class="muted">lux</span> Luxembourg</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_eu_west"></span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-at" alt="" width="16" height="11"> <span class="muted">vie</span> Vienna</span>
-				<span class="status" id="vie">…</span>
-				<span class="status" id="csgo_eu_east">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-at" alt="" width="16" height="11"> <span class="muted">vie</span> Vienna</span>
+					<span class="status" id="vie">…</span>
+					<span class="status" id="csgo_eu_east">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-se" alt="" width="16" height="11"> <span class="muted">sto</span> Stockholm</span>
-				<span class="status" id="sto">…</span>
-				<span class="status" id="csgo_eu_north">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-se" alt="" width="16" height="11"> <span class="muted">sto</span> Stockholm</span>
+					<span class="status" id="sto">…</span>
+					<span class="status" id="csgo_eu_north">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-pl" alt="" width="16" height="11"> <span class="muted">waw</span> Warsaw</span>
-				<span class="status" id="waw">…</span>
-				<span class="status" id="csgo_poland">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-pl" alt="" width="16" height="11"> <span class="muted">waw</span> Warsaw</span>
+					<span class="status" id="waw">…</span>
+					<span class="status" id="csgo_poland">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-es" alt="" width="16" height="11"> <span class="muted">mad</span> Madrid</span>
-				<span class="status" id="mad">…</span>
-				<span class="status" id="csgo_spain">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-es" alt="" width="16" height="11"> <span class="muted">mad</span> Madrid</span>
+					<span class="status" id="mad">…</span>
+					<span class="status" id="csgo_spain">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-de" alt="" width="16" height="11"> <span class="muted">fra</span> Frankfurt</span>
-				<span class="status" id="fra">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-de" alt="" width="16" height="11"> <span class="muted">fra</span> Frankfurt</span>
+					<span class="status" id="fra">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-fr" alt="" width="16" height="11"> <span class="muted">par</span> Paris</span>
-				<span class="status" id="par">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-fr" alt="" width="16" height="11"> <span class="muted">par</span> Paris</span>
+					<span class="status" id="par">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-uk" alt="" width="16" height="11"> <span class="muted">lhr</span> London</span>
-				<span class="status" id="lhr">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-uk" alt="" width="16" height="11"> <span class="muted">lhr</span> London</span>
+					<span class="status" id="lhr">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">iad</span> Sterling</span>
-				<span class="status" id="iad">…</span>
-				<span class="status" id="csgo_us_northeast">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">iad</span> Sterling</span>
+					<span class="status" id="iad">…</span>
+					<span class="status" id="csgo_us_northeast">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">lax</span> Los Angeles</span>
-				<span class="status" id="lax">…</span>
-				<span class="status" id="csgo_us_southwest">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">lax</span> Los Angeles</span>
+					<span class="status" id="lax">…</span>
+					<span class="status" id="csgo_us_southwest">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">ord</span> Chicago</span>
-				<span class="status" id="ord">…</span>
-				<span class="status" id="csgo_us_northcentral">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">ord</span> Chicago</span>
+					<span class="status" id="ord">…</span>
+					<span class="status" id="csgo_us_northcentral">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">okc</span> Oklahoma City</span>
-				<span class="status" id="okc">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">okc</span> Oklahoma City</span>
+					<span class="status" id="okc">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">sea</span> Seattle</span>
-				<span class="status" id="sea">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">sea</span> Seattle</span>
+					<span class="status" id="sea">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">eat</span> Moses Lake</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_us_northwest">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">eat</span> Moses Lake</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_us_northwest">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">atl</span> Atlanta</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_us_southeast">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-us" alt="" width="16" height="11"> <span class="muted">atl</span> Atlanta</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_us_southeast">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-au" alt="" width="16" height="11"> <span class="muted">syd</span> Sydney</span>
-				<span class="status" id="syd">…</span>
-				<span class="status" id="csgo_australia">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-au" alt="" width="16" height="11"> <span class="muted">syd</span> Sydney</span>
+					<span class="status" id="syd">…</span>
+					<span class="status" id="csgo_australia">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-br" alt="" width="16" height="11"> <span class="muted">gru</span> Sao Paulo</span>
-				<span class="status" id="gru">…</span>
-				<span class="status" id="csgo_brazil">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-br" alt="" width="16" height="11"> <span class="muted">gru</span> Sao Paulo</span>
+					<span class="status" id="gru">…</span>
+					<span class="status" id="csgo_brazil">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-cl" alt="" width="16" height="11"> <span class="muted">scl</span> Santiago</span>
-				<span class="status" id="scl">…</span>
-				<span class="status" id="csgo_chile">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-cl" alt="" width="16" height="11"> <span class="muted">scl</span> Santiago</span>
+					<span class="status" id="scl">…</span>
+					<span class="status" id="csgo_chile">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-ae" alt="" width="16" height="11"> <span class="muted">dxb</span> Dubai</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_emirates">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-ae" alt="" width="16" height="11"> <span class="muted">dxb</span> Dubai</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_emirates">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> <span class="muted">bom</span> Mumbai </span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_india">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> <span class="muted">bom</span> Mumbai </span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_india">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> <span class="muted">maa</span> Chennai </span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_india_east">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-in" alt="" width="16" height="11"> <span class="muted">maa</span> Chennai </span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_india_east">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> <span class="muted">lim</span> Lima</span>
-				<span class="status" id="lim">…</span>
-				<span class="status" id="csgo_peru">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> <span class="muted">lim</span> Lima</span>
+					<span class="status" id="lim">…</span>
+					<span class="status" id="csgo_peru">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> <span class="muted">man</span> Manilla</span>
-				<span class="status" id="man">…</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-pe" alt="" width="16" height="11"> <span class="muted">man</span> Manilla</span>
+					<span class="status" id="man">…</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-jp" alt="" width="16" height="11"> <span class="muted">tyo1</span> Tokyo</span>
-				<span class="status" id="tyo1">…</span>
-				<span class="status" id="csgo_japan">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-jp" alt="" width="16" height="11"> <span class="muted">tyo</span> Tokyo</span>
+					<span class="status" id="tyo1">…</span>
+					<span class="status" id="csgo_japan">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-hk" alt="" width="16" height="11"> <span class="muted">hkg</span> Hong Kong</span>
-				<span class="status" id="hkg">…</span>
-				<span class="status" id="csgo_hong_kong">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-hk" alt="" width="16" height="11"> <span class="muted">hkg</span> Hong Kong</span>
+					<span class="status" id="hkg">…</span>
+					<span class="status" id="csgo_hong_kong">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-sg" alt="" width="16" height="11"> <span class="muted">sgp</span> Singapore</span>
-				<span class="status" id="sgp">…</span>
-				<span class="status" id="csgo_singapore">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-sg" alt="" width="16" height="11"> <span class="muted">sgp</span> Singapore</span>
+					<span class="status" id="sgp">…</span>
+					<span class="status" id="csgo_singapore">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-za" alt="" width="16" height="11"> <span class="muted">jnb</span> Johannesburg</span>
-				<span class="status" id="jnb">…</span>
-				<span class="status" id="csgo_south_africa">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-za" alt="" width="16" height="11"> <span class="muted">jnb</span> Johannesburg</span>
+					<span class="status" id="jnb">…</span>
+					<span class="status" id="csgo_south_africa">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">sha</span> Shanghai</span>
-				<span class="status" id="sha">…</span>
-				<span class="status" id="csgo_china_shanghai">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">sha</span> Shanghai</span>
+					<span class="status" id="sha">…</span>
+					<span class="status" id="csgo_china_shanghai">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">can</span> Guangzhou</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_china_guangzhou">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">can</span> Guangzhou</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_china_guangzhou">…</span>
 
-				<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">tsn</span> Tianjin</span>
-				<span class="status muted" title="No servers in this location">N/A</span>
-				<span class="status" id="csgo_china_tianjin">…</span>
+					<span class="name"><img src="static/p.gif" class="flag flag-cn" alt="" width="16" height="11"> <span class="muted">tsn</span> Tianjin</span>
+					<span class="status muted" title="No servers in this location">N/A</span>
+					<span class="status" id="csgo_china_tianjin">…</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -291,11 +296,12 @@
 		<div class="container">
 			<p>A <a rel="noopener" target="_blank" href="https://steamdb.info/">SteamDB</a> project. Developed by <a rel="noopener author" target="_blank" href="https://xpaw.me">xPaw</a>.</p>
 			<p>CM monitoring initially created by <a rel="noopener" target="_blank" href="https://github.com/VoiDeD">VoiDeD</a>.</p>
+			<p class="community">This is a community website and is not affiliated with Valve or Steam.</p>
 		</div>
 	</footer>
 
 	<script src="static/highstock.js?_=1580000000"></script>
-	<script src="static/app.js?_=1580735040"></script>
+	<script src="static/app.js?_=1581004020"></script>
 	<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 </html>
