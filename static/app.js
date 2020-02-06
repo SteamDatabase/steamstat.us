@@ -148,7 +148,7 @@
 
 				this.previousOnline = response.online;
 
-				if (response.graph) {
+				if (response.graph && this.highcharts) {
 					if (this.highcharts.series.length > 0) {
 						this.highcharts.series[0].remove();
 					}
