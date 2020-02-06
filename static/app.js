@@ -34,15 +34,16 @@
 		}
 
 		Tick() {
+			this.time_element.textContent = this.secondsToUpdate < 10 ? `0${this.secondsToUpdate}` : this.secondsToUpdate;
+
 			if (this.secondsToUpdate <= 0) {
-				this.secondsToUpdate = 5;
+				this.secondsToUpdate = 45;
 
 				this.RefreshData();
 			} else {
 				setTimeout(this.Tick.bind(this), 1000);
 
 				this.secondsToUpdate -= 1;
-				this.time_element.textContent = this.secondsToUpdate < 10 ? `0${this.secondsToUpdate}` : this.secondsToUpdate;
 			}
 		}
 
