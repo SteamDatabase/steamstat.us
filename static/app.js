@@ -1,6 +1,7 @@
 (function Bootstrap() {
 	class SteamStatus {
 		constructor() {
+			this.statuses = ['good', 'minor', 'major'];
 			this.hasServiceWorker = false;
 			this.secondsToUpdate = 0;
 			this.previousOnline = 146;
@@ -23,7 +24,7 @@
 			this.loader.removeAttribute('hidden');
 
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'https://crowbar.steamstat.us/Barney', true);
+			xhr.open('GET', 'https://crowbar.steamstat.us/gravity.json', true);
 			xhr.onreadystatechange = () => this.LoadData(xhr);
 			xhr.ontimeout = () => this.ShowError('Request timed out. Is your network working?');
 			xhr.timeout = 20000;
@@ -118,16 +119,17 @@
 					}
 				}
 
-				Object.entries(response.services).forEach(([key, value]) => {
-					const element = document.getElementById(key);
+				// eslint-disable-next-line no-restricted-syntax
+				for (const [service, status, title] of response.services) {
+					const element = document.getElementById(service);
 
 					if (!element) {
 						// eslint-disable-next-line no-console
-						console.error('Missing DOM element for', key);
+						console.error('Missing DOM element for', service);
 						return;
 					}
 
-					const className = `status ${value.status}`;
+					const className = `status ${this.statuses[status]}`;
 
 					if (this.previousOnline === 146) {
 						// Initial page load
@@ -140,8 +142,10 @@
 						}, 1000);
 					}
 
-					element.textContent = value.title;
-				});
+					if (element.textContent !== title) {
+						element.textContent = title;
+					}
+				}
 
 				this.previousOnline = response.online;
 
