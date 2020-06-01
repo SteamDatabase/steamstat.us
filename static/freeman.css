@@ -3,8 +3,8 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url("https://cdn.jsdelivr.net/npm/inter-ui@3.11.0/Inter%20(web)/Inter-Regular.woff2") format("woff2"),
-		url("https://cdn.jsdelivr.net/npm/inter-ui@3.11.0/Inter%20(web)/Inter-Regular.woff") format("woff");
+	src: url("https://cdn.jsdelivr.net/npm/inter-ui@3.13.1/Inter%20(web)/Inter-Regular.woff2") format("woff2"),
+		url("https://cdn.jsdelivr.net/npm/inter-ui@3.13.1/Inter%20(web)/Inter-Regular.woff") format("woff");
 }
 
 @font-face {
@@ -12,8 +12,8 @@
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url("https://cdn.jsdelivr.net/npm/inter-ui@3.11.0/Inter%20(web)/Inter-Medium.woff2") format("woff2"),
-		url("https://cdn.jsdelivr.net/npm/inter-ui@3.11.0/Inter%20(web)/Inter-Medium.woff") format("woff");
+	src: url("https://cdn.jsdelivr.net/npm/inter-ui@3.13.1/Inter%20(web)/Inter-Medium.woff2") format("woff2"),
+		url("https://cdn.jsdelivr.net/npm/inter-ui@3.13.1/Inter%20(web)/Inter-Medium.woff") format("woff");
 }
 
 html {
