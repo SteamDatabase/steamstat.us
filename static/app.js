@@ -340,6 +340,7 @@
 				trackingId: 'UA-37177069-4',
 				cookieDomain: 'auto',
 				cookieFlags: 'SameSite=Lax; Secure',
+				cookieExpires: 3456000, // 40 days
 				allowAnchor: false,
 			});
 			window.ga('set', 'allowAdFeatures', false);
