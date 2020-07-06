@@ -336,7 +336,13 @@
 			window.ga = (...args) => window.ga.q.push(args);
 			window.ga.q = [];
 			window.ga.l = Date.now();
-			window.ga('create', 'UA-37177069-4', 'auto');
+			window.ga('create', {
+				trackingId: 'UA-37177069-4',
+				cookieDomain: 'auto',
+				cookieFlags: 'SameSite=Lax; Secure',
+				allowAnchor: false,
+			});
+			window.ga('set', 'allowAdFeatures', false);
 			window.ga('set', 'anonymizeIp', true);
 			window.ga('send', 'pageview');
 		}
