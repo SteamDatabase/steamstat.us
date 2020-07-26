@@ -249,6 +249,46 @@ noscript {
 	height: 150px;
 }
 
+/* Header */
+.steamdb {
+	width: 100%;
+	background-color: #000;
+}
+
+.steamdb-navbar {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.steamdb-navbar > li {
+	flex-shrink: 0;
+}
+
+.steamdb-navbar > li > a {
+	display: block;
+	color: #fff;
+	padding: 14px 12px;
+	font-size: 14px;
+}
+
+.steamdb-navbar > li > a:hover {
+	color: #999;
+}
+
+.steamdb-brand svg {
+	display: inline-block;
+	vertical-align: text-top;
+	fill: currentColor;
+}
+
+.steamdb-navbar > .steamdb-brand > a {
+	line-height: 0;
+	padding: 9px 14px;
+}
+
 @media screen and (max-width: 720px) {
 	.container {
 		width: 100%;
@@ -281,6 +321,10 @@ noscript {
 		padding: 0;
 	}
 
+	.steamdb-navbar {
+		overflow-x: scroll;
+	}
+
 	.title {
 		display: block;
 		margin-bottom: 0;
@@ -304,21 +348,6 @@ noscript {
 	} 20% {
 		transform: scaleY(1.0);
 	}
-}
-
-::-webkit-scrollbar {
-	width: 10px;
-	height: 10px;
-}
-
-::-webkit-scrollbar-thumb:vertical {
-	height: 50px;
-	background-color: rgba(255, 255, 255, .2);
-	border-radius: 100px;
-}
-
-::-webkit-scrollbar-thumb:hover:vertical {
-	background-color: rgba(255, 255, 255, .7);
 }
 
 @keyframes status-changed {
