@@ -126,7 +126,8 @@
 					if (!element) {
 						// eslint-disable-next-line no-console
 						console.error('Missing DOM element for', service);
-						return;
+						// eslint-disable-next-line no-continue
+						continue;
 					}
 
 					const className = `status ${this.statuses[status]}`;
