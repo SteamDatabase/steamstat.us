@@ -32,7 +32,7 @@
 			"src": "static/logos/192px_maskable.png",
 			"sizes": "295x295",
 			"type": "image/png",
-			"maskable": "any"
+			"purpose": "maskable"
 		}
 	]
 }
