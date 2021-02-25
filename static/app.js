@@ -12,6 +12,7 @@
 			this.cmsStatus = document.getElementById('cms');
 			this.cmsStatusHover = document.getElementById('cms-hover');
 			this.chartHoveredIndex = -1;
+			this.chartNodePositions = new Array();
 			this.graph = null;
 
 			if (window.location.search.length > 0 || window.location.hash.length > 0) {
@@ -188,9 +189,13 @@
 
 			ctx.moveTo(-50, height);
 
+			this.chartNodePositions = new Array();
 			for (const point of this.graph.data) {
 				const val = 2 * (point / 100 - 0.5);
-				ctx.lineTo(i * gap, (-val * paddedHeight) / 2 + halfHeight);
+				const x = i * gap;
+				const y = (-val * paddedHeight) / 2 + halfHeight;
+				ctx.lineTo(x, y);
+				this.chartNodePositions.push([x, y]);
 				i += 1;
 			}
 
@@ -223,6 +228,18 @@
 			}
 
 			this.chartHoveredIndex = index;
+
+			if (this.chartNodePositions.hasOwnProperty(index)) {
+				const ctx = this.canvas.getContext('2d');
+				ctx.strokeStyle = '#5d91df';
+				ctx.lineWidth = 1.5 * devicePixelRatio;
+
+				const position = this.chartNodePositions[index];
+
+				ctx.beginPath();
+				ctx.arc(position[0], position[1], gap, 0, Math.PI * 2);
+				ctx.stroke();
+			}
 
 			const date = new Date(this.graph.start + (this.graph.step * index)).toLocaleString('en-US', {
 				month: 'short',
