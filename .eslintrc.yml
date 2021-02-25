@@ -7,3 +7,4 @@ rules:
   class-methods-use-this: off
   indent: [error, tab]
   no-tabs: off
+  no-restricted-syntax: off

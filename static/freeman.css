@@ -244,7 +244,21 @@ noscript {
 }
 
 #cms-graph {
-	height: 150px;
+	padding: 0;
+	position: relative;
+}
+
+#cms-graph canvas {
+	display: block;
+	height: 100px;
+	width: 100%;
+}
+
+#cms-graph-label {
+	position: absolute;
+	bottom: 1px;
+	left: 0;
+	font-size: 10px;
 }
 
 /* Header */

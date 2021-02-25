@@ -9,7 +9,7 @@
 	<title>Steam Status · Is Steam Down?</title>
 
 	<link rel="preconnect" href="https://crowbar.steamstat.us" crossorigin>
-	<link rel="stylesheet" href="static/freeman.css?_=1601984820">
+	<link rel="stylesheet" href="static/freeman.css?_=1614267540">
 
 	<meta property="twitter:card" content="summary">
 	<meta property="twitter:site" content="@SteamStatus">
@@ -113,7 +113,10 @@
 					<span class="status" id="cms">…</span>
 				</div>
 
-				<div class="service sep" id="cms-graph">Loading graph…</div>
+				<div class="service sep" id="cms-graph">
+					<canvas id="js-cms-chart"></canvas>
+					<span id="cms-graph-label">% of online CMs last three days</span>
+				</div>
 
 				<div class="service">
 					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/tf2.jpg"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/440/graphs/" title="Team Fortress 2">TF2</a> Game Coordinator </span>
@@ -305,8 +308,7 @@
 		</div>
 	</footer>
 
-	<script src="static/highstock.js?_=1602076920"></script>
-	<script src="static/app.js?_=1600586280"></script>
+	<script src="static/app.js?_=1614267540"></script>
 	<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 </html>

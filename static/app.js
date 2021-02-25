@@ -119,7 +119,6 @@
 					}
 				}
 
-				// eslint-disable-next-line no-restricted-syntax
 				for (const [service, status, title] of response.services) {
 					const element = document.getElementById(service);
 
@@ -150,18 +149,8 @@
 
 				this.previousOnline = response.online;
 
-				if (response.graph && this.highcharts) {
-					if (this.highcharts.series.length > 0) {
-						this.highcharts.series[0].remove();
-					}
-
-					this.highcharts.addSeries({
-						color: '#4384D8',
-						name: 'Online CMs',
-						pointStart: response.graph.start,
-						pointInterval: response.graph.step,
-						data: response.graph.data,
-					});
+				if (response.graph) {
+					this.DrawChart(response.graph.data);
 				}
 
 				this.Tick();
@@ -170,118 +159,45 @@
 			}
 		}
 
-		RenderChart() {
-			const graph = document.getElementById('cms-graph');
+		DrawChart(data) {
+			const canvas = document.getElementById('js-cms-chart');
+			const rect = canvas.getBoundingClientRect();
 
-			if (!('Highcharts' in window)) {
-				graph.textContent = 'Failed to load Highcharts.';
+			const width = rect.width * devicePixelRatio;
+			const height = rect.height * devicePixelRatio;
 
-				return;
+			const gap = width / (data.length - 1);
+			const ctx = canvas.getContext('2d');
+
+			canvas.width = width;
+			canvas.height = height;
+
+			ctx.beginPath();
+
+			let i = 0;
+			const paddedHeight = height * 0.95;
+			const halfHeight = height / 2;
+
+			ctx.moveTo(-50, height);
+
+			for (const point of data) {
+				const val = 2 * (point / 100 - 0.5);
+				ctx.lineTo(i * gap, (-val * paddedHeight) / 2 + halfHeight);
+				i += 1;
 			}
 
-			this.highcharts = new window.Highcharts.Chart(
-				{
-					global:
-					{
-						useUTC: false,
-					},
-					plotOptions:
-					{
-						series:
-						{
-							animation: false,
-						},
-					},
-					chart:
-					{
-						renderTo: graph,
-						animation: false,
-						backgroundColor: 'transparent',
-						spacing: [5, 0, 0, 0],
-						style: {
-							fontFamily: 'inherit',
-						},
-					},
-					title:
-					{
-						text: null,
-					},
-					credits:
-					{
-						enabled: false,
-					},
-					exporting:
-					{
-						enabled: false,
-					},
-					rangeSelector:
-					{
-						enabled: false,
-					},
-					scrollbar:
-					{
-						enabled: false,
-					},
-					navigator:
-					{
-						enabled: false,
-					},
-					tooltip:
-					{
-						shared: true,
-						split: false,
-						shadow: false,
-						borderWidth: 0,
-						borderRadius: 0,
-						style:
-						{
-							color: '#FFF',
-						},
-						backgroundColor: 'rgba(27, 27, 36, .8)',
-						pointFormat: '<br><span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}%</b>',
-					},
-					legend:
-					{
-						enabled: false,
-					},
-					xAxis:
-					{
-						type: 'datetime',
-						labels:
-						{
-							style:
-							{
-								color: '#9E9E9E',
-							},
-						},
-						lineWidth: 0,
-						tickWidth: 0,
-					},
-					yAxis:
-					{
-						gridLineColor: '#282936',
-						title:
-						{
-							enabled: false,
-						},
-						labels:
-						{
-							format: '{value}%',
-							style:
-							{
-								color: '#9E9E9E',
-							},
-						},
-						showLastLabel: true,
-						tickPositions: [0, 25, 50, 75, 100],
-						min: 0,
-						max: 100,
-						allowDecimals: false,
-						startOnTick: false,
-						endOnTick: false,
-					},
-				},
-			);
+			const grd = ctx.createLinearGradient(0, 0, 0, height);
+			grd.addColorStop(0, 'rgba(93, 145, 223, .2)');
+			grd.addColorStop(1, 'transparent');
+
+			ctx.lineTo(width + 50, height);
+			ctx.save();
+			ctx.fillStyle = grd;
+			ctx.strokeStyle = '#5d91df';
+			ctx.lineWidth = 1.5 * devicePixelRatio;
+			ctx.fill();
+			ctx.stroke();
+			ctx.restore();
 		}
 
 		HandleNotifications() {
@@ -351,7 +267,6 @@
 	}
 
 	const status = new SteamStatus();
-	status.RenderChart();
 	status.Tick();
 	status.RemoveNoscript();
 	status.HandleNotifications();
