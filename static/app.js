@@ -8,10 +8,18 @@
 			this.loader = document.getElementById('loader');
 			this.psa_element = document.getElementById('psa');
 			this.time_element = document.getElementById('js-refresh');
+			this.canvas = document.getElementById('js-cms-chart');
+			this.cmsStatus = document.getElementById('cms');
+			this.cmsStatusHover = document.getElementById('cms-hover');
+			this.chartHoveredIndex = -1;
+			this.graph = null;
 
 			if (window.location.search.length > 0 || window.location.hash.length > 0) {
 				window.history.replaceState(null, '', window.location.origin);
 			}
+
+			this.canvas.addEventListener('mousemove', this.ChartPointerMove.bind(this), { passive: true });
+			this.canvas.addEventListener('mouseleave', this.ChartPointerLeave.bind(this), { passive: true });
 		}
 
 		ShowError(text) {
@@ -150,27 +158,27 @@
 				this.previousOnline = response.online;
 
 				if (response.graph) {
-					this.DrawChart(response.graph.data);
+					this.graph = response.graph;
+					this.DrawChart();
 				}
 
 				this.Tick();
 			} catch (error) {
 				this.ShowError(error.message);
+				console.error(error); // eslint-disable-line no-console
 			}
 		}
 
-		DrawChart(data) {
-			const canvas = document.getElementById('js-cms-chart');
-			const rect = canvas.getBoundingClientRect();
-
+		DrawChart() {
+			const rect = this.canvas.getBoundingClientRect();
 			const width = rect.width * devicePixelRatio;
 			const height = rect.height * devicePixelRatio;
 
-			const gap = width / (data.length - 1);
-			const ctx = canvas.getContext('2d');
+			const gap = width / (this.graph.data.length - 1);
+			const ctx = this.canvas.getContext('2d');
 
-			canvas.width = width;
-			canvas.height = height;
+			this.canvas.width = width;
+			this.canvas.height = height;
 
 			ctx.beginPath();
 
@@ -180,7 +188,7 @@
 
 			ctx.moveTo(-50, height);
 
-			for (const point of data) {
+			for (const point of this.graph.data) {
 				const val = 2 * (point / 100 - 0.5);
 				ctx.lineTo(i * gap, (-val * paddedHeight) / 2 + halfHeight);
 				i += 1;
@@ -198,6 +206,39 @@
 			ctx.fill();
 			ctx.stroke();
 			ctx.restore();
+		}
+
+		ChartPointerMove(e) {
+			const gap = this.canvas.offsetWidth / (this.graph.data.length - 1);
+			const x = e.offsetX - (gap / 2);
+			const index = Math.ceil(x / gap);
+
+			if (this.chartHoveredIndex === index) {
+				return;
+			}
+
+			if (this.chartHoveredIndex === -1) {
+				this.cmsStatus.hidden = true;
+				this.cmsStatusHover.hidden = false;
+			}
+
+			this.chartHoveredIndex = index;
+
+			const date = new Date(this.graph.start + (this.graph.step * index)).toLocaleString('en-US', {
+				month: 'short',
+				day: 'numeric',
+				hour: 'numeric',
+				minute: 'numeric',
+				hour12: false,
+			});
+
+			this.cmsStatusHover.textContent = `${this.graph.data[index]}% at ${date}`;
+		}
+
+		ChartPointerLeave() {
+			this.chartHoveredIndex = -1;
+			this.cmsStatusHover.hidden = true;
+			this.cmsStatus.hidden = false;
 		}
 
 		HandleNotifications() {

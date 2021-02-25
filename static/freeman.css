@@ -32,6 +32,7 @@ body {
 	background: #1B1B24;
 	font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	font-size: 16px;
+	font-variant-numeric: tabular-nums;
 }
 
 img {
@@ -239,10 +240,6 @@ noscript {
 	animation: status-changed 1s;
 }
 
-#js-refresh {
-	font-variant-numeric: tabular-nums;
-}
-
 #cms-graph {
 	padding: 0;
 	position: relative;
@@ -259,6 +256,12 @@ noscript {
 	bottom: 1px;
 	left: 0;
 	font-size: 10px;
+	transition: opacity 200ms;
+	pointer-events: none;
+}
+
+#cms-graph:hover #cms-graph-label {
+	opacity: 0;
 }
 
 /* Header */
