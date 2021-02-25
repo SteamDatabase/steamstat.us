@@ -183,6 +183,8 @@
 			ctx.beginPath();
 
 			let i = 0;
+			let circleX = null;
+			let circleY = null;
 			const paddedHeight = height * 0.95;
 			const halfHeight = height / 2;
 
@@ -190,7 +192,15 @@
 
 			for (const point of this.graph.data) {
 				const val = 2 * (point / 100 - 0.5);
-				ctx.lineTo(i * gap, (-val * paddedHeight) / 2 + halfHeight);
+				const x = i * gap;
+				const y = (-val * paddedHeight) / 2 + halfHeight;
+				ctx.lineTo(x, y);
+
+				if (this.chartHoveredIndex === i) {
+					circleX = x;
+					circleY = y;
+				}
+
 				i += 1;
 			}
 
@@ -199,13 +209,18 @@
 			grd.addColorStop(1, 'transparent');
 
 			ctx.lineTo(width + 50, height);
-			ctx.save();
 			ctx.fillStyle = grd;
 			ctx.strokeStyle = '#5d91df';
 			ctx.lineWidth = 1.5 * devicePixelRatio;
 			ctx.fill();
 			ctx.stroke();
-			ctx.restore();
+
+			if (circleX !== null) {
+				ctx.beginPath();
+				ctx.fillStyle = '#fff';
+				ctx.arc(circleX, circleY, 3 * devicePixelRatio, 0, Math.PI * 2);
+				ctx.fill();
+			}
 		}
 
 		ChartPointerMove(e) {
@@ -223,6 +238,7 @@
 			}
 
 			this.chartHoveredIndex = index;
+			this.DrawChart();
 
 			const date = new Date(this.graph.start + (this.graph.step * index)).toLocaleString('en-US', {
 				month: 'short',
@@ -239,6 +255,7 @@
 			this.chartHoveredIndex = -1;
 			this.cmsStatusHover.hidden = true;
 			this.cmsStatus.hidden = false;
+			this.DrawChart();
 		}
 
 		HandleNotifications() {
