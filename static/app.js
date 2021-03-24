@@ -224,6 +224,10 @@
 		}
 
 		ChartPointerMove(e) {
+			if (this.graph === null) {
+				return;
+			}
+
 			const gap = this.canvas.offsetWidth / (this.graph.data.length - 1);
 			const x = e.offsetX - (gap / 2);
 			const index = Math.ceil(x / gap);
@@ -252,6 +256,10 @@
 		}
 
 		ChartPointerLeave() {
+			if (this.graph === null) {
+				return;
+			}
+
 			this.chartHoveredIndex = -1;
 			this.cmsStatusHover.hidden = true;
 			this.cmsStatus.hidden = false;
