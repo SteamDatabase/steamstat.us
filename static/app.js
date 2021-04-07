@@ -249,7 +249,7 @@
 				day: 'numeric',
 				hour: 'numeric',
 				minute: 'numeric',
-				hour12: false,
+				hourCycle: 'h23',
 			});
 
 			this.cmsStatusHover.textContent = `${this.graph.data[index]}% at ${date}`;
