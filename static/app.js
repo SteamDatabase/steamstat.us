@@ -31,8 +31,9 @@
 		RefreshData() {
 			this.loader.removeAttribute('hidden');
 
+			const pleaseDoNotUseThis = 'not_an_api.json';
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'https://crowbar.steamstat.us/gravity.json', true);
+			xhr.open('GET', `https://vortigaunt.steamstat.us/${pleaseDoNotUseThis}`, true);
 			xhr.onreadystatechange = () => this.LoadData(xhr);
 			xhr.ontimeout = () => this.ShowError('Request timed out. Is your network working?');
 			xhr.timeout = 20000;
