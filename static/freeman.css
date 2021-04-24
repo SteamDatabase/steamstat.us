@@ -308,6 +308,7 @@ noscript {
 .steamdb-navbar > .steamdb-brand > a {
 	line-height: 0;
 	padding: 9px 14px;
+	padding-right: 0;
 }
 
 @media screen and (max-width: 720px) {
