@@ -18,7 +18,9 @@ html {
 	box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
 	box-sizing: inherit;
 }
 
@@ -28,8 +30,8 @@ html {
 
 body {
 	margin: 0;
-	color: #8A8DB7;
-	background: #1B1B24;
+	color: #8a8db7;
+	background: #1b1b24;
 	font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-variant-numeric: tabular-nums;
@@ -81,11 +83,11 @@ footer .community {
 
 .title {
 	display: inline;
-	color: #FFF;
+	color: #fff;
 	line-height: 1;
 	font-size: 1.5em;
 	font-weight: 700;
-	margin-right: .5em;
+	margin-right: 0.5em;
 }
 
 .services-title {
@@ -101,7 +103,7 @@ footer .community {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 28px;
-	color: #FFC107;
+	color: #ffc107;
 }
 
 a {
@@ -174,7 +176,7 @@ noscript {
 
 #psa,
 noscript {
-	color: #FFF;
+	color: #fff;
 	background-color: #1566b7;
 	padding: 1em;
 	margin-bottom: 1em;
@@ -185,12 +187,12 @@ noscript {
 }
 
 #psa a {
-	color: #FFF;
+	color: #fff;
 	text-decoration: underline;
 }
 
 #psa a:hover {
-	color: #F5F7FA;
+	color: #f5f7fa;
 	text-decoration: none;
 }
 
@@ -235,11 +237,11 @@ noscript {
 }
 
 .minor {
-	color: #26C6DA;
+	color: #26c6da;
 }
 
 .major {
-	color: #FFC107;
+	color: #ffc107;
 }
 
 .status-changed {
@@ -355,20 +357,19 @@ noscript {
 
 @media screen and (max-width: 400px) {
 	.service {
-		font-size: .9em;
+		font-size: 0.9em;
 	}
 }
 
-@-webkit-keyframes stretch {
-	0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
-	20% { -webkit-transform: scaleY(1.0) }
-}
-
 @keyframes stretch {
-	0%, 40%, 100% {
+	0%,
+	40%,
+	100% {
 		transform: scaleY(0.4);
-	} 20% {
-		transform: scaleY(1.0);
+	}
+
+	20% {
+		transform: scaleY(1);
 	}
 }
 

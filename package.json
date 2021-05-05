@@ -1,11 +1,13 @@
 {
 	"private": true,
 	"scripts": {
-		"test": "eslint static/app.js"
+		"test": "eslint static/app.js && stylelint static/freeman.css"
 	},
 	"devDependencies": {
 		"eslint": "^7.9.0",
 		"eslint-config-airbnb-base": "^14.0.0",
-		"eslint-plugin-import": "^2.20.0"
+		"eslint-plugin-import": "^2.20.0",
+		"stylelint": "^13.13.1",
+		"stylelint-config-standard": "^22.0.0"
 	}
 }
