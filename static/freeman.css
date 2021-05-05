@@ -115,6 +115,47 @@ a:hover {
 	text-decoration: underline;
 }
 
+/* Header */
+.steamdb {
+	width: 100%;
+	background-color: #000;
+}
+
+.steamdb-navbar {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.steamdb-navbar > li {
+	flex-shrink: 0;
+}
+
+.steamdb-navbar > li > a {
+	display: block;
+	color: #fff;
+	padding: 14px 12px;
+	font-size: 14px;
+}
+
+.steamdb-navbar > .steamdb-brand > a {
+	line-height: 0;
+	padding: 9px 14px;
+	padding-right: 0;
+}
+
+.steamdb-navbar > li > a:hover {
+	color: #999;
+}
+
+.steamdb-brand svg {
+	display: inline-block;
+	vertical-align: text-top;
+	fill: currentColor;
+}
+
 .services,
 #psa,
 noscript {
@@ -207,6 +248,10 @@ noscript {
 	justify-content: space-between;
 }
 
+#js-enable-notification {
+	margin-right: 15px;
+}
+
 #js-enable-notification:hover,
 #js-twitter-follow:hover {
 	color: #fff;
@@ -222,10 +267,6 @@ noscript {
 #js-twitter-follow svg {
 	fill: currentColor;
 	vertical-align: -4px;
-}
-
-#js-enable-notification {
-	margin-right: 15px;
 }
 
 .services .sep {
@@ -270,47 +311,6 @@ noscript {
 
 #cms-graph:hover #cms-graph-label {
 	opacity: 0;
-}
-
-/* Header */
-.steamdb {
-	width: 100%;
-	background-color: #000;
-}
-
-.steamdb-navbar {
-	display: flex;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-}
-
-.steamdb-navbar > li {
-	flex-shrink: 0;
-}
-
-.steamdb-navbar > li > a {
-	display: block;
-	color: #fff;
-	padding: 14px 12px;
-	font-size: 14px;
-}
-
-.steamdb-navbar > li > a:hover {
-	color: #999;
-}
-
-.steamdb-brand svg {
-	display: inline-block;
-	vertical-align: text-top;
-	fill: currentColor;
-}
-
-.steamdb-navbar > .steamdb-brand > a {
-	line-height: 0;
-	padding: 9px 14px;
-	padding-right: 0;
 }
 
 @media screen and (max-width: 720px) {
