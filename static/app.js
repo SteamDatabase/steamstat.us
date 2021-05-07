@@ -37,6 +37,7 @@
 			xhr.onreadystatechange = () => this.LoadData(xhr);
 			xhr.ontimeout = () => this.ShowError('Request timed out. Is your network working?');
 			xhr.timeout = 20000;
+			xhr.withCredentials = true;
 			xhr.send();
 		}
 
