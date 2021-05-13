@@ -313,6 +313,27 @@ noscript {
 	opacity: 0;
 }
 
+@media screen and (max-width: 1200px) {
+	.steamdb-navbar {
+		overflow-x: scroll;
+	}
+}
+
+@media screen and (max-width: 950px) {
+	header {
+		flex-direction: column;
+	}
+
+	header .title-contain,
+	header .links {
+		padding: 0;
+	}
+
+	header .links {
+		margin-top: 1em;
+	}
+}
+
 @media screen and (max-width: 720px) {
 	.container {
 		width: 100%;
@@ -332,21 +353,6 @@ noscript {
 
 	header {
 		margin-top: 0;
-		flex-direction: column;
-	}
-
-	header .links a {
-		display: block;
-		margin-top: 1em;
-	}
-
-	header .title-contain,
-	header .links {
-		padding: 0;
-	}
-
-	.steamdb-navbar {
-		overflow-x: scroll;
 	}
 
 	.title {
@@ -356,6 +362,15 @@ noscript {
 }
 
 @media screen and (max-width: 400px) {
+	header .links {
+		margin-top: 0;
+	}
+
+	header .links a {
+		margin-top: 1em;
+		display: block;
+	}
+
 	.service {
 		font-size: 0.9em;
 	}
