@@ -252,6 +252,10 @@ noscript {
 	justify-content: space-between;
 }
 
+.service .status {
+	text-align: right;
+}
+
 #js-enable-notification {
 	margin-right: 15px;
 }
