@@ -173,6 +173,7 @@ noscript {
 .services-container {
 	display: flex;
 	justify-content: space-between;
+	align-items: flex-start;
 }
 
 .services {
@@ -182,8 +183,11 @@ noscript {
 .regions {
 	display: grid;
 	grid-template-columns: 50% 25% 25%;
-	grid-template-rows: repeat(auto-fill, 24px);
-	padding: 8px 12px;
+	padding: 0 12px;
+}
+
+.regions:last-child {
+	padding-bottom: 8px;
 }
 
 .regions-title {
@@ -192,6 +196,13 @@ noscript {
 	padding: 8px 12px;
 	display: grid;
 	grid-template-columns: 50% 25% 25%;
+}
+
+.region-name {
+	font-weight: 700;
+	margin: 0 12px;
+	margin-top: 8px;
+	border-bottom: 1px solid #282936;
 }
 
 .regions .muted {
@@ -204,9 +215,11 @@ noscript {
 	vertical-align: middle;
 }
 
-.regions .name > svg + .muted {
+.region-colo {
 	font-family: monospace;
 	font-size: 14px;
+	text-transform: uppercase;
+	color: #009688;
 }
 
 .regions span {
