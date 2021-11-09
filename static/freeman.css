@@ -67,7 +67,6 @@ header .links {
 }
 
 footer {
-	margin-top: auto;
 	margin: 20px 0;
 	padding: 13px;
 	line-height: 1.5;
@@ -267,22 +266,15 @@ noscript {
 	text-align: right;
 }
 
-#js-enable-notification {
-	margin-right: 15px;
-}
-
-#js-enable-notification:hover,
 #js-twitter-follow:hover {
 	color: #fff;
 	text-decoration: none;
 }
 
-#js-enable-notification:hover span,
 #js-twitter-follow:hover span {
 	text-decoration: underline;
 }
 
-#js-enable-notification svg,
 #js-twitter-follow svg {
 	fill: currentColor;
 	vertical-align: -4px;
@@ -341,6 +333,7 @@ noscript {
 @media screen and (max-width: 950px) {
 	header {
 		flex-direction: column;
+		margin-top: 0;
 	}
 
 	header .title-contain,
@@ -366,10 +359,6 @@ noscript {
 
 	.services + .services {
 		margin-top: 1em;
-	}
-
-	header {
-		margin-top: 0;
 	}
 
 	.title {

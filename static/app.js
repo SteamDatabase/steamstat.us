@@ -2,9 +2,8 @@
 	class SteamStatus {
 		constructor() {
 			this.statuses = ['good', 'minor', 'major'];
-			this.hasServiceWorker = false;
+			this.firstLoad = true;
 			this.secondsToUpdate = 0;
-			this.previousOnline = 146;
 			this.loader = document.getElementById('loader');
 			this.psa_element = document.getElementById('psa');
 			this.time_element = document.getElementById('js-refresh');
@@ -109,26 +108,6 @@
 					this.psa_element.setAttribute('hidden', '');
 				}
 
-				if (this.previousOnline < 75 && response.online >= 75 && 'Notification' in window) {
-					if (window.Notification.permission === 'granted') {
-						const notifTitle = 'Steam is back online';
-						const notifData =						{
-							lang: 'en',
-							icon: '/static/logos/192px.png',
-							body: `${response.online}% of Steam servers are online, you could try logging in now.`,
-						};
-
-						if (this.hasServiceWorker) {
-							navigator.serviceWorker.ready.then((registration) => {
-								registration.showNotification(notifTitle, notifData);
-							});
-						} else {
-							const notification = new window.Notification(notifTitle, notifData);
-							notification.onclick = () => notification.close();
-						}
-					}
-				}
-
 				for (const [service, status, title] of response.services) {
 					const element = document.getElementById(service);
 
@@ -141,15 +120,15 @@
 
 					const className = `status ${this.statuses[status]}`;
 
-					if (this.previousOnline === 146) {
+					if (this.firstLoad) {
 						// Initial page load
 						element.className = className;
 					} else if (element.className !== className) {
 						element.className = `${className} status-changed`;
 
-						setTimeout(() => {
+						element.addEventListener('animationend', () => {
 							element.className = className;
-						}, 1000);
+						}, { once: true });
 					}
 
 					if (element.textContent !== title) {
@@ -157,7 +136,7 @@
 					}
 				}
 
-				this.previousOnline = response.online;
+				this.firstLoad = false;
 
 				if (response.graph) {
 					this.graph = response.graph;
@@ -268,33 +247,6 @@
 			this.DrawChart();
 		}
 
-		HandleNotifications() {
-			const button = document.getElementById('js-enable-notification');
-
-			if ('Notification' in window && window.Notification.permission === 'default') {
-				button.addEventListener('click', (e) => {
-					e.preventDefault();
-
-					window.Notification.requestPermission((notifResult) => {
-						if (notifResult === 'granted') {
-							button.setAttribute('hidden', '');
-						}
-					});
-				}, false);
-			} else {
-				button.setAttribute('hidden', '');
-			}
-
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('/service-worker.js', { scope: './' }).then(() => {
-					this.hasServiceWorker = true;
-				}).catch((e) => {
-					// eslint-disable-next-line no-console
-					console.error(e);
-				});
-			}
-		}
-
 		HandleFollowButton() {
 			const follow = document.getElementById('js-twitter-follow');
 			follow.addEventListener('click', (e) => {
@@ -320,6 +272,12 @@
 	const status = new SteamStatus();
 	status.Tick();
 	status.RemoveNoscript();
-	status.HandleNotifications();
 	status.HandleFollowButton();
+
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/service-worker.js', { scope: './' }).catch((e) => {
+			// eslint-disable-next-line no-console
+			console.error(e);
+		});
+	}
 }());
