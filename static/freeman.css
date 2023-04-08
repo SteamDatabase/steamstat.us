@@ -67,7 +67,6 @@ header .links {
 }
 
 footer {
-	margin: 20px 0;
 	padding: 13px;
 	line-height: 1.5;
 }
@@ -347,6 +346,10 @@ noscript {
 
 	header .links {
 		margin-top: 1em;
+	}
+
+	footer {
+		margin-bottom: 20px;
 	}
 
 	.container {
