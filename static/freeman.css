@@ -170,6 +170,10 @@ noscript {
 	line-height: 1.5;
 }
 
+.services + .services {
+	margin-top: 20px;
+}
+
 .services-container {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
