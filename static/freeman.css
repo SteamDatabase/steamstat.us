@@ -317,8 +317,8 @@ noscript {
 
 #cms-graph-label {
 	position: absolute;
-	bottom: 1px;
-	left: 0;
+	bottom: 2px;
+	left: 12px;
 	font-size: 10px;
 	transition: opacity 200ms;
 	pointer-events: none;
