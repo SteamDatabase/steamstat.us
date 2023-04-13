@@ -70,113 +70,82 @@
 		<div id="psa" hidden></div>
 
 		<div class="services-container">
-			<div class="left">
-				<div class="services">
-					<div class="sep services-title">
-						Steam Services
-						<span id="loader">Loading…</span>
-					</div>
-
-					<div class="service">
-						<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/app/753/charts/">Online on Steam</a> </span>
-						<span class="status" id="online">…</span>
-					</div>
-
-					<div class="service sep">
-						<span class="name">In-Game on Steam </span>
-						<span class="status" id="ingame">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name">Steam Store </span>
-						<span class="status" id="store">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name">Steam Community </span>
-						<span class="status" id="community">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name">Steam Web API </span>
-						<span class="status" id="webapi">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name">Steam Connection Managers </span>
-						<span class="status" id="cms">…</span>
-						<span class="status" id="cms-hover" hidden></span>
-					</div>
-
-					<div id="cms-graph">
-						<canvas id="js-cms-chart"></canvas>
-						<span id="cms-graph-label">% of online CMs last three days</span>
-					</div>
+			<div class="services">
+				<div class="sep services-title">
+					Steam Services
+					<span id="loader">Loading…</span>
 				</div>
 
-				<div class="services">
-					<div class="service">
-						<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Game Coordinator </span>
-						<span class="status" id="csgo">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Sessions Logon </span>
-						<span class="status" id="csgo_sessions">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Player Inventories </span>
-						<span class="status" id="csgo_community">…</span>
-					</div>
-
-					<div class="service sep">
-						<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Matchmaking Scheduler </span>
-						<span class="status" id="csgo_mm_scheduler">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/dota2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/570/charts/">Dota 2</a> Game Coordinator </span>
-						<span class="status" id="dota2">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/tf2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/440/charts/" title="Team Fortress 2">TF2</a> Game Coordinator </span>
-						<span class="status" id="tf2">…</span>
-					</div>
-
+				<div class="service">
+					<span class="name"><a rel="noopener" target="_blank" href="https://steamdb.info/app/753/charts/">Online on Steam</a> </span>
+					<span class="status" id="online">…</span>
 				</div>
 
-				<div class="services">
-					<div class="sep services-title">
-						SteamDB.info
-					</div>
-
-					<div class="service">
-						<span class="name">Backend Steam Bot </span>
-						<span class="status" id="bot">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name">Database </span>
-						<span class="status" id="database">…</span>
-					</div>
-
-					<div class="service">
-						<span class="name"><a href="/">SteamStat.us</a> Page Views</span>
-						<span class="status" id="pageviews">…</span>
-					</div>
+				<div class="service sep">
+					<span class="name">In-Game on Steam </span>
+					<span class="status" id="ingame">…</span>
 				</div>
 
-				<footer>
-					<p>A <a rel="noopener" target="_blank" href="https://steamdb.info/">SteamDB</a> project by <a rel="noopener author" target="_blank" href="https://xpaw.me">xPaw</a> <small><a href="https://twitter.com/thexpaw">(follow me on twitter)</a></small></p>
-					<p>CM monitoring initially created by <a rel="noopener" target="_blank" href="https://github.com/VoiDeD">VoiDeD</a>.</p>
-					<p class="community not-valve">This is an unofficial website and is not affiliated with Valve or Steam.</p>
-					<p class="community">Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.</p>
-				</footer>
+				<div class="service">
+					<span class="name">Steam Store </span>
+					<span class="status" id="store">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name">Steam Community </span>
+					<span class="status" id="community">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name">Steam Web API </span>
+					<span class="status" id="webapi">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name">Steam Connection Managers </span>
+					<span class="status" id="cms">…</span>
+					<span class="status" id="cms-hover" hidden></span>
+				</div>
+
+				<div id="cms-graph">
+					<canvas id="js-cms-chart"></canvas>
+					<span id="cms-graph-label">% of online CMs last three days</span>
+				</div>
 			</div>
 
 			<div class="services">
+				<div class="service">
+					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Game Coordinator </span>
+					<span class="status" id="csgo">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Sessions Logon </span>
+					<span class="status" id="csgo_sessions">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Player Inventories </span>
+					<span class="status" id="csgo_community">…</span>
+				</div>
+
+				<div class="service sep">
+					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/cs2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/730/charts/">CS</a> Matchmaking Scheduler </span>
+					<span class="status" id="csgo_mm_scheduler">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/dota2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/570/charts/">Dota 2</a> Game Coordinator </span>
+					<span class="status" id="dota2">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name"><img class="game-icon" alt="" width="20" height="20" src="static/icons/tf2.png"> <a rel="noopener" target="_blank" href="https://steamdb.info/app/440/charts/" title="Team Fortress 2">TF2</a> Game Coordinator </span>
+					<span class="status" id="tf2">…</span>
+				</div>
+			</div>
+
+			<div class="services services-right">
 				<div class="sep regions-title">
 					<span>Region</span>
 					<span title="Steam Connection Managers"><img class="game-icon" alt="Steam" width="24" height="24" src="static/icons/steam.png"> CM</span>
@@ -443,6 +412,34 @@
 					<span class="status" id="csgo_australia">…</span>
 				</div>
 			</div>
+
+			<div class="services">
+				<div class="sep services-title">
+					SteamDB.info
+				</div>
+
+				<div class="service">
+					<span class="name">Backend Steam Bot </span>
+					<span class="status" id="bot">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name">Database </span>
+					<span class="status" id="database">…</span>
+				</div>
+
+				<div class="service">
+					<span class="name"><a href="/">SteamStat.us</a> Page Views</span>
+					<span class="status" id="pageviews">…</span>
+				</div>
+			</div>
+
+			<footer>
+				<p>A <a rel="noopener" target="_blank" href="https://steamdb.info/">SteamDB</a> project by <a rel="noopener author" target="_blank" href="https://xpaw.me">xPaw</a> <small><a href="https://twitter.com/thexpaw">(follow me on twitter)</a></small></p>
+				<p>CM monitoring initially created by <a rel="noopener" target="_blank" href="https://github.com/VoiDeD">VoiDeD</a>.</p>
+				<p class="community not-valve">This is an unofficial website and is not affiliated with Valve or Steam.</p>
+				<p class="community">Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.</p>
+			</footer>
 		</div>
 	</div>
 
