@@ -1,7 +1,7 @@
 /
 	Cross-Origin-Opener-Policy: same-origin
 	Cross-Origin-Embedder-Policy: require-corp
-	Content-Security-Policy: block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' https:; connect-src https://vortigaunt.steamstat.us https://cloudflareinsights.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://static.cloudflareinsights.com; font-src 'self'; manifest-src 'self'; worker-src 'self';
+	Content-Security-Policy: block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' https:; connect-src 'self' https://vortigaunt.steamstat.us https://cloudflareinsights.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://static.cloudflareinsights.com; font-src 'self'; manifest-src 'self'; worker-src 'self';
 	Referrer-Policy: strict-origin
 	X-Frame-Options: DENY
 
