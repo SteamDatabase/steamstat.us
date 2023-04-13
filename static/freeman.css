@@ -161,6 +161,7 @@ a:hover {
 
 .services,
 #psa,
+footer,
 noscript {
 	position: relative;
 	border: 1px solid #282936;
@@ -169,6 +170,7 @@ noscript {
 	line-height: 1.5;
 }
 
+footer,
 .services + .services {
 	margin-top: 20px;
 }
@@ -376,7 +378,26 @@ noscript {
 
 	.title {
 		display: block;
-		margin-bottom: 0;
+		margin-right: 0;
+		margin-bottom: 4px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.container {
+		padding: 0;
+	}
+
+	header,
+	footer {
+		margin-left: 1em;
+		margin-right: 1em
+	}
+
+	#psa,
+	.services {
+		border: 0;
+		border-radius: 0;
 	}
 }
 
@@ -391,7 +412,7 @@ noscript {
 	}
 
 	.service {
-		font-size: 0.9em;
+		font-size: 14px;
 	}
 }
 
