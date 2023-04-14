@@ -199,6 +199,10 @@ noscript {
 	padding: 8px 12px;
 	display: grid;
 	grid-template-columns: 50% 25% 25%;
+	position: sticky;
+	top: 0;
+	background: #1b1b24;
+	z-index: 1;
 }
 
 .region-name {
