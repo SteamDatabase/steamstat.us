@@ -67,16 +67,11 @@ header .links {
 }
 
 footer {
-	padding: 13px;
-	line-height: 1.5;
+	padding: 12px;
 }
 
 footer p {
 	margin: 0;
-}
-
-footer .not-valve {
-	margin-top: 15px;
 }
 
 footer .community {
@@ -179,7 +174,7 @@ noscript {
 }
 
 .services-right {
-	grid-row: 1 / 5;
+	grid-row: 1 / 4;
 	grid-column: 2;
 }
 
@@ -276,18 +271,22 @@ noscript {
 	text-align: right;
 }
 
-#js-twitter-follow:hover {
+.links > a:hover {
 	color: #fff;
 	text-decoration: none;
 }
 
-#js-twitter-follow:hover span {
+.links > a:hover span {
 	text-decoration: underline;
 }
 
-#js-twitter-follow svg {
+.links > a > svg {
 	fill: currentColor;
 	vertical-align: -4px;
+}
+
+.links > a + a {
+	margin-left: 15px;
 }
 
 .services .sep {
@@ -310,18 +309,18 @@ noscript {
 	animation: status-changed 1s;
 }
 
-#cms-graph {
+.chart {
 	padding: 0;
 	position: relative;
 }
 
-#cms-graph canvas {
+.chart canvas {
 	display: block;
 	height: 100px;
 	width: 100%;
 }
 
-#cms-graph-label {
+.chart .chart-label {
 	position: absolute;
 	bottom: 2px;
 	left: 12px;
@@ -330,8 +329,13 @@ noscript {
 	pointer-events: none;
 }
 
-#cms-graph:hover #cms-graph-label {
+.chart:hover .chart-label {
 	opacity: 0;
+}
+
+.chart #js-pageviews-chart + .chart-label {
+	bottom: unset;
+	top: 2px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -353,10 +357,6 @@ noscript {
 
 	header .links {
 		margin-top: 1em;
-	}
-
-	footer {
-		margin-bottom: 20px;
 	}
 
 	.container {
@@ -393,7 +393,7 @@ noscript {
 	header,
 	footer {
 		margin-left: 1em;
-		margin-right: 1em
+		margin-right: 1em;
 	}
 
 	#psa,
@@ -404,15 +404,6 @@ noscript {
 }
 
 @media screen and (max-width: 400px) {
-	header .links {
-		margin-top: 0;
-	}
-
-	header .links a {
-		margin-top: 1em;
-		display: block;
-	}
-
 	.service {
 		font-size: 14px;
 	}

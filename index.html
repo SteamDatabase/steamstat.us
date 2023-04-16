@@ -9,7 +9,8 @@
 	<title>Steam Status · Is Steam Down?</title>
 
 	<link rel="preconnect" href="https://vortigaunt.steamstat.us" crossorigin>
-	<link rel="stylesheet" href="static/freeman.css?_=1681458120">
+	<link rel="stylesheet" href="static/freeman.css?_=1681669380">
+	<script src="static/app.js?_=1681669380" defer></script>
 
 	<meta property="twitter:card" content="summary">
 	<meta property="twitter:site" content="@SteamStatus">
@@ -43,7 +44,6 @@
 				<li><a href="https://steamdb.info/patchnotes/">Patch notes</a></li>
 				<li><a href="https://steamdb.info/upcoming/">Upcoming</a></li>
 				<li><a href="https://steamdb.info/donate/">Donate</a></li>
-				<li><a href="https://steamdb.info/discord/">Discord</a></li>
 				<li><a href="https://steamdb.info/sales/history/">When is next Steam sale?</a></li>
 			</ul>
 		</div>
@@ -56,11 +56,17 @@
 				Refreshing in <span id="js-refresh">00</span> seconds
 			</div>
 			<div class="links">
-				<a href="https://twitter.com/intent/follow?screen_name=SteamStatus" id="js-twitter-follow">
-					<svg viewBox="0 0 32 32" height="20" width="20">
+				<a rel="noopener" target="_blank" href="https://discord.com/invite/steamdb">
+					<svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+						<path fill="currentColor" d="M13.54 2.9a13.2 13.2 0 00-3.25-1c-.02 0-.04 0-.05.02-.15.25-.3.58-.41.83a12.18 12.18 0 00-3.66 0 8.4 8.4 0 00-.41-.83.05.05 0 00-.05-.02 13.16 13.16 0 00-3.28 1.03 13.5 13.5 0 00-2.34 9.14c1.37 1 2.7 1.61 4 2.02.01 0 .04 0 .05-.02.3-.42.58-.86.82-1.33a.05.05 0 00-.03-.07 8.76 8.76 0 01-1.25-.6.05.05 0 010-.08l.24-.2a.05.05 0 01.05 0 9.46 9.46 0 008.05 0h.05l.25.2c.03.02.02.07 0 .09-.4.23-.82.43-1.26.59a.05.05 0 00-.02.07c.24.47.51.91.81 1.33.02.02.04.03.06.02a13.23 13.23 0 004.02-2.06 13.41 13.41 0 00-2.39-9.12zm-8.2 7.31c-.78 0-1.43-.72-1.43-1.6 0-.9.64-1.62 1.44-1.62.8 0 1.45.73 1.43 1.61 0 .89-.63 1.61-1.43 1.61zm5.32 0c-.79 0-1.43-.72-1.43-1.6 0-.9.63-1.62 1.43-1.62.81 0 1.45.73 1.44 1.61 0 .89-.63 1.61-1.44 1.61z"></path>
+					</svg>
+					<span>Discord</span>
+				</a>
+				<a rel="noopener" target="_blank" href="https://twitter.com/intent/follow?screen_name=SteamStatus">
+					<svg viewBox="0 0 32 32" height="20" width="20" aria-hidden="true">
 						<path d="M31.993 6.077c-1.177.523-2.44.876-3.77 1.033 1.355-.812 2.396-2.098 2.887-3.63-1.27.75-2.673 1.3-4.168 1.592C25.744 3.797 24.038 3 22.15 3c-3.626 0-6.563 2.938-6.563 6.563 0 .514.057 1.016.17 1.496C10.3 10.784 5.464 8.17 2.226 4.2c-.564.97-.888 2.098-.888 3.3 0 2.28 1.158 4.287 2.918 5.465-1.075-.035-2.087-.33-2.972-.82v.08c0 3.182 2.26 5.835 5.264 6.438-.55.15-1.13.23-1.73.23-.423 0-.833-.04-1.233-.117.834 2.606 3.26 4.504 6.13 4.558-2.245 1.76-5.075 2.81-8.15 2.81-.53 0-1.053-.03-1.566-.09C2.906 27.913 6.356 29 10.063 29c12.072 0 18.675-10 18.675-18.675 0-.284-.008-.568-.02-.85 1.283-.925 2.395-2.08 3.276-3.398z"></path>
 					</svg>
-					<span>Follow @SteamStatus</span>
+					<span>@SteamStatus</span>
 				</a>
 			</div>
 		</header>
@@ -107,9 +113,9 @@
 					<span class="status" id="cms-hover" hidden></span>
 				</div>
 
-				<div id="cms-graph">
+				<div class="chart">
 					<canvas id="js-cms-chart"></canvas>
-					<span id="cms-graph-label">% of online CMs last three days</span>
+					<span class="chart-label">% of online CMs last three days</span>
 				</div>
 			</div>
 
@@ -431,18 +437,24 @@
 				<div class="service">
 					<span class="name"><a href="/">SteamStat.us</a> Page Views</span>
 					<span class="status" id="pageviews">…</span>
+					<span class="status" id="pageviews-hover" hidden></span>
+				</div>
+
+				<div class="chart">
+					<canvas id="js-pageviews-chart"></canvas>
+					<span class="chart-label">% relative page views last 36 hours</span>
 				</div>
 			</div>
 
 			<footer>
 				<p>A <a rel="noopener" target="_blank" href="https://steamdb.info/">SteamDB</a> project by <a rel="noopener author" target="_blank" href="https://xpaw.me">xPaw</a> <small><a href="https://twitter.com/thexpaw">(follow me on twitter)</a></small></p>
 				<p>CM monitoring initially created by <a rel="noopener" target="_blank" href="https://github.com/VoiDeD">VoiDeD</a>.</p>
+			</footer>
+			<footer>
 				<p class="community not-valve">This is an unofficial website and is not affiliated with Valve or Steam.</p>
 				<p class="community">Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.</p>
 			</footer>
 		</div>
 	</div>
-
-	<script src="static/app.js?_=1636492140"></script>
 </body>
 </html>

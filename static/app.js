@@ -7,18 +7,33 @@
 			this.loader = document.getElementById('loader');
 			this.psa_element = document.getElementById('psa');
 			this.time_element = document.getElementById('js-refresh');
-			this.canvas = document.getElementById('js-cms-chart');
-			this.cmsStatus = document.getElementById('cms');
-			this.cmsStatusHover = document.getElementById('cms-hover');
-			this.chartHoveredIndex = -1;
-			this.graph = null;
 
 			if (window.location.search.length > 0 || window.location.hash.length > 0) {
 				window.history.replaceState(null, '', window.location.origin);
 			}
 
-			this.canvas.addEventListener('mousemove', this.ChartPointerMove.bind(this), { passive: true });
-			this.canvas.addEventListener('mouseleave', this.ChartPointerLeave.bind(this), { passive: true });
+			this.charts = [
+				{
+					canvas: document.getElementById('js-cms-chart'),
+					status: document.getElementById('cms'),
+					statusHover: document.getElementById('cms-hover'),
+					hoveredIndex: -1,
+					graph: null,
+				},
+				{
+					canvas: document.getElementById('js-pageviews-chart'),
+					status: document.getElementById('pageviews'),
+					statusHover: document.getElementById('pageviews-hover'),
+					hoveredIndex: -1,
+					graph: null,
+				},
+			];
+
+			for (let i = 0; i < this.charts.length; i += 1) {
+				const { canvas } = this.charts[i];
+				canvas.addEventListener('mousemove', this.ChartPointerMove.bind(this, i), { passive: true });
+				canvas.addEventListener('mouseleave', this.ChartPointerLeave.bind(this, i), { passive: true });
+			}
 		}
 
 		ShowError(text) {
@@ -30,9 +45,14 @@
 		RefreshData() {
 			this.loader.removeAttribute('hidden');
 
-			const pleaseDoNotUseThis = 'not_an_api.json';
+			let pleaseDoNotUseThis = 'not_an_api.json';
+
+			if (window.location.hostname !== 'localhost') {
+				pleaseDoNotUseThis = `https://vortigaunt.steamstat.us/${pleaseDoNotUseThis}`;
+			}
+
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', `https://vortigaunt.steamstat.us/${pleaseDoNotUseThis}`, true);
+			xhr.open('GET', pleaseDoNotUseThis, true);
 			xhr.onreadystatechange = () => this.LoadData(xhr);
 			xhr.ontimeout = () => this.ShowError('Request timed out. Is your network working?');
 			xhr.timeout = 20000;
@@ -138,9 +158,14 @@
 
 				this.firstLoad = false;
 
-				if (response.graph) {
-					this.graph = response.graph;
-					this.DrawChart();
+				if (response.c_cms) {
+					this.charts[0].graph = response.c_cms;
+					this.DrawChart(0);
+				}
+
+				if (response.c_pv) {
+					this.charts[1].graph = response.c_pv;
+					this.DrawChart(1);
 				}
 
 				this.Tick();
@@ -150,16 +175,17 @@
 			}
 		}
 
-		DrawChart() {
-			const rect = this.canvas.getBoundingClientRect();
+		DrawChart(chartIndex) {
+			const { canvas, graph, hoveredIndex } = this.charts[chartIndex];
+			const rect = canvas.getBoundingClientRect();
 			const width = rect.width * devicePixelRatio;
 			const height = rect.height * devicePixelRatio;
 
-			const gap = width / (this.graph.data.length - 1);
-			const ctx = this.canvas.getContext('2d');
+			const gap = width / (graph.data.length - 1);
+			const ctx = canvas.getContext('2d');
 
-			this.canvas.width = width;
-			this.canvas.height = height;
+			canvas.width = width;
+			canvas.height = height;
 
 			ctx.beginPath();
 
@@ -171,13 +197,13 @@
 
 			ctx.moveTo(-50, height);
 
-			for (const point of this.graph.data) {
+			for (const point of graph.data) {
 				const val = 2 * (point / 100 - 0.5);
 				const x = i * gap;
 				const y = (-val * paddedHeight) / 2 + halfHeight;
 				ctx.lineTo(x, y);
 
-				if (this.chartHoveredIndex === i) {
+				if (hoveredIndex === i) {
 					circleX = x;
 					circleY = y;
 				}
@@ -204,28 +230,30 @@
 			}
 		}
 
-		ChartPointerMove(e) {
-			if (this.graph === null) {
+		ChartPointerMove(chartIndex, e) {
+			const chart = this.charts[chartIndex];
+
+			if (chart.graph === null) {
 				return;
 			}
 
-			const gap = this.canvas.offsetWidth / (this.graph.data.length - 1);
+			const gap = chart.canvas.offsetWidth / (chart.graph.data.length - 1);
 			const x = e.offsetX - (gap / 2);
 			const index = Math.ceil(x / gap);
 
-			if (this.chartHoveredIndex === index) {
+			if (chart.hoveredIndex === index) {
 				return;
 			}
 
-			if (this.chartHoveredIndex === -1) {
-				this.cmsStatus.hidden = true;
-				this.cmsStatusHover.hidden = false;
+			if (chart.hoveredIndex === -1) {
+				chart.status.hidden = true;
+				chart.statusHover.hidden = false;
 			}
 
-			this.chartHoveredIndex = index;
-			this.DrawChart();
+			this.charts[chartIndex].hoveredIndex = index;
+			this.DrawChart(chartIndex);
 
-			const date = new Date(this.graph.start + (this.graph.step * index)).toLocaleString('en-US', {
+			const date = new Date((chart.graph.start * 1000) + (chart.graph.step * 1000 * index)).toLocaleString('en-US', {
 				month: 'short',
 				day: 'numeric',
 				hour: 'numeric',
@@ -233,35 +261,22 @@
 				hourCycle: 'h23',
 			});
 
-			this.cmsStatusHover.textContent = `${this.graph.data[index]}% at ${date}`;
+			chart.statusHover.textContent = `${chart.graph.data[index]}% at ${date}`;
 		}
 
-		ChartPointerLeave() {
-			if (this.graph === null) {
+		ChartPointerLeave(chartIndex) {
+			if (this.charts[chartIndex].graph === null) {
 				return;
 			}
 
-			this.chartHoveredIndex = -1;
-			this.cmsStatusHover.hidden = true;
-			this.cmsStatus.hidden = false;
-			this.DrawChart();
-		}
-
-		HandleFollowButton() {
-			const follow = document.getElementById('js-twitter-follow');
-			follow.addEventListener('click', (e) => {
-				const left = Math.round(window.screen.width / 2 - 250);
-				const top = Math.round(window.screen.height / 2 - 300);
-
-				window.open(follow.href, undefined, `scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=500,height=600,left=${left},top=${top}`);
-
-				e.preventDefault();
-				e.stopPropagation();
-			});
+			this.charts[chartIndex].hoveredIndex = -1;
+			this.charts[chartIndex].statusHover.hidden = true;
+			this.charts[chartIndex].status.hidden = false;
+			this.DrawChart(chartIndex);
 		}
 
 		RemoveNoscript() {
-			const element = document.getElementsByTagName('noscript')[0];
+			const element = document.querySelector('noscript');
 
 			if (element) {
 				element.parentNode.removeChild(element);
@@ -272,7 +287,6 @@
 	const status = new SteamStatus();
 	status.Tick();
 	status.RemoveNoscript();
-	status.HandleFollowButton();
 
 	if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('/service-worker.js', { scope: './' }).catch((e) => {
