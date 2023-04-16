@@ -1,17 +1,26 @@
 @font-face {
-	font-family: 'Inter';
+	font-family: Inter;
 	font-style: normal;
 	font-weight: 400;
-	font-display: swap;
+	font-display: fallback;
 	src: url("fonts/Inter-Regular.woff2?v=3.18") format("woff2");
 }
 
 @font-face {
-	font-family: 'Inter';
+	font-family: Inter;
 	font-style: normal;
 	font-weight: 700;
-	font-display: swap;
+	font-display: fallback;
 	src: url("fonts/Inter-Bold.woff2?v=3.18") format("woff2");
+}
+
+@font-face {
+	font-family: fallback-inter;
+	ascent-override: 90.20%;
+	descent-override: 22.48%;
+	line-gap-override: 0.00%;
+	size-adjust: 107.40%;
+	src: local("Arial");
 }
 
 html {
@@ -32,7 +41,7 @@ body {
 	margin: 0;
 	color: #a0a3c5;
 	background: #1b1b24;
-	font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-family: Inter, fallback-inter, system-ui, sans-serif;
 	font-size: 16px;
 	font-variant-numeric: tabular-nums;
 }
@@ -43,7 +52,7 @@ img {
 
 hr {
 	border: none;
-	border-top: 1px solid rgba(255, 255, 255, 0.4);
+	border-top: 1px solid rgb(255 255 255 / 40%);
 }
 
 .container {
@@ -151,7 +160,7 @@ a:hover {
 .steamdb-brand svg {
 	display: inline-block;
 	vertical-align: text-top;
-	fill: currentColor;
+	fill: currentcolor;
 }
 
 .services,
@@ -281,7 +290,7 @@ noscript {
 }
 
 .links > a > svg {
-	fill: currentColor;
+	fill: currentcolor;
 	vertical-align: -4px;
 }
 
@@ -439,7 +448,7 @@ noscript {
 	width: 12px;
 	height: 12px;
 	margin-right: 2px;
-	background: currentColor;
+	background: currentcolor;
 }
 
 .minor::before {
