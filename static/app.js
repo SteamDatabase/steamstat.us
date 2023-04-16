@@ -187,15 +187,22 @@
 			canvas.width = width;
 			canvas.height = height;
 
+			ctx.reset();
+
+			// Draw gradient
+			const grd = ctx.createLinearGradient(0, 0, 0, height);
+			grd.addColorStop(0, 'rgba(93, 145, 223, .2)');
+			grd.addColorStop(1, 'transparent');
+
+			ctx.fillStyle = grd;
+
 			ctx.beginPath();
 
 			let i = 0;
-			let circleX = null;
-			let circleY = null;
 			const paddedHeight = height * 0.95;
 			const halfHeight = height / 2;
 
-			ctx.moveTo(-50, height);
+			ctx.moveTo(0, height);
 
 			for (const point of graph.data) {
 				const val = 2 * (point / 100 - 0.5);
@@ -203,23 +210,52 @@
 				const y = (-val * paddedHeight) / 2 + halfHeight;
 				ctx.lineTo(x, y);
 
+				i += 1;
+			}
+
+			ctx.lineTo(width, height);
+			ctx.fill();
+
+			ctx.beginPath();
+
+			// Draw line
+			ctx.strokeStyle = '#5d91df';
+			ctx.lineWidth = 2 * devicePixelRatio;
+
+			let circleX = null;
+			let circleY = null;
+			i = 0;
+
+			for (const point of graph.data) {
+				const val = 2 * (point / 100 - 0.5);
+				const x = i * gap;
+				const y = (-val * paddedHeight) / 2 + halfHeight;
+
+				if (i === 0) {
+					ctx.moveTo(x, y);
+				} else {
+					ctx.lineTo(x, y);
+				}
+
 				if (hoveredIndex === i) {
 					circleX = x;
 					circleY = y;
 				}
 
 				i += 1;
+
+				// Page views chart, last point is partial so draw dashed line
+				if (chartIndex === 1 && graph.data.length === i + 1) {
+					ctx.stroke();
+
+					ctx.beginPath();
+
+					ctx.setLineDash([5 * devicePixelRatio, 3 * devicePixelRatio]);
+					ctx.strokeStyle = '#4f5061';
+					ctx.moveTo(x, y);
+				}
 			}
 
-			const grd = ctx.createLinearGradient(0, 0, 0, height);
-			grd.addColorStop(0, 'rgba(93, 145, 223, .2)');
-			grd.addColorStop(1, 'transparent');
-
-			ctx.lineTo(width + 50, height);
-			ctx.fillStyle = grd;
-			ctx.strokeStyle = '#5d91df';
-			ctx.lineWidth = 1.5 * devicePixelRatio;
-			ctx.fill();
 			ctx.stroke();
 
 			if (circleX !== null) {
