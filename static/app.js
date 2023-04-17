@@ -184,10 +184,9 @@
 			const gap = width / (graph.data.length - 1);
 			const ctx = canvas.getContext('2d');
 
+			// Setting size clears the canvas
 			canvas.width = width;
 			canvas.height = height;
-
-			ctx.reset();
 
 			// Draw gradient
 			const grd = ctx.createLinearGradient(0, 0, 0, height);
