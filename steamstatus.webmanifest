@@ -1,6 +1,7 @@
 {
 	"name": "Steam Status",
 	"short_name": "Steam Status",
+	"description": "Is Steam Down? Current status of the Steam services.",
 	"start_url": "https://steamstat.us/",
 	"display": "standalone",
 	"orientation": "any",
