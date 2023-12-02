@@ -6,4 +6,5 @@
 	X-Frame-Options: DENY
 
 /static/*
+	Cache-Control: max-age=2628000, public
 	Cross-Origin-Resource-Policy: same-origin
