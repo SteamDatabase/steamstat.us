@@ -11,6 +11,7 @@
 	Cross-Origin-Resource-Policy: same-origin
 
 /static/logos/*
+	! Cross-Origin-Resource-Policy
 	Cross-Origin-Resource-Policy: cross-origin
 
 /steamstatus.webmanifest
