@@ -1,17 +1,9 @@
 @font-face {
 	font-family: Inter;
 	font-style: normal;
-	font-weight: 400;
-	font-display: fallback;
-	src: url("fonts/Inter-Regular.woff2?v=3.18") format("woff2");
-}
-
-@font-face {
-	font-family: Inter;
-	font-style: normal;
-	font-weight: 700;
-	font-display: fallback;
-	src: url("fonts/Inter-Bold.woff2?v=3.18") format("woff2");
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("fonts/InterVariable.woff2?v=4.0") format("woff2");
 }
 
 @font-face {
@@ -44,6 +36,7 @@ body {
 	font-family: Inter, fallback-inter, system-ui, sans-serif;
 	font-size: 16px;
 	font-variant-numeric: tabular-nums;
+	font-optical-sizing: auto;
 }
 
 img {
