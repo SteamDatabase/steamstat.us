@@ -17,6 +17,7 @@
 
 html {
 	box-sizing: border-box;
+	scrollbar-gutter: stable;
 }
 
 *,
