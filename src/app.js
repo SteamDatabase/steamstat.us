@@ -47,7 +47,7 @@
 
 			let pleaseDoNotUseThis = 'not_an_api.json';
 
-			if (window.location.hostname !== 'localhost') {
+			if (window.location.hostname !== '127.0.0.1') {
 				pleaseDoNotUseThis = `https://vortigaunt.steamstat.us/${pleaseDoNotUseThis}`;
 			}
 

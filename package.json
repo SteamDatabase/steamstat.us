@@ -1,12 +1,17 @@
 {
 	"private": true,
 	"scripts": {
-		"test": "eslint static/app.js && stylelint static/freeman.css"
+		"build": "node build.mjs",
+		"dev": "node build.mjs --dev",
+		"test": "eslint src/app.js && stylelint src/freeman.css"
 	},
 	"devDependencies": {
+		"@chialab/esbuild-plugin-html": "^0.18.2",
+		"esbuild": "^0.21.3",
 		"eslint": "^8.38.0",
 		"eslint-config-airbnb-base": "^15.0.0",
-		"stylelint": "^15.5.0",
-		"stylelint-config-standard": "^33.0.0"
+		"htmlnano": "^2.1.1",
+		"stylelint": "^16.5.0",
+		"stylelint-config-standard": "^36.0.0"
 	}
 }

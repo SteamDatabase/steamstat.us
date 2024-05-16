@@ -171,8 +171,7 @@ noscript {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: min-content min-content 1fr;
-	column-gap: 20px;
-	row-gap: 20px;
+	gap: 20px 20px;
 	margin-bottom: 30px;
 }
 
@@ -368,7 +367,6 @@ noscript {
 
 	.steamdb > .container {
 		padding: 0;
-		-webkit-mask-image: linear-gradient(270deg, transparent, #000 54px);
 		mask-image: linear-gradient(270deg, transparent, #000 40px);
 	}
 
