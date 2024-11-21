@@ -65,10 +65,6 @@ header .title-contain {
 	padding-left: 13px;
 }
 
-header .links {
-	padding-right: 13px;
-}
-
 footer {
 	padding: 12px;
 }
@@ -276,24 +272,6 @@ noscript {
 	text-align: right;
 }
 
-.links > a:hover {
-	color: #fff;
-	text-decoration: none;
-}
-
-.links > a:hover span {
-	text-decoration: underline;
-}
-
-.links > a > svg {
-	fill: currentcolor;
-	vertical-align: -4px;
-}
-
-.links > a + a {
-	margin-left: 15px;
-}
-
 .services .sep {
 	border-bottom: 1px solid #282936;
 }
@@ -355,13 +333,8 @@ noscript {
 		margin-top: 0;
 	}
 
-	header .title-contain,
-	header .links {
+	header .title-contain {
 		padding: 0;
-	}
-
-	header .links {
-		margin-top: 1em;
 	}
 
 	.container {
