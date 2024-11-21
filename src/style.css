@@ -368,7 +368,18 @@ noscript {
 		padding: 0;
 	}
 
-	header,
+	header {
+		margin: 0;
+		margin-bottom: 1em;
+		padding: 12px;
+		background: #000;
+		border-top: 1px solid #1b1b24;
+
+		.title {
+			margin-top: 0;
+		}
+	}
+
 	footer {
 		margin-left: 1em;
 		margin-right: 1em;
