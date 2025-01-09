@@ -36,7 +36,6 @@ body {
 	background: #1b1b24;
 	font-family: Inter, fallback-inter, system-ui, sans-serif;
 	font-size: 16px;
-	font-variant-numeric: tabular-nums;
 	font-optical-sizing: auto;
 }
 
@@ -63,6 +62,10 @@ header {
 
 header .title-contain {
 	padding-left: 13px;
+}
+
+#js-refresh {
+	font-variant-numeric: tabular-nums;
 }
 
 footer {
