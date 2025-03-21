@@ -28,9 +28,16 @@ let secondsToUpdate = 0;
 const loader = document.getElementById('loader')!;
 const psaElement = document.getElementById('psa')!;
 const timeElement = document.getElementById('js-refresh')!;
+const statusIdsOnPage = new Set<string>();
 
 if (window.location.search.length > 0 || window.location.hash.length > 0) {
 	window.history.replaceState(null, '', window.location.origin);
+}
+
+for (const el of document.querySelectorAll('.status')) {
+	if (el.id && el.id !== 'cms-hover' && el.id !== 'pageviews-hover') {
+		statusIdsOnPage.add(el.id);
+	}
 }
 
 const charts: ChartDefinition[] = [
@@ -158,15 +165,17 @@ function LoadData(xhr: XMLHttpRequest) {
 			psaElement.setAttribute('hidden', '');
 		}
 
+		const missingServices = new Set(statusIdsOnPage);
+
 		for (const [service, status, title] of response.services) {
 			const element = document.getElementById(service);
 
 			if (!element) {
-				// eslint-disable-next-line no-console
 				console.error('Missing DOM element for', service);
-				// eslint-disable-next-line no-continue
 				continue;
 			}
+
+			missingServices.delete(service);
 
 			const className = `status ${statuses[status]}`;
 
@@ -184,6 +193,14 @@ function LoadData(xhr: XMLHttpRequest) {
 			if (element.textContent !== title) {
 				element.textContent = title;
 			}
+		}
+
+		for (const service of missingServices) {
+			console.error('Unused DOM element for', service);
+
+			const element = document.getElementById(service)!;
+			element.className = 'status major';
+			element.textContent = 'Removed';
 		}
 
 		firstLoad = false;
