@@ -13,7 +13,7 @@ The CS regions and service status come from Valve's
 Unfortunately this API is not available for other games.
 
 Backend automatically creates status keys for new regions, such as `cs_china_beijing`,
-but they need to be manually added to [index.html](index.html) to be actually displayed.
+but they need to be manually added to [index.html](src/index.html) to be actually displayed.
 
 #### Flags
 
