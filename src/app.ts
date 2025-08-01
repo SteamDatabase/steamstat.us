@@ -2,6 +2,7 @@
 
 interface ApiResponse {
 	psa: string | null
+	sale: string | null
 	time: number
 	services: [string, 0 | 1 | 2, string][]
 	c_cms: ChartData
@@ -27,6 +28,7 @@ let firstLoad = true;
 let secondsToUpdate = 0;
 const loader = document.getElementById('loader')!;
 const psaElement = document.getElementById('psa')!;
+const saleNameElement = document.getElementById('js-sale-name')!;
 const timeElement = document.getElementById('js-refresh')!;
 const statusIdsOnPage = new Set<string>();
 
@@ -137,12 +139,14 @@ function LoadData(xhr: XMLHttpRequest) {
 		}
 
 		const response = JSON.parse(responseText) as ApiResponse;
-		let psa = response.psa || '';
+		let psa = response.psa;
 		const timeDiff = Math.abs(Date.now() / 1000 - response.time);
 
 		if (timeDiff > 300) {
 			if (psa) {
 				psa += '<hr>';
+			} else {
+				psa = '';
 			}
 
 			psa += `Data appears to be ${Math.round(timeDiff / 60)} minutes old.`;
@@ -163,6 +167,19 @@ function LoadData(xhr: XMLHttpRequest) {
 		} else if (!psaElement.hasAttribute('hidden')) {
 			psaElement.innerHTML = '';
 			psaElement.setAttribute('hidden', '');
+		}
+
+		if (response.sale) {
+			if (!saleNameElement.classList.contains('has-sale')) {
+				saleNameElement.classList.add('has-sale');
+			}
+
+			if (saleNameElement.textContent !== response.sale) {
+				saleNameElement.textContent = response.sale;
+			}
+		} else if (saleNameElement.classList.contains('has-sale')) {
+			saleNameElement.textContent = 'Sales & Deals';
+			saleNameElement.classList.remove('has-sale');
 		}
 
 		const missingServices = new Set(statusIdsOnPage);

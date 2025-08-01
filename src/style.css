@@ -138,6 +138,21 @@ a:hover {
 	color: #fff;
 	padding: 14px 12px;
 	font-size: 14px;
+
+	&.has-sale {
+		color: #ffc107;
+
+		&::after {
+			display: inline-block;
+			content: "";
+			background-color: currentcolor;
+			border-radius: 50%;
+			width: 6px;
+			height: 6px;
+			margin-left: 4px;
+			vertical-align: middle;
+		}
+	}
 }
 
 .steamdb-navbar > .steamdb-brand > a {
