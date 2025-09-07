@@ -119,27 +119,51 @@ a:hover {
 .steamdb {
 	width: 100%;
 	background-color: #000;
-}
+	height: 48px;
 
-.steamdb-navbar {
-	display: flex;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-}
+	.container {
+		height: 100%;
+	}
 
-.steamdb-navbar > li {
-	flex-shrink: 0;
-}
+	nav {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
 
-.steamdb-navbar > li > a {
-	display: block;
-	color: #fff;
-	padding: 14px 12px;
-	font-size: 14px;
+	a {
+		font-size: 14px;
+		line-height: 20px;
+		color: #fff;
+		padding: 0 10px;
+		white-space: nowrap;
 
-	&.has-sale {
+		&:hover {
+			color: #66c0f4;
+		}
+	}
+
+	.steamdb-brand {
+		display: flex;
+		align-items: center;
+		font-weight: bold;
+		font-size: 16px;
+		fill: currentcolor;
+
+		span {
+			margin-left: 6px;
+		}
+
+		@media screen and (max-width: 950px) {
+			padding-left: 0;
+		}
+
+		@media screen and (max-width: 600px) {
+			padding-left: 12px;
+		}
+	}
+
+	a.has-sale {
 		color: #ffc107;
 
 		&::after {
@@ -153,22 +177,13 @@ a:hover {
 			vertical-align: middle;
 		}
 	}
-}
 
-.steamdb-navbar > .steamdb-brand > a {
-	line-height: 0;
-	padding: 9px 14px;
-	padding-right: 0;
-}
-
-.steamdb-navbar > li > a:hover {
-	color: #999;
-}
-
-.steamdb-brand svg {
-	display: inline-block;
-	vertical-align: text-top;
-	fill: currentcolor;
+	@media screen and (max-width: 950px) {
+		.container {
+			overflow-x: scroll;
+			mask-image: linear-gradient(270deg, transparent, #000 40px);
+		}
+	}
 }
 
 .services,
@@ -340,12 +355,6 @@ noscript {
 	top: 2px;
 }
 
-@media screen and (max-width: 1200px) {
-	.steamdb-navbar {
-		overflow-x: scroll;
-	}
-}
-
 @media screen and (max-width: 950px) {
 	header {
 		flex-direction: column;
@@ -358,11 +367,6 @@ noscript {
 
 	.container {
 		width: 100%;
-	}
-
-	.steamdb > .container {
-		padding: 0;
-		mask-image: linear-gradient(270deg, transparent, #000 40px);
 	}
 
 	.services-container {
