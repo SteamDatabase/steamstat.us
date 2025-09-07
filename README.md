@@ -28,3 +28,7 @@ Please do not attempt to use this endpoint in your own applications.
 
 If you need to monitor Steam services for your own projects, you should implement your own monitoring
 solution by directly accessing Steam services, rather than relying on third-party services like steamstat.us.
+
+#### CM Monitor
+
+The code for monitoring Steam connection manager servers is available at https://github.com/SteamDatabase/SteamMonitor
