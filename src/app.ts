@@ -86,16 +86,11 @@ function RefreshData() {
 
 	let pleaseDoNotUseThis = 'not_an_api.json';
 
-	if (window.location.hostname !== '127.0.0.1') {
-		pleaseDoNotUseThis = `https://vortigaunt.steamstat.us/${pleaseDoNotUseThis}`;
-	}
-
 	const xhr = new XMLHttpRequest();
 	xhr.open('GET', pleaseDoNotUseThis, true);
 	xhr.onreadystatechange = () => LoadData(xhr);
 	xhr.ontimeout = () => ShowError('Request timed out. Is your network working?');
 	xhr.timeout = 20000;
-	xhr.withCredentials = true;
 	xhr.send();
 }
 
