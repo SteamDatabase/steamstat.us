@@ -214,6 +214,7 @@ noscript {
 	position: sticky;
 	top: 0;
 	background: #1b1b24;
+	border-radius: 8px 8px 0 0;
 	z-index: 1;
 }
 
