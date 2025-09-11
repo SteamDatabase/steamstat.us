@@ -233,6 +233,11 @@ noscript {
 	z-index: 1;
 }
 
+.regions-title svg {
+	fill: currentColor;
+	vertical-align: sub;
+}
+
 .region-name {
 	font-weight: 700;
 	margin: 0 12px;
@@ -304,6 +309,11 @@ noscript {
 
 .service .status {
 	text-align: right;
+}
+
+.service svg {
+	fill: currentColor;
+	vertical-align: sub;
 }
 
 .services .sep {
