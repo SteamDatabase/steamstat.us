@@ -11,17 +11,12 @@ const saleNameElement = document.getElementById('js-sale-name')!;
 const timeElement = document.getElementById('js-refresh')!;
 const statusIdsOnPage = new Set<string>();
 
-declare var g_SteamStatusSSR: ApiResponse | undefined;
-
 if (window.location.search.length > 0 || window.location.hash.length > 0) {
 	window.history.replaceState(null, '', window.location.origin);
 }
 
-for (const el of document.querySelectorAll('.status')) {
-	// Also see worker.ts when modifying these ids
-	if (el.id && el.id !== 'cms-hover' && el.id !== 'pageviews-hover') {
-		statusIdsOnPage.add(el.id);
-	}
+for (const el of document.querySelectorAll('.status[id]')) {
+	statusIdsOnPage.add(el.id);
 }
 
 const charts: ChartDefinition[] = [

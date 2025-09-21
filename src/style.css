@@ -307,6 +307,8 @@ noscript {
 	justify-content: space-between;
 }
 
+#cms-hover,
+#pageviews-hover,
 .service .status {
 	text-align: right;
 }

@@ -33,7 +33,7 @@ export default class extends WorkerEntrypoint<Env> {
 				element(element) {
 					const serviceId = element.getAttribute('id');
 
-					if (!serviceId || serviceId === 'cms-hover' || serviceId === 'pageviews-hover') {
+					if (!serviceId) {
 						return;
 					}
 
