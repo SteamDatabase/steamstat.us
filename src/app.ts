@@ -1,27 +1,6 @@
 //! https://github.com/SteamDatabase/steamstat.us
 
-interface ApiResponse {
-	psa: string | null
-	sale: string | null
-	time: number
-	services: [string, 0 | 1 | 2, string][]
-	c_cms: ChartData
-	c_pv: ChartData
-}
-
-interface ChartData {
-	start: number
-	step: number
-	data: number[]
-}
-
-interface ChartDefinition {
-	canvas: HTMLCanvasElement
-	status: HTMLElement
-	statusHover: HTMLElement
-	hoveredIndex: number
-	graph: ChartData | null
-}
+import type { ApiResponse, ChartDefinition } from './types.js';
 
 const statuses = ['good', 'minor', 'major'];
 let firstLoad = true;
@@ -39,6 +18,7 @@ if (window.location.search.length > 0 || window.location.hash.length > 0) {
 }
 
 for (const el of document.querySelectorAll('.status')) {
+	// Also see worker.ts when modifying these ids
 	if (el.id && el.id !== 'cms-hover' && el.id !== 'pageviews-hover') {
 		statusIdsOnPage.add(el.id);
 	}
@@ -67,13 +47,15 @@ for (let i = 0; i < charts.length; i++) {
 	canvas.addEventListener('mouseleave', ChartPointerLeave.bind(this, i), { passive: true });
 }
 
-if (typeof g_SteamStatusSSR !== 'undefined') {
-	loader.setAttribute('hidden', '');
-	secondsToUpdate = 45;
-	ProcessApiResponse(g_SteamStatusSSR);
-	g_SteamStatusSSR = undefined;
-} else {
-	Tick();
+{
+	const ssrData = loader.getAttribute('data-ssr');
+	if (ssrData) {
+		const parsedData = JSON.parse(ssrData);
+		secondsToUpdate = 45;
+		ProcessApiResponse(parsedData);
+	} else {
+		Tick();
+	}
 }
 
 RemoveNoscript();
@@ -196,42 +178,44 @@ function ProcessApiResponse(response: ApiResponse) {
 			saleNameElement.classList.remove('has-sale');
 		}
 
-		const missingServices = new Set(statusIdsOnPage);
+		if (response.services) {
+			const missingServices = new Set(statusIdsOnPage);
 
-		for (const [service, status, title] of response.services) {
-			const element = document.getElementById(service);
+			for (const [service, status, title] of response.services) {
+				const element = document.getElementById(service);
 
-			if (!element) {
-				console.error('Missing DOM element for', service);
-				continue;
-			}
+				if (!element) {
+					console.error('Missing DOM element for', service);
+					continue;
+				}
 
-			missingServices.delete(service);
+				missingServices.delete(service);
 
-			const className = `status ${statuses[status]}`;
+				const className = `status ${statuses[status]}`;
 
-			if (firstLoad) {
-				// Initial page load
-				element.className = className;
-			} else if (element.className !== className) {
-				element.className = `${className} status-changed`;
-
-				element.addEventListener('animationend', () => {
+				if (firstLoad) {
+					// Initial page load
 					element.className = className;
-				}, { once: true });
+				} else if (element.className !== className) {
+					element.className = `${className} status-changed`;
+
+					element.addEventListener('animationend', () => {
+						element.className = className;
+					}, { once: true });
+				}
+
+				if (element.textContent !== title) {
+					element.textContent = title;
+				}
 			}
 
-			if (element.textContent !== title) {
-				element.textContent = title;
+			for (const service of missingServices) {
+				console.error('Unused DOM element for', service);
+
+				const element = document.getElementById(service)!;
+				element.className = 'status major';
+				element.textContent = 'Removed';
 			}
-		}
-
-		for (const service of missingServices) {
-			console.error('Unused DOM element for', service);
-
-			const element = document.getElementById(service)!;
-			element.className = 'status major';
-			element.textContent = 'Removed';
 		}
 
 		firstLoad = false;

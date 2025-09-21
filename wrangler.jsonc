@@ -2,6 +2,9 @@
 	"name": "steamstatus",
 	"compatibility_date": "2025-04-01",
 	"main": "./worker.ts",
+	"build": {
+		"command": "npm run build"
+	},
 	"assets": {
 		"binding": "ASSETS",
 		"directory": "./public/",
