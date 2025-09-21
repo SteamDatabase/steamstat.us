@@ -32,6 +32,8 @@ const saleNameElement = document.getElementById('js-sale-name')!;
 const timeElement = document.getElementById('js-refresh')!;
 const statusIdsOnPage = new Set<string>();
 
+declare var g_SteamStatusSSR: ApiResponse | undefined;
+
 if (window.location.search.length > 0 || window.location.hash.length > 0) {
 	window.history.replaceState(null, '', window.location.origin);
 }
@@ -65,7 +67,15 @@ for (let i = 0; i < charts.length; i++) {
 	canvas.addEventListener('mouseleave', ChartPointerLeave.bind(this, i), { passive: true });
 }
 
-Tick();
+if (typeof g_SteamStatusSSR !== 'undefined') {
+	loader.setAttribute('hidden', '');
+	secondsToUpdate = 45;
+	ProcessApiResponse(g_SteamStatusSSR);
+	g_SteamStatusSSR = undefined;
+} else {
+	Tick();
+}
+
 RemoveNoscript();
 
 if ('serviceWorker' in navigator) {
@@ -134,6 +144,15 @@ function LoadData(xhr: XMLHttpRequest) {
 		}
 
 		const response = JSON.parse(responseText) as ApiResponse;
+		ProcessApiResponse(response);
+	} catch (error: any) {
+		ShowError(error.message);
+		console.error(error); // eslint-disable-line no-console
+	}
+}
+
+function ProcessApiResponse(response: ApiResponse) {
+	try {
 		let psa = response.psa;
 		const timeDiff = Math.abs(Date.now() / 1000 - response.time);
 

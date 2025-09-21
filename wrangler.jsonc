@@ -3,16 +3,18 @@
 	"compatibility_date": "2025-04-01",
 	"main": "./worker.ts",
 	"assets": {
+		"binding": "ASSETS",
 		"directory": "./public/",
 		"not_found_handling": "404-page",
 		"run_worker_first": [
 			"/not_an_api.json",
+			"/",
 			"!/**/*"
 		]
 	},
 	"kv_namespaces": [
 		{
-			"binding": "STEAMSTATUS",
+			"binding": "KV_STATUS",
 			"id": "110b40c690a54a1c9d2aac6196f7c3a2"
 		}
 	]

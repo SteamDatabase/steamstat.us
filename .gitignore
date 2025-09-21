@@ -6,3 +6,4 @@ dist/
 public/static/*.js
 public/static/*.css
 public/index.html
+/.wrangler/
