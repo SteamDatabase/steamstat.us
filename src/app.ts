@@ -217,15 +217,19 @@ function ProcessApiResponse(response: ApiResponse) {
 
 		if (response.c_cms) {
 			charts[0].graph = response.c_cms;
-			DrawChart(0);
 		}
 
 		if (response.c_pv) {
 			charts[1].graph = response.c_pv;
-			DrawChart(1);
 		}
 
 		Tick();
+
+		requestAnimationFrame(() => {
+			for (let i = 0; i < charts.length; i++) {
+				DrawChart(i);
+			}
+		});
 	} catch (error: any) {
 		ShowError(error.message);
 		console.error(error); // eslint-disable-line no-console
@@ -348,7 +352,10 @@ function ChartPointerMove(chartIndex: number, eOriginal: Event) {
 	}
 
 	charts[chartIndex].hoveredIndex = index;
-	DrawChart(chartIndex);
+
+	requestAnimationFrame(() => {
+		DrawChart(chartIndex);
+	});
 
 	const date = new Date((chart.graph.start * 1000) + (chart.graph.step * 1000 * index)).toLocaleString('en-US', {
 		month: 'short',
@@ -369,7 +376,10 @@ function ChartPointerLeave(chartIndex: number) {
 	charts[chartIndex].hoveredIndex = -1;
 	charts[chartIndex].statusHover.hidden = true;
 	charts[chartIndex].status.hidden = false;
-	DrawChart(chartIndex);
+
+	requestAnimationFrame(() => {
+		DrawChart(chartIndex);
+	});
 }
 
 function RemoveNoscript() {
