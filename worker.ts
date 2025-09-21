@@ -24,6 +24,9 @@ export default class extends WorkerEntrypoint<Env> {
 			return htmlResponse;
 		}
 
+		// @ts-ignore
+		delete statusData.notice;
+
 		const scriptTag = `<script>window.g_SteamStatusSSR=${JSON.stringify(statusData)};</script>`;
 		let html = await htmlResponse.text();
 		html = html.replace('</body>', `${scriptTag}</body>`);
