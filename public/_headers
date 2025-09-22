@@ -5,6 +5,7 @@
 	Content-Security-Policy: block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' https:; connect-src 'self' https://cloudflareinsights.com; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; font-src 'self'; manifest-src 'self'; worker-src 'self';
 	Referrer-Policy: strict-origin
 	X-Frame-Options: DENY
+	Cache-Control: max-age=0, stale-if-error=86400
 
 /static/*
 	Cache-Control: max-age=2628000, public
@@ -15,4 +16,7 @@
 	Cross-Origin-Resource-Policy: cross-origin
 
 /steamstatus.webmanifest
+	Cache-Control: max-age=2628000, public
+
+/favicon.ico
 	Cache-Control: max-age=2628000, public

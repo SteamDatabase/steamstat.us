@@ -10,7 +10,11 @@ export default class extends WorkerEntrypoint<Env> {
 		}
 		else if (url.pathname === '/not_an_api.json') {
 			const value = await this.env.KV_STATUS.get<ApiResponse>('steamstatus', { type: 'json' });
-			return Response.json(value);
+			return Response.json(value, {
+				headers: {
+					'Cache-Control': 'no-store'
+				}
+			});
 		}
 
 		return new Response(null, { status: 404 });
