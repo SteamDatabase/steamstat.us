@@ -1,5 +1,6 @@
 /
 	! Access-Control-Allow-Origin
+	! ETag
 	Cross-Origin-Opener-Policy: same-origin
 	Cross-Origin-Embedder-Policy: require-corp
 	Content-Security-Policy: block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' https:; connect-src 'self' https://cloudflareinsights.com; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; font-src 'self'; manifest-src 'self'; worker-src 'self';
