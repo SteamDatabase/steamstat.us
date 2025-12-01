@@ -1,6 +1,4 @@
 node_modules
-yarn.lock
-package-lock.json
 not_an_api.json
 dist/
 public/static/*.js
