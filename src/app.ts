@@ -7,7 +7,7 @@ let firstLoad = true;
 let secondsToUpdate = 0;
 const loader = document.getElementById('loader')!;
 const psaElement = document.getElementById('psa')!;
-const saleNameElement = document.querySelector<HTMLAnchorElement>('.js-sale-name')!;
+const saleNameElement = document.querySelector<HTMLAnchorElement>('#js-sale-name')!;
 const timeElement = document.getElementById('js-refresh')!;
 const statusIdsOnPage = new Set<string>();
 
