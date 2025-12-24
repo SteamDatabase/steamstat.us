@@ -73,6 +73,7 @@ export default class extends WorkerEntrypoint<Env> {
 				element(element) {
 					if (statusData.sale) {
 						element.setAttribute('class', 'has-sale');
+						element.setAttribute('href', 'https://steamdb.info/sales/');
 						element.setInnerContent(statusData.sale);
 					}
 				}

@@ -7,7 +7,7 @@ let firstLoad = true;
 let secondsToUpdate = 0;
 const loader = document.getElementById('loader')!;
 const psaElement = document.getElementById('psa')!;
-const saleNameElement = document.getElementById('js-sale-name')!;
+const saleNameElement = document.querySelector<HTMLAnchorElement>('.js-sale-name')!;
 const timeElement = document.getElementById('js-refresh')!;
 const statusIdsOnPage = new Set<string>();
 
@@ -167,10 +167,12 @@ function ProcessApiResponse(response: ApiResponse) {
 
 			if (saleNameElement.textContent !== response.sale) {
 				saleNameElement.textContent = response.sale;
+				saleNameElement.href = 'https://steamdb.info/sales/';
 			}
 		} else if (saleNameElement.classList.contains('has-sale')) {
 			saleNameElement.textContent = 'Sales & Deals';
 			saleNameElement.classList.remove('has-sale');
+			saleNameElement.href = 'https://steamdb.info/sales/history/';
 		}
 
 		if (response.services) {
