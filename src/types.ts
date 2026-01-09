@@ -5,6 +5,7 @@ export interface ApiResponse {
 	services: [string, 0 | 1 | 2, string][]
 	c_cms: ChartData
 	c_pv: ChartData
+	c_users?: ChartData
 }
 
 export interface ChartData {

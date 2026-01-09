@@ -34,6 +34,13 @@ const charts: ChartDefinition[] = [
 		hoveredIndex: -1,
 		graph: null,
 	},
+	{
+		canvas: document.getElementById('js-online-chart') as HTMLCanvasElement,
+		status: document.getElementById('online')!,
+		statusHover: document.getElementById('online-hover')!,
+		hoveredIndex: -1,
+		graph: null,
+	},
 ];
 
 for (let i = 0; i < charts.length; i++) {
@@ -225,6 +232,10 @@ function ProcessApiResponse(response: ApiResponse) {
 			charts[1].graph = response.c_pv;
 		}
 
+		if (response.c_users) {
+			charts[2].graph = response.c_users;
+		}
+
 		Tick();
 
 		requestAnimationFrame(() => {
@@ -254,6 +265,19 @@ function DrawChart(chartIndex: number) {
 	canvas.width = width;
 	canvas.height = height;
 
+	let minVal = 0;
+	let maxVal = 100;
+
+	if (chartIndex === 2) {
+		minVal = Math.min(...graph.data);
+		maxVal = Math.max(...graph.data);
+	}
+
+	const range = Math.max(1, maxVal - minVal);
+	const normalize = chartIndex === 2
+		? (value: number) => (value - minVal) / range
+		: (value: number) => (value as number) / 100;
+
 	// Draw gradient
 	const grd = ctx.createLinearGradient(0, 0, 0, height);
 	grd.addColorStop(0, 'rgba(93, 145, 223, .2)');
@@ -271,7 +295,7 @@ function DrawChart(chartIndex: number) {
 	ctx.moveTo(0, height);
 
 	for (const point of graph.data) {
-		const val = 2 * (point / 100 - 0.5);
+		const val = 2 * (normalize(point) - 0.5);
 		const x = i * gap;
 		const y = (-val * paddedHeight) / 2 + halfHeight;
 		ctx.lineTo(x, y);
@@ -293,7 +317,7 @@ function DrawChart(chartIndex: number) {
 	i = 0;
 
 	for (const point of graph.data) {
-		const val = 2 * (point / 100 - 0.5);
+		const val = 2 * (normalize(point) - 0.5);
 		const x = i * gap;
 		const y = (-val * paddedHeight) / 2 + halfHeight;
 
@@ -353,7 +377,7 @@ function ChartPointerMove(chartIndex: number, eOriginal: Event) {
 		chart.statusHover.hidden = false;
 	}
 
-	charts[chartIndex].hoveredIndex = index;
+	chart.hoveredIndex = index;
 
 	requestAnimationFrame(() => {
 		DrawChart(chartIndex);
@@ -367,7 +391,12 @@ function ChartPointerMove(chartIndex: number, eOriginal: Event) {
 		hourCycle: 'h23',
 	});
 
-	chart.statusHover.textContent = `${chart.graph.data[index]}% at ${date}`;
+	// Online chart shows raw numbers
+	if (chartIndex === 2) {
+		chart.statusHover.textContent = `${chart.graph.data[index].toLocaleString()} at ${date}`;
+	} else {
+		chart.statusHover.textContent = `${chart.graph.data[index]}% at ${date}`;
+	}
 }
 
 function ChartPointerLeave(chartIndex: number) {
