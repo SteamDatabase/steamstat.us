@@ -178,6 +178,14 @@ a:hover {
 		}
 	}
 
+	.sponsor {
+		color: #c673ef;
+		margin-left: auto;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
 	@media screen and (max-width: 950px) {
 		.container {
 			overflow-x: scroll;
