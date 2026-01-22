@@ -8,9 +8,9 @@
 	"devDependencies": {
 		"@chialab/esbuild-plugin-html": "^0.19.0",
 		"esbuild": "^0.27.0",
-		"htmlnano": "^2.1.1",
-		"stylelint": "^16.5.0",
-		"stylelint-config-standard": "^39.0.0",
+		"htmlnano": "^2.1.5",
+		"stylelint": "^17.0.0",
+		"stylelint-config-standard": "^40.0.0",
 		"typescript": "^5.7.3",
 		"wrangler": "^4.34.0"
 	}
