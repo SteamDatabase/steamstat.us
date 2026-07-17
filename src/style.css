@@ -32,7 +32,7 @@ html {
 
 body {
 	margin: 0;
-	color: #a0a3c5;
+	color: #A1A4C5;
 	background: #1b1b24;
 	font-family: Inter, fallback-inter, system-ui, sans-serif;
 	font-size: 16px;
@@ -78,7 +78,7 @@ footer p {
 
 footer .community {
 	font-size: 14px;
-	color: #009688;
+	color: #00BBA9;
 }
 
 .title {
@@ -107,7 +107,7 @@ footer .community {
 }
 
 a {
-	color: #5d91df;
+	color: #7EA8E6;
 	text-decoration: none;
 }
 
@@ -125,13 +125,13 @@ a:hover {
 		height: 100%;
 	}
 
-	nav {
+	& nav {
 		display: flex;
 		align-items: center;
 		height: 100%;
 	}
 
-	a {
+	& a {
 		font-size: 14px;
 		line-height: 20px;
 		color: #fff;
@@ -150,8 +150,14 @@ a:hover {
 		font-size: 16px;
 		fill: currentcolor;
 
-		span {
+		& span {
 			margin-left: 6px;
+		}
+
+		.regions span {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 
 		@media screen and (max-width: 950px) {
@@ -163,7 +169,7 @@ a:hover {
 		}
 	}
 
-	a.has-sale {
+	& a.has-sale {
 		color: #ffc107;
 
 		&::after {
@@ -179,7 +185,7 @@ a:hover {
 	}
 
 	.sponsor {
-		color: #c673ef;
+		color: #D08BF2;
 		margin-left: auto;
 		display: flex;
 		align-items: center;
@@ -273,14 +279,13 @@ noscript {
 
 .region-name {
 	font-weight: 700;
-	margin: 0 12px;
-	margin-top: 8px;
-	margin-bottom: 4px;
+	margin: 8px 12px 4px;
 	border-bottom: 1px solid #282936;
 }
 
-.regions .muted {
-	opacity: 0.5;
+.service svg {
+	fill: currentcolor;
+	vertical-align: sub;
 }
 
 .regions .name > svg {
@@ -294,13 +299,7 @@ noscript {
 	font-family: monospace;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: #009688;
-}
-
-.regions span {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	color: #00BBA9;
 }
 
 noscript {
@@ -310,7 +309,7 @@ noscript {
 #psa,
 noscript {
 	color: #fff;
-	background-color: #1566b7;
+	background-color: #1359A0;
 	padding: 1em;
 	margin-bottom: 1em;
 }
@@ -346,17 +345,12 @@ noscript {
 	text-align: right;
 }
 
-.service svg {
-	fill: currentcolor;
-	vertical-align: sub;
-}
-
 .services .sep {
 	border-bottom: 1px solid #282936;
 }
 
 .good {
-	color: #4aa172;
+	color: #61B788;
 }
 
 .minor {
@@ -437,8 +431,7 @@ noscript {
 	}
 
 	header {
-		margin: 0;
-		margin-bottom: 1em;
+		margin: 0 0 1em;
 		padding: 12px;
 		background: #000;
 		border-top: 1px solid #1b1b24;
@@ -480,7 +473,7 @@ noscript {
 
 @keyframes status-changed {
 	from {
-		background: #1566b7;
+		background: #1359A0;
 	}
 }
 
